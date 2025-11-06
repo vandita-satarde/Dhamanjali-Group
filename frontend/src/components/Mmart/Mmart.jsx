@@ -149,7 +149,7 @@ const MartDynamic = () => {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    // Fetch mart items from backend
+    // Fetch mart items from backend added new changes 
     fetch("http://localhost:5000/api/mart")
       .then((res) => res.json())
       .then((data) => {
