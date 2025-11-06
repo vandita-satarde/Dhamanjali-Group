@@ -85,9 +85,12 @@ export const addMartItem = async (req, res) => {
 
 export const getMartItems = async (req, res) => {
   try {
-    const items = await Mart.find();
+    console.log("Fetching mart items from database...");
+    const items = await Mart.find().sort({ createdAt: -1 });
+    console.log(`Found ${items.length} mart items`);
     res.json(items);
   } catch (error) {
+    console.error("Error fetching mart items:", error);
     res.status(500).json({ message: error.message });
   }
 };

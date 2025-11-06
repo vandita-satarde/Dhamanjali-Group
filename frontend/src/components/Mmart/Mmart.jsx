@@ -147,22 +147,62 @@ const AnnouncementsTitle = ({
 const MartDynamic = () => {
   const [items, setItems] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
 
   useEffect(() => {
-    // Fetch mart items from backend added new changes 
-    fetch("https://dhamanjali-group.vercel.app/api/mart")
-      .then((res) => res.json())
-      .then((data) => {
-        setItems(data);
+    // Fetch mart items from backend with better error handling
+    const fetchMartItems = async () => {
+      try {
+        console.log("Fetching mart items from:", "https://dhamanjali-group.vercel.app/api/mart");
+        
+        const response = await fetch("https://dhamanjali-group.vercel.app/api/mart", {
+          method: 'GET',
+          headers: {
+            'Content-Type': 'application/json',
+            'Accept': 'application/json'
+          }
+        });
+        
+        console.log("Response status:", response.status);
+        console.log("Response ok:", response.ok);
+        
+        if (!response.ok) {
+          throw new Error(`HTTP error! status: ${response.status}`);
+        }
+        
+        const data = await response.json();
+        console.log("Fetched mart items:", data);
+        
+        setItems(Array.isArray(data) ? data : []);
         setLoading(false);
-      })
-      .catch((err) => {
+      } catch (err) {
         console.error("Error fetching mart items:", err);
-        setLoading(false);
-      });
+        console.error("Error details:", {
+          message: err.message,
+          stack: err.stack
+        });
+        setError(err.message);
+        setLoading(false)
+      }
+    };
+
+    fetchMartItems();
   }, []);
 
-  if (loading) return <div className="p-8 text-center">Loading...</div>;
+  if (loading) return <div className="p-8 text-center">Loading mart items...</div>;
+
+  if (error) {
+    return (
+      <div className="p-8 text-center">
+        <div className="text-red-600 mb-4">
+          Error loading mart items: {error}
+        </div>
+        <div className="text-sm text-gray-500">
+          Please check the console for more details or try refreshing the page.
+        </div>
+      </div>
+    );
+  }
 
   if (items.length === 0)
     return (
