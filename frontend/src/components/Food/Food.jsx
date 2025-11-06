@@ -198,7 +198,7 @@ function Food() {
             No food items uploaded yet.
           </p>
         ) : (
-          <div className="flex flex-col gap-32">
+          <div className="flex flex-col gap-32 mb-20">
             {filteredSpecialities.map((item, idx) => (
               <motion.div
                 key={item.id}
@@ -206,9 +206,8 @@ function Food() {
                 whileInView={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.6, delay: idx * 0.1 }}
                 viewport={{ once: true }}
-                className={`flex flex-col lg:flex-row ${
-                  idx % 2 !== 0 ? "lg:flex-row-reverse" : ""
-                } items-center gap-8`}
+                className={`flex flex-col lg:flex-row ${idx % 2 !== 0 ? "lg:flex-row-reverse" : ""
+                  } items-center gap-8`}
               >
                 <motion.div className="flex-1 text-center lg:text-left">
                   <h3 className="mb-4 text-3xl md:text-4xl font-bold text-orange-600">

@@ -12,11 +12,15 @@ const Homepage = () => {
   const imageUrl =
     "https://res.cloudinary.com/dwudu5pep/image/upload/v1761452862/WhatsApp_Image_2025-10-06_at_6.11.24_PM_puuxkm.jpg";
 
+  const imageUrl2 = "https://res.cloudinary.com/dwudu5pep/image/upload/v1761450416/DHAMMANJALI_GROUP_ez07yj.jpg";
+
   // Corporate section state
   const [activeTab, setActiveTab] = useState("SUSTAINABILITY");
 
-  const [currentImageIndex, setCurrentImageIndex] = useState(0);
+  // Popup state for mobile image
+  const [isOpen, setIsOpen] = useState(false);
 
+  const [currentImageIndex, setCurrentImageIndex] = useState(0);
   // all background images
   const heroImages = [bg1, bg2, bg3, bg4, bg5];
 
@@ -142,14 +146,53 @@ const Homepage = () => {
 
           {/* Energy Wind Energy Section */}
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-16 items-center">
-            <div className="order-2 lg:order-1">
+            {/* <div className="order-2 lg:order-1">
               <div className="relative">
                 <img
                   src="https://res.cloudinary.com/dwudu5pep/image/upload/v1761450416/DHAMMANJALI_GROUP_ez07yj.jpg"
                   alt="workflow"
-                  className="w-full h-full object-cover"
+                  className="w-full h-full object-cover "
                 />
               </div>
+            </div> */}
+
+            {/* Image with popup for mobile */}
+            <div className="order-2 lg:order-1">
+              <div className="relative">
+                {/* Image */}
+                <img
+                  src={imageUrl2}
+                  alt="workflow"
+                  className="w-full h-full object-cover cursor-pointer"
+                  onClick={() => {
+                    // Only open popup for mobile view
+                    if (window.innerWidth < 1024) setIsOpen(true);
+                  }}
+                />
+              </div>
+
+              {/* Popup modal (mobile only) */}
+              {isOpen && (
+                <div
+                  className="fixed inset-0 bg-black bg-opacity-80 flex items-center justify-center z-50 lg:hidden"
+                  onClick={() => setIsOpen(false)} // close on background click
+                >
+                  <div className="relative w-[90%] h-[70%]">
+                    <img
+                      src={imageUrl2}
+                      alt="Zoomed"
+                      className="w-full h-full object-contain rounded-lg"
+                    />
+                    {/* Close button */}
+                    <button
+                      className="absolute top-30 right-3 bg-red-400 text-black rounded-full px-2 py-1 text-[10px]"
+                      onClick={() => setIsOpen(false)}
+                    >
+                      ✕
+                    </button>
+                  </div>
+                </div>
+              )}
             </div>
 
             <div className="order-1 lg:order-2">

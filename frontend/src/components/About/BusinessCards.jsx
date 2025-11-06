@@ -33,13 +33,13 @@ const BusinessCards = () => {
       id: 5,
       title: "Dhammanjali Foundation",
       image: foundation,
-      // link: "/foundation",
+      link: "/foundation",
     },
     {
       id: 6,
       title: "Charity",
       image: "https://res.cloudinary.com/dwudu5pep/image/upload/v1761454016/charity_ecf6fa.avif",
-      // link: "/charity",
+      link: "/charity",
     },
   ];
 
