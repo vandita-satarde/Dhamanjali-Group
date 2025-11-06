@@ -1,4 +1,6 @@
 import React from "react";
+import { Link } from "react-router-dom";
+
 import foundation from "../../assets/images/homeImg4.png";
 
 const BusinessCards = () => {
@@ -7,33 +9,40 @@ const BusinessCards = () => {
       id: 1,
       title: "M-Mart",
       image: "https://res.cloudinary.com/dwudu5pep/image/upload/v1761453246/m-mart_lfbgh6.jpg",
+      link: "/retail",
     },
     {
       id: 2,
       title: "Real estate",
       image: "https://res.cloudinary.com/dwudu5pep/image/upload/v1761453093/dholera-3_iqqrc0.jpg",
+      link: "/realestate",
     },
     {
       id: 3,
       title: "Medical Devices",
       image: "https://res.cloudinary.com/dwudu5pep/image/upload/v1761453407/water-ionizer_lq8la6.jpg",
+      link: "/health",
     },
     {
       id: 4,
       title: "Cafe Villa",
       image: "https://res.cloudinary.com/dwudu5pep/image/upload/v1761453542/320x320_square_f7e279db7f23326de892cdd1e370bbcf_jnuqrk.jpg",
+      link: "/food",
     },
     {
       id: 5,
       title: "Dhammanjali Foundation",
       image: foundation,
+      // link: "/foundation",
     },
     {
       id: 6,
       title: "Charity",
       image: "https://res.cloudinary.com/dwudu5pep/image/upload/v1761454016/charity_ecf6fa.avif",
+      // link: "/charity",
     },
   ];
+
 
   return (
     <section className="py-16 md:py-20 bg-white -mt-20 lg:-mt-20">
@@ -91,9 +100,11 @@ const BusinessCards = () => {
 
                 {/* Explore Button - Bottom Right */}
                 <div className="absolute bottom-4 sm:bottom-6 right-4 sm:right-6">
-                  <button className="bg-white/20 backdrop-blur-sm border border-white/30 text-white px-4 sm:px-6 py-2 sm:py-3 rounded-full text-sm sm:text-base font-semibold hover:bg-white/30 transition-all duration-300 shadow-lg">
-                    Explore
-                  </button>
+                  <Link to={business.link}>
+                    <button className="bg-white/20 backdrop-blur-sm border border-white/30 text-white px-4 sm:px-6 py-2 sm:py-3 rounded-full text-sm sm:text-base font-semibold hover:bg-white/30 transition-all duration-300 shadow-lg">
+                      Explore
+                    </button>
+                  </Link>
                 </div>
               </div>
             </div>

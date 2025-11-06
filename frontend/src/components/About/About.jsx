@@ -178,6 +178,7 @@ function About() {
           </div>
         </div>
       </section>
+      
       <BusinessCards />
 
       {/* Aspirations and Desired Section */}
