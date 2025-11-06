@@ -32,7 +32,7 @@ function AddGallery() {
     data.append("image", image);
 
     try {
-      await axios.post("http://localhost:5000/api/gallery", data);
+      await axios.post("http://localhost:5000/api/gallery/add", data);
       alert("Image uploaded successfully!");
       setImage(null);
     } catch (err) {
