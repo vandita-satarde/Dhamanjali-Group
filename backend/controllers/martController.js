@@ -94,3 +94,30 @@ export const getMartItems = async (req, res) => {
     res.status(500).json({ message: error.message });
   }
 };
+
+export const deleteMartItem = async (req, res) => {
+  try {
+    const { id } = req.params;
+
+    console.log("Deleting mart item:", id);
+
+    // Find and delete the item
+    const deletedItem = await Mart.findByIdAndDelete(id);
+    
+    if (!deletedItem) {
+      return res.status(404).json({ message: "Mart item not found" });
+    }
+
+    console.log("Mart item deleted successfully:", deletedItem.title);
+    res.json({ 
+      message: "Mart item deleted successfully",
+      deletedItem: {
+        id: deletedItem._id,
+        title: deletedItem.title
+      }
+    });
+  } catch (error) {
+    console.error("Error deleting mart item:", error);
+    res.status(500).json({ message: error.message });
+  }
+};

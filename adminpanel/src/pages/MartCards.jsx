@@ -100,8 +100,27 @@ function AddMartItem() {
   };
 
   const fetchMartItems = async () => {
-    const res = await axios.get("https://dhamanjali-group.vercel.app/api/mart");
-    setMartItems(res.data);
+    try {
+      const res = await axios.get("https://dhamanjali-group.vercel.app/api/mart");
+      setMartItems(res.data);
+    } catch (error) {
+      console.error("Error fetching mart items:", error);
+    }
+  };
+
+  const handleDelete = async (id, title) => {
+    if (!window.confirm(`Are you sure you want to delete "${title}"?`)) {
+      return;
+    }
+
+    try {
+      await axios.delete(`https://dhamanjali-group.vercel.app/api/mart/${id}`);
+      alert("Mart item deleted successfully!");
+      fetchMartItems(); // Refresh the list
+    } catch (error) {
+      console.error("Error deleting mart item:", error);
+      alert("Error deleting mart item. Please try again.");
+    }
   };
 
   useEffect(() => {
@@ -164,15 +183,23 @@ function AddMartItem() {
           {martItems.map((item) => (
             <div
               key={item._id}
-              className="p-4 border rounded shadow flex flex-col items-center"
+              className="p-4 border rounded shadow flex flex-col items-center relative"
             >
               <img
                 src={item.imageUrl}
                 alt={item.title}
                 className="h-24 w-24 object-cover mb-2 rounded"
               />
-              <h3 className="font-semibold">{item.title}</h3>
-              <p className="text-sm text-gray-600">{item.description}</p>
+              <h3 className="font-semibold text-center">{item.title}</h3>
+              <p className="text-sm text-gray-600 text-center mb-3">{item.description}</p>
+              
+              {/* Delete Button */}
+              <button
+                onClick={() => handleDelete(item._id, item.title)}
+                className="mt-auto bg-red-500 text-white px-4 py-2 rounded hover:bg-red-600 transition-colors duration-200 text-sm"
+              >
+                Delete
+              </button>
             </div>
           ))}
         </div>
