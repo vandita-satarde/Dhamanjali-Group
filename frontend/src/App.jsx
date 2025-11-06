@@ -13,6 +13,7 @@ import RealEstate from "./components/RealEstate/RealEstate";
 import Agriculture from "./components/Agriculture/Agriculture";
 import Hospitality from "./components/Hospatility/Hospitality";
 import ScrollToTop from "./components/ScrollToTop/ScrollToTop";
+import Startuplogo from "./assets/images/startupindia.jpeg";
 
 function App() {
   return (
@@ -37,7 +38,7 @@ function App() {
       {/* Fixed Startup India Image - Bottom Right */}
       <div className="fixed bottom-4 right-4 z-40 animate-pulse">
         <img
-          src="src/assets/images/startupindia.jpeg"
+          src={Startuplogo}
           alt="Startup India"
           className="w-16 h-16 md:w-20 md:h-20 lg:w-24 lg:h-24 object-contain rounded-lg shadow-lg hover:scale-110 transition-transform duration-300 cursor-pointer"
         />
