@@ -20,8 +20,48 @@ function AddGallery() {
   };
 
 
-  const handleFileChange = (e) => {
-    setImage(e.target.files[0]);
+  const compressImage = (file, maxWidth = 1200, quality = 0.8) => {
+    return new Promise((resolve) => {
+      const canvas = document.createElement('canvas');
+      const ctx = canvas.getContext('2d');
+      const img = new Image();
+      
+      img.onload = () => {
+        // Calculate new dimensions
+        const ratio = Math.min(maxWidth / img.width, maxWidth / img.height);
+        const newWidth = img.width * ratio;
+        const newHeight = img.height * ratio;
+        
+        canvas.width = newWidth;
+        canvas.height = newHeight;
+        
+        // Draw and compress
+        ctx.drawImage(img, 0, 0, newWidth, newHeight);
+        canvas.toBlob(resolve, 'image/jpeg', quality);
+      };
+      
+      img.src = URL.createObjectURL(file);
+    });
+  };
+
+  const handleFileChange = async (e) => {
+    const selectedFile = e.target.files[0];
+    if (!selectedFile) return;
+
+    // Check file size (limit to 5MB before compression)
+    if (selectedFile.size > 5 * 1024 * 1024) {
+      alert("Please select an image smaller than 5MB");
+      return;
+    }
+
+    // Compress the image
+    try {
+      const compressedFile = await compressImage(selectedFile);
+      setImage(compressedFile);
+    } catch (err) {
+      console.error("Error compressing image:", err);
+      setImage(selectedFile); // Fallback to original if compression fails
+    }
   };
 
   const handleSubmit = async (e) => {
@@ -32,12 +72,22 @@ function AddGallery() {
     data.append("image", image);
 
     try {
-      await axios.post("https://dhamanjali-group.vercel.app/api/gallery", data);
+      await axios.post("https://dhamanjali-group.vercel.app/api/gallery/add", data, {
+        headers: {
+          'Content-Type': 'multipart/form-data'
+        },
+        timeout: 30000 // 30 second timeout
+      });
       alert("Image uploaded successfully!");
       setImage(null);
+      fetchGallery(); // Refresh gallery
     } catch (err) {
       console.error(err);
-      alert("Upload failed!");
+      if (err.code === 'ERR_BAD_REQUEST' && err.response?.status === 413) {
+        alert("Image is too large. Please select a smaller image.");
+      } else {
+        alert("Upload failed! Please try again.");
+      }
     }
   };
 
@@ -61,11 +111,29 @@ function AddGallery() {
         <h2 className=" text-[#0f2769] text-[22px] md:text-[30px] font-bold mb-3 md:mb-6 lg:mb-8">
           Upload Gallery Image
         </h2>
-        <form onSubmit={handleSubmit} >
-          <input type="file" onChange={handleFileChange} required className=" bg-blue-100 p-2 rounded-lg " />
+        <form onSubmit={handleSubmit} className="space-y-4">
+          <div>
+            <input 
+              type="file" 
+              onChange={handleFileChange} 
+              accept="image/*"
+              required 
+              className="bg-blue-100 p-2 rounded-lg w-full" 
+            />
+            {image && (
+              <p className="text-sm text-gray-600 mt-2">
+                Selected file size: {(image.size / 1024 / 1024).toFixed(2)} MB
+                {image.size > 1024 * 1024 && " (Compressed)"}
+              </p>
+            )}
+            <p className="text-xs text-gray-500 mt-1">
+              Max file size: 5MB. Images will be automatically compressed.
+            </p>
+          </div>
           <button
             type="submit"
-            className="bg-blue-900 text-white px-4 py-2 rounded"
+            className="bg-blue-900 text-white px-4 py-2 rounded hover:bg-blue-800"
+            disabled={!image}
           >
             Upload
           </button>
