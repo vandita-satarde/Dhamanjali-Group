@@ -27,7 +27,7 @@ function AddMartItem() {
     data.append("image", formData.image);
 
     try {
-      await axios.post("http://localhost:5000/api/mart/add", data, {
+      await axios.post("https://dhamanjali-group.vercel.app/api/mart/add", data, {
         headers: { "Content-Type": "multipart/form-data" },
       });
       alert("Mart item added!");
@@ -40,7 +40,7 @@ function AddMartItem() {
   };
 
   const fetchMartItems = async () => {
-    const res = await axios.get("http://localhost:5000/api/mart");
+    const res = await axios.get("https://dhamanjali-group.vercel.app/api/mart");
     setMartItems(res.data);
   };
 

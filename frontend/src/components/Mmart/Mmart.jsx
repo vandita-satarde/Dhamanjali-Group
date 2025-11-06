@@ -150,7 +150,7 @@ const MartDynamic = () => {
 
   useEffect(() => {
     // Fetch mart items from backend added new changes 
-    fetch("http://localhost:5000/api/mart")
+    fetch("https://dhamanjali-group.vercel.app/api/mart")
       .then((res) => res.json())
       .then((data) => {
         setItems(data);
