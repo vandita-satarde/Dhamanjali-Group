@@ -9,7 +9,20 @@ import martRoutes from "./routes/martRoutes.js";
 dotenv.config();
 const app = express();
 
-app.use(cors());
+// Configure CORS to allow requests from your frontend
+app.use(cors({
+  origin: [
+    'http://localhost:5173',
+    'http://localhost:5174', 
+    'http://192.168.1.7:5174',
+    'https://dhamanjali-group.vercel.app',
+    'https://your-frontend-domain.vercel.app'  // Replace with your actual frontend domain
+  ],
+  credentials: true,
+  methods: ['GET', 'POST', 'PUT', 'DELETE', 'PATCH', 'OPTIONS'],
+  allowedHeaders: ['Content-Type', 'Authorization']
+}));
+
 app.use(express.json());
 
 mongoose.connect(process.env.MONGO_URI)
