@@ -28,26 +28,30 @@ app.use(express.json({ limit: '10mb' }));
 app.use(express.urlencoded({ limit: '10mb', extended: true }));
 
 // MongoDB connection optimized for Vercel serverless
-let isConnected = false;
-
 const connectToDatabase = async () => {
-  if (isConnected) {
+  // Check if already connected
+  if (mongoose.connection.readyState === 1) {
     return;
+  }
+
+  // Check if connecting
+  if (mongoose.connection.readyState === 2) {
+    // Wait for the connection to complete
+    return new Promise((resolve, reject) => {
+      mongoose.connection.once('connected', resolve);
+      mongoose.connection.once('error', reject);
+    });
   }
 
   try {
     await mongoose.connect(process.env.MONGO_URI, {
-      serverSelectionTimeoutMS: 5000, // Timeout after 5s instead of 30s
+      serverSelectionTimeoutMS: 10000, // Increased timeout
       socketTimeoutMS: 45000,
       maxPoolSize: 10,
       minPoolSize: 0,
       maxIdleTimeMS: 30000,
     });
     
-    // Disable buffering for serverless
-    mongoose.set('bufferCommands', false);
-    
-    isConnected = true;
     console.log('MongoDB connected successfully');
   } catch (error) {
     console.error('MongoDB connection failed:', error);
@@ -55,8 +59,11 @@ const connectToDatabase = async () => {
   }
 };
 
-// Connect to database
-connectToDatabase();
+// Initial database connection (but don't block app startup)
+connectToDatabase().catch(err => {
+  console.error('Initial database connection failed:', err);
+  // Don't throw here - let individual requests handle connection
+});
 
 // Middleware to ensure database connection on each API request
 app.use('/api', async (req, res, next) => {
