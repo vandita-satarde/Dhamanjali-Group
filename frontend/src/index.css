@@ -1,0 +1,102 @@
+@import "tailwindcss";
+/* @import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&display=swap"); */
+
+/* Custom responsive utilities for enhanced mobile-first design */
+@layer utilities {
+  /* Custom gap spacing for responsive design */
+  .gap-15 {
+    gap: 1.25rem;
+  }
+
+  @media (min-width: 640px) {
+    .gap-15 {
+      gap: 2.5rem;
+    }
+  }
+
+  @media (min-width: 768px) {
+    .gap-15 {
+      gap: 3rem;
+    }
+  }
+
+  @media (min-width: 1024px) {
+    .gap-15 {
+      gap: 3.75rem;
+    }
+  }
+
+  /* Enhanced responsive margin utilities */
+  @media (max-width: 1023px) {
+    .lg\:ml-8 {
+      margin-left: 0 !important;
+    }
+
+    .lg\:text-left {
+      text-align: center !important;
+    }
+  }
+
+  /* Stats box responsive behavior */
+  @media (max-width: 640px) {
+    .stats-responsive {
+      position: static !important;
+      transform: none !important;
+      margin-top: 1.25rem;
+      width: 100% !important;
+      right: auto !important;
+      bottom: auto !important;
+      margin-left: 0;
+      margin-right: 0;
+    }
+  }
+
+  /* Values section enhanced responsive spacing */
+  .values-container {
+    display: flex;
+    flex-direction: column;
+    gap: 4rem;
+    align-items: center;
+  }
+
+  @media (min-width: 640px) {
+    .values-container {
+      flex-direction: row;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 4rem 6rem;
+    }
+  }
+
+  @media (min-width: 1024px) {
+    .values-container {
+      gap: 5rem 8rem;
+    }
+  }
+
+  /* Enhanced card hover effects */
+  .card-enhanced {
+    transition: all 0.3s ease;
+  }
+
+  .card-enhanced:hover {
+    transform: translateY(-5px);
+  }
+
+  /* Image wrapper enhancements */
+  .image-wrapper-enhanced {
+    transition: all 0.4s ease;
+    border: 3px solid transparent;
+  }
+
+  .image-wrapper-enhanced:hover {
+    transform: scale(1.08);
+    box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1),
+      0 10px 10px -5px rgba(0, 0, 0, 0.04);
+  }
+
+  .highlight-image {
+    border-color: #fb923c !important;
+    box-shadow: 0 0 20px rgba(251, 146, 60, 0.5);
+  }
+}
