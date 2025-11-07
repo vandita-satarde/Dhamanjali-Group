@@ -1,5 +1,6 @@
 import React, { useRef, useEffect, useState } from "react";
 import { motion } from "framer-motion";
+import axios from "axios";
 
 // AnnouncementsTitle Component
 const AnnouncementsTitle = ({
@@ -67,40 +68,6 @@ const specialitiesData = {
     "Established in 2020 and headquartered in Prayagraj, Uttar Pradesh, Dhammanjali India Private Limited is a private, non-government company engaged in the food and beverages industry. The company focuses on creating lasting value not only through its products but also through meaningful contributions to the communities it serves.",
 };
 
-const foodItems = [
-  {
-    id: 1,
-    heading: "Classic Butter Croissant",
-    subheading:
-      "Light, flaky, and baked golden every morning.",
-    imageUrl:
-      "https://res.cloudinary.com/dwudu5pep/image/upload/v1761639604/croissant_yxwzvv.jpg",
-  },
-  {
-    id: 2,
-    heading: "Masala chai",
-    subheading:
-      "Authentic, soul-warming chai brewed with fresh spices and love. From classic masala to unique blends — every sip tells a story.",
-    imageUrl:
-      "https://res.cloudinary.com/dwudu5pep/image/upload/v1761652699/masalaChai_ox1xyj.jpg",
-  },
-  {
-    id: 3,
-    heading: "Burger",
-    subheading:
-      "Serving juicy, handcrafted burgers made with fresh ingredients and bold flavors. Perfectly grilled, stacked with your favorite toppings, and always delicious.",
-    imageUrl:
-      "https://res.cloudinary.com/dwudu5pep/image/upload/v1761653204/k2ffns5rmyzpr4ghhjn4_cke2nj.jpg",
-  },
-  {
-    id: 4,
-    heading: "Cheese Grilled Sandwich",
-    subheading:
-      "Crispy golden bread stuffed with gooey melted cheese and veggies. A perfect quick bite for any time of the day.",
-    imageUrl:
-      "https://res.cloudinary.com/dwudu5pep/image/upload/v1761653300/s5lnaiyydeplpitwkzti_ft5mnc.jpg",
-  },
-];
 
 const testimonialsData = [
   {
@@ -129,6 +96,13 @@ const testimonialsData = [
 function Food() {
   const scrollRef = useRef(null);
   const [filter, setFilter] = useState("");
+  const [foodItems, setFoodItems] = useState([]);
+
+  useEffect(() => {
+    axios.get("http://localhost:5000/api/food")
+      .then(res => setFoodItems(res.data))
+      .catch(err => console.error(err));
+  }, []);
 
   // Auto-scroll logic for testimonials
   useEffect(() => {
@@ -160,7 +134,7 @@ function Food() {
 
   // Filtered food items
   const filteredSpecialities = foodItems.filter((item) =>
-    item.heading?.toLowerCase().includes(filter.toLowerCase())
+    item.title?.toLowerCase().includes(filter.toLowerCase())
   );
 
   return (
@@ -211,15 +185,15 @@ function Food() {
               >
                 <motion.div className="flex-1 text-center lg:text-left">
                   <h3 className="mb-4 text-3xl md:text-4xl font-bold text-orange-600">
-                    {item.heading}
+                    {item.title}
                   </h3>
                   <p className="text-gray-700 text-lg md:text-xl leading-relaxed">
-                    {item.subheading}
+                    {item.description}
                   </p>
                 </motion.div>
                 <motion.img
-                  src={item.imageUrl}
-                  alt={item.heading}
+                  src={item.image}
+                  alt={item.title}
                   className="flex-1 w-full md:w-[500px] h-[300px] md:h-[350px] object-cover rounded-2xl shadow-xl hover:scale-105 transition-transform duration-300"
                 />
               </motion.div>

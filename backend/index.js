@@ -3,8 +3,8 @@ import mongoose from "mongoose";
 import cors from "cors";
 import dotenv from "dotenv";
 import galleryRoutes from "./routes/galleryRoutes.js";
-
 import martRoutes from "./routes/martRoutes.js";
+import foodRoutes from "./routes/foodRoutes.js";
 
 dotenv.config();
 const app = express();
@@ -81,6 +81,7 @@ app.use('/api', async (req, res, next) => {
 
 app.use("/api/gallery", galleryRoutes);
 app.use("/api/mart", martRoutes);
+app.use("/api/food", foodRoutes);
 
 // Add health check routes
 app.get("/", (req, res) => {

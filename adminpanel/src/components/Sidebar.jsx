@@ -34,6 +34,7 @@ function Sidebar() {
             <p><Link to='/' >Dashboard</Link></p>
             <p><Link to='/gallery' >Gallery</Link></p>
             <p><Link to='/mart' >MMart Cards</Link></p>
+            <p><Link to='/food' >Food Items</Link></p>
           </div>
         </div>
         <button onClick={handleLogout} className='text-[#0E1836] bg-[#F5F9FE] w-full h-9 md:h-12 lg:h-9 rounded-xs cursor-pointer '>Log Out</button>
