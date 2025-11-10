@@ -5,6 +5,8 @@ import dotenv from "dotenv";
 import galleryRoutes from "./routes/galleryRoutes.js";
 import martRoutes from "./routes/martRoutes.js";
 import foodRoutes from "./routes/foodRoutes.js";
+import hospitalityRoutes from "./routes/HospitalityRoutes.js";
+
 
 dotenv.config();
 const app = express();
@@ -82,6 +84,8 @@ app.use('/api', async (req, res, next) => {
 app.use("/api/gallery", galleryRoutes);
 app.use("/api/mart", martRoutes);
 app.use("/api/food", foodRoutes);
+app.use("/api/hospitality", hospitalityRoutes);
+  
 
 // Add health check routes
 app.get("/", (req, res) => {

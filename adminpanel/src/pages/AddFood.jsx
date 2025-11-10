@@ -136,8 +136,8 @@ function AddFood() {
             required
           />
           <input type="file" name="image" accept="image/*" onChange={handleChange} required />
-          <button type="submit" className="bg-blue-600 text-white px-4 py-2 rounded">
-            {editingId ? "Update" : "Add"} Food Item
+          <button type="submit" className="bg-blue-900 text-white hover:bg-blue-800 px-4 py-2 rounded">
+            {editingId ? "Update" : "Add"} Item
           </button>
         </form>
 

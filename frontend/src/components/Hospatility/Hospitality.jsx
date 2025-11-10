@@ -1,4 +1,5 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
+import axios from "axios";
 import { Link } from "react-router-dom";
 import { FaUtensils, FaSpa, FaUsers, FaSwimmer } from "react-icons/fa";
 
@@ -113,23 +114,6 @@ const staticHospitalityData = {
       ],
     },
   },
-  gallery: {
-    "Deluxe Rooms": [
-      "https://res.cloudinary.com/dwudu5pep/image/upload/v1761559487/deluxeImage1_ytaua1.avif",
-      "https://res.cloudinary.com/dwudu5pep/image/upload/v1761559486/deluxeImage2_okn4tl.avif",
-      "https://res.cloudinary.com/dwudu5pep/image/upload/v1761559486/deluxeImage3_bcsdrj.avif",
-    ],
-    "Suite Rooms": [
-      "https://res.cloudinary.com/dwudu5pep/image/upload/v1761559448/suiteRoom1_emmss7.avif",
-      "https://res.cloudinary.com/dwudu5pep/image/upload/v1761559448/suiteRoom3_grbhjv.avif",
-      "https://res.cloudinary.com/dwudu5pep/image/upload/v1761559448/suiteRoom2_oyown5.avif",
-    ],
-    Presidential: [
-      "https://res.cloudinary.com/dwudu5pep/image/upload/v1761559465/presedential1_olxion.avif",
-      "https://res.cloudinary.com/dwudu5pep/image/upload/v1761559465/presedential3_a12jyd.avif",
-      "https://res.cloudinary.com/dwudu5pep/image/upload/v1761559465/presedential2_yybcp5.avif",
-    ],
-  },
 };
 
 const iconMap = {
@@ -162,11 +146,10 @@ const ServicesTabs = ({ services }) => {
         {serviceKeys.map((key) => (
           <button
             key={key}
-            className={`flex items-center gap-2 px-4 md:px-6 py-2 md:py-3 rounded-full shadow-md transition-all duration-300 transform hover:scale-105 text-sm md:text-base ${
-              active === key
-                ? "bg-orange-500 text-white"
-                : "bg-white text-gray-700 border border-gray-200"
-            }`}
+            className={`flex items-center gap-2 px-4 md:px-6 py-2 md:py-3 rounded-full shadow-md transition-all duration-300 transform hover:scale-105 text-sm md:text-base ${active === key
+              ? "bg-orange-500 text-white"
+              : "bg-white text-gray-700 border border-gray-200"
+              }`}
             onClick={() => setActive(key)}
           >
             {iconMap[key]}
@@ -208,63 +191,89 @@ const ServicesTabs = ({ services }) => {
   );
 };
 
-const GallerySection = ({ gallery }) => {
-  const tabs = Object.keys(gallery || {});
-  const [activeTab, setActiveTab] = useState(tabs[0]);
+const GallerySection = () => {
+  const [images, setImages] = useState([]); // store all gallery items
+  const [activeTab, setActiveTab] = useState("Deluxe Rooms"); // default tab
 
-  if (!gallery || tabs.length === 0) return null;
+  // Step 1: Fetch all gallery items from backend
+  useEffect(() => {
+    axios
+      .get("https://dhamanjali-group.vercel.app/api/hospitality") // your backend route
+      .then((res) => setImages(res.data))
+      .catch((err) => console.error("Error fetching hospitality:", err));
+  }, []);
+
+  // Step 2: Define your category tabs
+  const categories = ["Deluxe Rooms", "Suite Rooms", "Presidential"];
+
+  // Step 3: Filter images based on selected tab
+  const filteredImages = images.filter(
+    (img) => img.category === activeTab
+  );
 
   return (
     <section className="py-12 md:py-16 bg-white px-4 max-w-full mx-auto lg:mb-2">
-      <h2 className="text-2xl md:text-3xl lg:text-4xl xl:text-5xl font-extrabold text-center mb-4 md:mb-6 animate-fade-in">
+      <h2 className="text-2xl md:text-3xl lg:text-4xl xl:text-5xl font-extrabold text-center mb-6">
         Explore Our Hotel Gallery
       </h2>
-      <div className="flex justify-center gap-2 md:gap-3 mb-8 md:mb-10 flex-wrap">
-        {tabs.map((tab) => (
+
+      {/* Tabs */}
+      <div className="flex justify-center gap-3 mb-8 flex-wrap">
+        {categories.map((tab) => (
           <button
             key={tab}
             onClick={() => setActiveTab(tab)}
-            className={`px-3 md:px-5 py-2 rounded-full shadow-md transition-all duration-300 transform hover:scale-105 text-xs md:text-sm ${
-              activeTab === tab
-                ? "bg-orange-500 text-white"
-                : "bg-gray-100 text-gray-700"
-            }`}
+            className={`px-4 md:px-6 py-2 rounded-full shadow-md text-sm md:text-base ${activeTab === tab
+              ? "bg-orange-500 text-white"
+              : "bg-gray-100 text-gray-700"
+              }`}
           >
             {tab}
           </button>
         ))}
       </div>
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8 lg:max-w-7xl justify-center mx-auto">
-        {(gallery[activeTab] || []).map((roomImg, index) => (
-          <div
-            key={index}
-            className="bg-gray-50 rounded-xl overflow-hidden shadow-lg animate-scale-up flex flex-col"
-          >
-            <div className="relative group">
-              <img
-                src={roomImg}
-                alt={`${activeTab} room ${index + 1}`}
-                className="w-full h-48 md:h-56 object-cover transform transition-transform duration-500 group-hover:scale-110"
-              />
-              <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end p-3 md:p-4">
-                <p className="text-white font-semibold text-sm md:text-base">
-                  View Details
+
+      {/* Cards */}
+      {/* Cards (Restored Old Design) */}
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 max-w-7xl mx-auto">
+        {filteredImages.length > 0 ? (
+          filteredImages.map((img) => (
+            <div
+              key={img._id}
+              className="relative bg-white rounded-2xl overflow-hidden shadow-xl transition-transform transform hover:scale-[1.03] duration-500 group"
+            >
+              <div className="relative w-full h-56 md:h-64 overflow-hidden">
+                <img
+                  src={img.image}
+                  alt={img.title}
+                  className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 flex items-end justify-center p-3">
+                  <p className="text-white text-base font-semibold tracking-wide">
+                    View Details
+                  </p>
+                </div>
+              </div>
+
+              <div className="p-5 flex flex-col justify-between">
+                <p className="font-semibold text-gray-900 text-base mb-4">
+                  {img.title}
                 </p>
+                <Link to="/GetFrenchieForm">
+                  <button className="bg-orange-500 text-white px-6 py-2 rounded-full font-semibold shadow-md hover:bg-orange-600 hover:shadow-lg transition-all duration-300">
+                    Book Now
+                  </button>
+                </Link>
               </div>
             </div>
-            <div className="p-4 md:p-5 flex-1 flex flex-col justify-between">
-              <p className="font-semibold text-gray-800 mb-3 text-sm md:text-base">
-                Elegant {activeTab} Room with Modern Amenities
-              </p>
-              <Link to="/GetFrenchieForm">
-                <button className="bg-orange-500 text-white px-4 md:px-5 py-2 rounded-full hover:bg-orange-600 transition-all duration-300 transform hover:scale-105 text-sm md:text-base w-full md:w-auto">
-                  Book Now
-                </button>
-              </Link>
-            </div>
-          </div>
-        ))}
+          ))
+        ) : (
+          <p className="text-center text-gray-500 col-span-full">
+            No images found for this category.
+          </p>
+        )}
       </div>
+
     </section>
   );
 };

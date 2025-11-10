@@ -171,7 +171,7 @@ function AddMartItem() {
           </div>
           <button
             type="submit"
-            className="bg-blue-600 text-white py-2 rounded hover:bg-blue-700"
+            className=" py-2 rounded bg-blue-900 text-white hover:bg-blue-800"
             disabled={!formData.title || !formData.description || !formData.image}
           >
             Add Item
