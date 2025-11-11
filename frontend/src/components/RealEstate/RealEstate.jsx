@@ -1,4 +1,5 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
+import axios from "axios";
 import { motion, AnimatePresence } from "framer-motion";
 import {
   ArrowRight,
@@ -158,76 +159,14 @@ const HandpickedProjects = () => {
       "Carefully selected premium properties that offer exceptional value, strategic locations, and modern amenities. Each project is thoroughly vetted to ensure quality and investment potential.",
   };
 
-  const projects = [
-    {
-      id: 1,
-      name: "Luxury Villa Complex",
-      plotArea: "Prayagraj, Uttar Pradesh",
-      price: "₹1.2 Cr - ₹2.5 Cr",
-      imageUrl:
-        "https://res.cloudinary.com/dwudu5pep/image/upload/v1761553176/realestate7_so8fdd.avif",
-      description:
-        "Premium luxury villas with modern amenities, landscaped gardens, and 24/7 security. Perfect for families seeking comfort and elegance.",
-      highlights: [
-        "Gated Community",
-        "Swimming Pool",
-        "Gym & Clubhouse",
-        "Kids Play Area",
-        "24/7 Security",
-      ],
-    },
-    {
-      id: 2,
-      name: "Commercial Plaza",
-      plotArea: "City Center, Prayagraj",
-      price: "₹75L - ₹1.5 Cr",
-      imageUrl:
-        "https://res.cloudinary.com/dwudu5pep/image/upload/v1761553176/realestate8_ztuat3.avif",
-      description:
-        "Strategic commercial spaces in the heart of the city, ideal for offices, retail stores, and business establishments.",
-      highlights: [
-        "Prime Location",
-        "High Footfall Area",
-        "Parking Available",
-        "Modern Infrastructure",
-        "Investment Opportunity",
-      ],
-    },
-    {
-      id: 3,
-      name: "Residential Apartments",
-      plotArea: "Civil Lines, Prayagraj",
-      price: "₹45L - ₹85L",
-      imageUrl:
-        "https://res.cloudinary.com/dwudu5pep/image/upload/v1761553176/realestate9_f6mlmt.avif",
-      description:
-        "Modern residential apartments with contemporary design, excellent connectivity, and all essential amenities nearby.",
-      highlights: [
-        "2-3 BHK Options",
-        "Modular Kitchen",
-        "Balcony Views",
-        "Elevator Access",
-        "Near Schools & Hospitals",
-      ],
-    },
-    {
-      id: 4,
-      name: "Farmhouse Plots",
-      plotArea: "Outskirts, Prayagraj",
-      price: "₹25L - ₹60L",
-      imageUrl:
-        "https://res.cloudinary.com/dwudu5pep/image/upload/v1761553176/realestate4_tdrr8b.avif",
-      description:
-        "Spacious farmhouse plots perfect for weekend getaways or agricultural activities, surrounded by natural beauty.",
-      highlights: [
-        "Large Plot Sizes",
-        "Natural Environment",
-        "Investment Potential",
-        "Road Connectivity",
-        "Clear Title",
-      ],
-    },
-  ];
+  const [projects, setProjects] = useState([]);
+
+  useEffect(() => {
+    axios.get("https://dhamanjali-group.vercel.app/api/handpicked")
+      .then((res) => setProjects(res.data))
+      .catch((err) => console.error(err));
+  }, []);
+
 
   const handleLoadMore = () => {
     setVisibleProjects((prev) => prev + 3);
@@ -289,74 +228,90 @@ const HandpickedProjects = () => {
         </motion.div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8">
-          {projectsToShow.map((project, index) => (
+          {projectsToShow.length === 0 ? (
             <motion.div
-              key={project.id}
-              initial={{ opacity: 0, y: 60, scale: 0.9 }}
-              whileInView={{ opacity: 1, y: 0, scale: 1 }}
-              viewport={{ once: true }}
-              transition={{
-                delay: index * 0.15,
-                duration: 0.7,
-                type: "spring",
-                stiffness: 100,
-              }}
-              whileHover={{ y: -8, scale: 1.02 }}
-              whileTap={{ scale: 0.97 }}
-              className="bg-white rounded-2xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-500 relative cursor-pointer group border border-gray-100"
-              onClick={() => setSelectedProject(project)}
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6 }}
+              className="col-span-full text-center py-16"
             >
-              <motion.span
-                initial={{ scale: 0, rotate: -180 }}
-                whileInView={{ scale: 1, rotate: 0 }}
+              <h3 className="text-xl md:text-2xl font-semibold text-gray-700 mb-2">
+                No projects available yet.
+              </h3>
+              <p className="text-gray-500 text-sm md:text-base">
+                Please check back soon — new projects will be added here!
+              </p>
+            </motion.div>
+          ) : (
+            projectsToShow.map((project, index) => (
+              <motion.div
+                key={project.id}
+                initial={{ opacity: 0, y: 60, scale: 0.9 }}
+                whileInView={{ opacity: 1, y: 0, scale: 1 }}
                 viewport={{ once: true }}
                 transition={{
-                  delay: index * 0.15 + 0.5,
+                  delay: index * 0.15,
+                  duration: 0.7,
                   type: "spring",
-                  stiffness: 200,
+                  stiffness: 100,
                 }}
-                className="absolute top-3 md:top-4 left-3 md:left-4 bg-gradient-to-r from-purple-500 via-pink-500 to-red-500 text-white text-xs font-bold px-2 md:px-3 py-1 md:py-1.5 rounded-full z-10 shadow-lg flex items-center gap-1"
+                whileHover={{ y: -8, scale: 1.02 }}
+                whileTap={{ scale: 0.97 }}
+                className="bg-white rounded-2xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-500 relative cursor-pointer group border border-gray-100"
+                onClick={() => setSelectedProject(project)}
               >
-                <Sparkles className="w-2 h-2 md:w-3 md:h-3" />
-                Featured
-              </motion.span>
-
-              <div className="relative overflow-hidden">
-                <motion.img
-                  src={project.imageUrl}
-                  alt={project.name}
-                  className="w-full h-40 md:h-48 object-cover group-hover:scale-110 transition-transform duration-700"
-                  whileHover={{ scale: 1.1 }}
-                />
-                <div className="absolute inset-0 bg-gradient-to-t from-black/30 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
-              </div>
-
-              <motion.div
-                className="p-4 md:p-6"
-                whileHover={{ backgroundColor: "rgba(249, 250, 251, 0.8)" }}
-                transition={{ duration: 0.3 }}
-              >
-                <motion.h3
-                  className="text-lg md:text-xl font-bold text-indigo-900 mb-2 md:mb-3 group-hover:text-purple-700 transition-colors duration-300"
-                  whileHover={{ x: 5 }}
+                <motion.span
+                  initial={{ scale: 0, rotate: -180 }}
+                  whileInView={{ scale: 1, rotate: 0 }}
+                  viewport={{ once: true }}
+                  transition={{
+                    delay: index * 0.15 + 0.5,
+                    type: "spring",
+                    stiffness: 200,
+                  }}
+                  className="absolute top-3 md:top-4 left-3 md:left-4 bg-gradient-to-r from-purple-500 via-pink-500 to-red-500 text-white text-xs font-bold px-2 md:px-3 py-1 md:py-1.5 rounded-full z-10 shadow-lg flex items-center gap-1"
                 >
-                  {project.name}
-                </motion.h3>
-                <div className="flex items-center gap-2 text-gray-600 mb-2">
-                  <MapPin className="w-3 h-3 md:w-4 md:h-4 text-indigo-500" />
-                  <p className="text-xs md:text-sm font-medium">
-                    {project.plotArea}
-                  </p>
+                  <Sparkles className="w-2 h-2 md:w-3 md:h-3" />
+                  Featured
+                </motion.span>
+
+                <div className="relative overflow-hidden">
+                  <motion.img
+                    src={project.imageUrl}
+                    alt={project.name}
+                    className="w-full h-40 md:h-48 object-cover group-hover:scale-110 transition-transform duration-700"
+                    whileHover={{ scale: 1.1 }}
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/30 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
                 </div>
-                <div className="flex items-center gap-2">
-                  <DollarSign className="w-4 h-4 md:w-5 md:h-5 text-yellow-600" />
-                  <p className="text-sm md:text-lg text-yellow-600 font-bold">
-                    {project.price}
-                  </p>
-                </div>
+
+                <motion.div
+                  className="p-4 md:p-6"
+                  whileHover={{ backgroundColor: "rgba(249, 250, 251, 0.8)" }}
+                  transition={{ duration: 0.3 }}
+                >
+                  <motion.h3
+                    className="text-lg md:text-xl font-bold text-indigo-900 mb-2 md:mb-3 group-hover:text-purple-700 transition-colors duration-300"
+                    whileHover={{ x: 5 }}
+                  >
+                    {project.name}
+                  </motion.h3>
+                  <div className="flex items-center gap-2 text-gray-600 mb-2">
+                    <MapPin className="w-3 h-3 md:w-4 md:h-4 text-indigo-500" />
+                    <p className="text-xs md:text-sm font-medium">
+                      {project.plotArea}
+                    </p>
+                  </div>
+                  <div className="flex items-center gap-2">
+                    <DollarSign className="w-4 h-4 md:w-5 md:h-5 text-yellow-600" />
+                    <p className="text-sm md:text-lg text-yellow-600 font-bold">
+                      {project.price}
+                    </p>
+                  </div>
+                </motion.div>
               </motion.div>
-            </motion.div>
-          ))}
+            ))
+          )}
         </div>
 
         {hasMoreProjects && (
@@ -401,11 +356,11 @@ const HandpickedProjects = () => {
               >
                 <motion.button
                   whileHover={{ scale: 1.1, rotate: 90 }}
-                  whileTap={{ scale: 0.9 }}
-                  className="absolute top-4 md:top-6 right-4 md:right-6 text-gray-400 hover:text-red-500 transition-colors bg-gray-100 hover:bg-red-50 rounded-full p-2"
+                  whileTap={{ scale: 1.0 }}
+                  className="absolute top-4 md:top-3 right-4 md:right-1 text-gray-700 hover:text-red-500 transition-colors bg-gray-100 hover:bg-red-50 rounded-full p-1 "
                   onClick={() => setSelectedProject(null)}
                 >
-                  <X size={20} />
+                  <X size={16} />
                 </motion.button>
 
                 <div className="relative overflow-hidden rounded-xl mb-4 md:mb-6">

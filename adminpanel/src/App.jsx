@@ -5,6 +5,7 @@ import Gallery from './pages/AddGallery'
 import MartCards from './pages/MartCards'
 import FoodItems from './pages/AddFood'
 import AddHospitalityCards from './pages/AddHospitalityCards'
+import AddHandpicked from './pages/AddHandpicked'
 
 function App() {
 
@@ -18,6 +19,7 @@ function App() {
           <Route path='/mart' element={<MartCards />} />
           <Route path='/food' element={<FoodItems />} />
           <Route path='/hospitality' element={<AddHospitalityCards />} />
+          <Route path='/handpicked' element={<AddHandpicked />} />
         </Routes>
       </div>
     </Router>
