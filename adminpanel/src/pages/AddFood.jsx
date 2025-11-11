@@ -14,7 +14,7 @@ function AddFood() {
 
   // Fetch existing food items
   useEffect(() => {
-    axios.get("http://localhost:5000/api/food")
+    axios.get("https://dhamanjali-group.vercel.app/api/food")
       .then(res => setFoodItems(res.data))
       .catch(err => console.error(err));
   }, []);
@@ -56,16 +56,16 @@ function AddFood() {
 
       if (editingId) {
         // 🟢 UPDATE existing food item
-        await axios.put(`http://localhost:5000/api/food/${editingId}`, foodData);
+        await axios.put(`https://dhamanjali-group.vercel.app/api/food/${editingId}`, foodData);
         alert("Food item updated successfully!");
       } else {
         // 🟢 ADD new food item
-        await axios.post("http://localhost:5000/api/food", foodData);
+        await axios.post("https://dhamanjali-group.vercel.app/api/food", foodData);
         alert("Food item added successfully!");
       }
 
       // ✅ Refresh the list
-      const res = await axios.get("http://localhost:5000/api/food");
+      const res = await axios.get("https://dhamanjali-group.vercel.app/api/food");
       setFoodItems(res.data);
 
       // Reset form
@@ -95,7 +95,7 @@ function AddFood() {
 
   const handleDelete = async (id) => {
     if (window.confirm("Delete this food item?")) {
-      await axios.delete(`http://localhost:5000/api/food/${id}`);
+      await axios.delete(`https://dhamanjali-group.vercel.app/api/food/${id}`);
       setFoodItems(foodItems.filter(item => item._id !== id));
     }
   };
