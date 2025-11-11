@@ -1,4 +1,5 @@
-import React, { useMemo } from "react";
+import React, { useMemo, useState, useEffect } from "react";
+import axios from "axios";
 import { Link } from "react-router-dom";
 import {
   FaUtensils,
@@ -145,36 +146,17 @@ const staticData = {
     feature3Description:
       "Offering professional consultation and training to help farmers adopt modern agricultural techniques and best practices.",
   },
-  stories: [
-    {
-      id: 1,
-      storyImg: StoryImage1,
-      name: "Ramesh Kumar",
-      role: "Organic Farmer",
-      quote:
-        "Thanks to Dhammanjali's sustainable farming techniques, I've increased my crop yield by 40% while maintaining soil health. The organic methods have transformed my farm into a thriving ecosystem.",
-    },
-    {
-      id: 2,
-      storyImg: StoryImage2,
-      name: "Priya Sharma",
-      role: "Smart Farm Owner",
-      quote:
-        "The smart irrigation system provided by Dhammanjali has reduced my water consumption by 60% while improving crop quality. It's a game-changer for modern farming.",
-    },
-    {
-      id: 3,
-      storyImg: StoryImage3,
-      name: "Vikram Singh",
-      role: "Progressive Farmer",
-      quote:
-        "With Dhammanjali's guidance and modern equipment, I've transformed my traditional farm into a profitable and sustainable agricultural enterprise.",
-    },
-  ],
 };
 
 const Agriculture = () => {
-  const { hero, details, features, stories } = staticData;
+  const { hero, details, features } = staticData;
+  const [stories, setStories] = useState([]);
+
+  useEffect(() => {
+    axios.get("https://dhamanjali-group.vercel.app/api/farmerstories")
+      .then((res) => setStories(res.data))
+      .catch((err) => console.error("Error fetching farmer stories:", err));
+  }, []);
 
   const amenities = useMemo(() => {
     const iconMap = {
@@ -342,16 +324,21 @@ const Agriculture = () => {
           </p>
         </div>
         <div className="space-y-6 md:space-y-8">
-          {stories.map((story) => (
-            <StoriesOfHope
-              key={story.id}
-              storyImg={story.storyImg}
-              name={story.name}
-              role={story.role}
-              quote={story.quote}
-            />
-          ))}
+          {stories.length === 0 ? (
+            <p className="text-center text-gray-500">No farmer stories available yet.</p>
+          ) : (
+            stories.map((story) => (
+              <StoriesOfHope
+                key={story._id}
+                storyImg={story.storyImg}
+                name={story.name}
+                role={story.role}
+                quote={story.quote}
+              />
+            ))
+          )}
         </div>
+
       </section>
 
       {/* Optimized CTA Section */}
