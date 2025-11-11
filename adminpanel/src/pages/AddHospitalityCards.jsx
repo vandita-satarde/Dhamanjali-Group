@@ -48,12 +48,12 @@ const AddHospitalityCards = () => {
     try {
       if (editingId) {
         // update existing record
-        await axios.put(`https://dhamanjali-group.vercel.app/api/hospitality/${editingId}`, formData);
+        await axios.put(`http://localhost:5000/api/hospitality/${editingId}`, formData);
         alert("Updated successfully");
         setEditingId(null);
       } else {
         // add new
-        await axios.post("https://dhamanjali-group.vercel.app/api/hospitality", formData);
+        await axios.post("http://localhost:5000/api/hospitality", formData);
         alert("Added successfully");
       }
 
@@ -65,7 +65,7 @@ const AddHospitalityCards = () => {
   };
 
   const fetchImages = async () => {
-    const res = await axios.get("https://dhamanjali-group.vercel.app/api/hospitality");
+    const res = await axios.get("http://localhost:5000/api/hospitality");
     setImages(res.data);
   };
 
@@ -84,7 +84,7 @@ const AddHospitalityCards = () => {
   const handleDelete = async (id) => {
     if (window.confirm("Are you sure you want to delete this card?")) {
       try {
-        await axios.delete(`https://dhamanjali-group.vercel.app/api/hospitality/${id}`);
+        await axios.delete(`http://localhost:5000/api/hospitality/${id}`);
         fetchImages();
       } catch (err) {
         console.error(err);

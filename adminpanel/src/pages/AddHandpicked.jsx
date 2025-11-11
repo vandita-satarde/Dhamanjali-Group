@@ -6,7 +6,8 @@ const AddHandpicked = () => {
     const [formData, setFormData] = useState({
         name: "",
         plotArea: "",
-        price: "",
+        priceFrom: "",
+        priceTo: "",
         image: null,
         description: "",
         highlights: "",
@@ -17,7 +18,7 @@ const AddHandpicked = () => {
 
     const fetchProjects = async () => {
         try {
-            const res = await axios.get("https://dhamanjali-group.vercel.app/api/handpicked");
+            const res = await axios.get("http://localhost:5000/api/handpicked");
             setProjects(res.data);
         } catch (err) {
             console.error("Error fetching projects:", err);
@@ -67,7 +68,10 @@ const AddHandpicked = () => {
             const projectData = {
                 name: formData.name,
                 plotArea: formData.plotArea,
-                price: formData.price,
+                price: {
+                    from: formData.priceFrom,
+                    to: formData.priceTo,
+                },
                 description: formData.description,
                 highlights: highlightsArray,
                 imageUrl,
@@ -75,11 +79,11 @@ const AddHandpicked = () => {
 
             if (editingId) {
                 // Update existing project
-                await axios.put(`https://dhamanjali-group.vercel.app/api/handpicked/${editingId}`, projectData);
+                await axios.put(`http://localhost:5000/api/handpicked/${editingId}`, projectData);
                 alert("Project updated successfully!");
             } else {
                 // Add new project
-                await axios.post("https://dhamanjali-group.vercel.app/api/handpicked", projectData);
+                await axios.post("http://localhost:5000/api/handpicked", projectData);
                 alert("Project added successfully!");
             }
 
@@ -88,7 +92,8 @@ const AddHandpicked = () => {
             setFormData({
                 name: "",
                 plotArea: "",
-                price: "",
+                priceFrom: "",
+                priceTo: "",
                 image: null,
                 description: "",
                 highlights: "",
@@ -104,7 +109,8 @@ const AddHandpicked = () => {
         setFormData({
             name: project.name,
             plotArea: project.plotArea,
-            price: project.price,
+            priceFrom: project.price?.from || "",
+            priceTo: project.price?.to || "",
             description: project.description,
             highlights: project.highlights.join(", "),
             image: project.imageUrl,
@@ -115,7 +121,7 @@ const AddHandpicked = () => {
     // ✅ Delete project
     const handleDelete = async (id) => {
         if (window.confirm("Delete this project?")) {
-            await axios.delete(`https://dhamanjali-group.vercel.app/api/handpicked/${id}`);
+            await axios.delete(`http://localhost:5000/api/handpicked/${id}`);
             setProjects(projects.filter((p) => p._id !== id));
         }
     };
@@ -147,15 +153,38 @@ const AddHandpicked = () => {
                         className="border p-2 w-full"
                         required
                     />
-                    <input
-                        type="text"
-                        name="price"
-                        placeholder="Price"
-                        value={formData.price}
-                        onChange={handleChange}
-                        className="border p-2 w-full"
-                        required
-                    />
+
+                    <div>
+                        <label className="block text-gray-700 mb-1 font-medium">Price Range</label>
+                        <div className="flex gap-2">
+                            <div className="flex items-center border rounded w-1/2">
+                                <span className="px-2 text-gray-600">₹</span>
+                                <input
+                                    type="text"
+                                    name="priceFrom"
+                                    placeholder="Min Price"
+                                    value={formData.priceFrom || ""}
+                                    onChange={handleChange}
+                                    className="w-full p-2 outline-none"
+                                    required
+                                />
+                            </div>
+
+                            <div className="flex items-center border rounded w-1/2">
+                                <span className="px-2 text-gray-600">₹</span>
+                                <input
+                                    type="text"
+                                    name="priceTo"
+                                    placeholder="Max Price"
+                                    value={formData.priceTo || ""}
+                                    onChange={handleChange}
+                                    className="w-full p-2 outline-none"
+                                    required
+                                />
+                            </div>
+                        </div>
+                    </div>
+
 
                     <label className="text-gray-600 text-sm">
                         {editingId ? "Change Image (optional)" : "Upload Image"}
@@ -249,7 +278,7 @@ const AddHandpicked = () => {
                             />
                             <h3 className="font-bold mt-2">{p.name}</h3>
                             <p className="text-sm text-gray-600">{p.plotArea}</p>
-                            <p className="text-gray-500 text-sm">₹{p.price}</p>
+                            <p className="text-gray-500 text-sm">₹{p.price?.from} - ₹{p.price?.to}</p>
 
                             <div className="flex gap-2 mt-3">
                                 <button

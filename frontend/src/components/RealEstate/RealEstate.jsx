@@ -162,7 +162,7 @@ const HandpickedProjects = () => {
   const [projects, setProjects] = useState([]);
 
   useEffect(() => {
-    axios.get("https://dhamanjali-group.vercel.app/api/handpicked")
+    axios.get("http://localhost:5000/api/handpicked")
       .then((res) => setProjects(res.data))
       .catch((err) => console.error(err));
   }, []);
@@ -305,7 +305,7 @@ const HandpickedProjects = () => {
                   <div className="flex items-center gap-2">
                     <DollarSign className="w-4 h-4 md:w-5 md:h-5 text-yellow-600" />
                     <p className="text-sm md:text-lg text-yellow-600 font-bold">
-                      {project.price}
+                      ₹{project.price?.from} - ₹{project.price?.to}
                     </p>
                   </div>
                 </motion.div>
@@ -403,7 +403,7 @@ const HandpickedProjects = () => {
                 >
                   <DollarSign className="w-5 h-5 md:w-6 md:h-6 text-yellow-600" />
                   <p className="text-xl md:text-2xl text-yellow-600 font-bold">
-                    {selectedProject.price}
+                    ₹{selectedProject.price?.from} - ₹{selectedProject.price?.to}
                   </p>
                 </motion.div>
 

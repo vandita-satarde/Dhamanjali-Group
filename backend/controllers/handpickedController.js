@@ -33,7 +33,7 @@ export const getHandpickedProjects = async (req, res) => {
 export const updateHandpicked = async (req, res) => {
   try {
     const { id } = req.params;
-    const updated = await Handpicked.findByIdAndUpdate(id, req.body, { new: true });
+    const updated = await HandpickedProject.findByIdAndUpdate(id, req.body, { new: true });
     if (!updated) return res.status(404).json({ success: false, message: "Project not found" });
     res.status(200).json({ success: true, data: updated });
   } catch (error) {

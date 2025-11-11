@@ -12,7 +12,7 @@ function AddGallery() {
 
   const fetchGallery = async () => {
     try {
-      const res = await axios.get("https://dhamanjali-group.vercel.app/api/gallery");
+      const res = await axios.get("http://localhost:5000/api/gallery");
       setGallery(res.data);
     } catch (err) {
       console.error("Failed to fetch gallery images", err);
@@ -72,7 +72,7 @@ function AddGallery() {
     data.append("image", image);
 
     try {
-      await axios.post("https://dhamanjali-group.vercel.app/api/gallery/add", data, {
+      await axios.post("http://localhost:5000/api/gallery/add", data, {
         headers: {
           'Content-Type': 'multipart/form-data'
         },
@@ -96,7 +96,7 @@ function AddGallery() {
     if (!window.confirm("Are you sure you want to delete this image?")) return;
 
     try {
-      await axios.delete(`https://dhamanjali-group.vercel.app/api/gallery/${id}`);
+      await axios.delete(`http://localhost:5000/api/gallery/${id}`);
       alert("Image deleted successfully");
       fetchGallery(); // refresh
     } catch (error) {
