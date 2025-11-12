@@ -10,10 +10,7 @@ const AddStories = () => {
         storyImg: null,
     });
     const [stories, setStories] = useState([]);
-    const [loading, setLoading] = useState(false);
-    const [preview, setPreview] = useState(null);
     const [editingId, setEditingId] = useState(null);
-
 
     // Fetch existing stories
     useEffect(() => {
@@ -29,35 +26,13 @@ const AddStories = () => {
         }
     };
 
-    // Handle input changes
+    // ✅ Handle input & file change
     const handleChange = (e) => {
-        setFormData({ ...formData, [e.target.name]: e.target.value });
-    };
-
-    // Handle image upload
-    const handleImageUpload = async (e) => {
-        const file = e.target.files[0];
-        if (!file) return;
-
-        // Show preview
-        setPreview(URL.createObjectURL(file));
-
-        const data = new FormData();
-        data.append("file", file);
-        data.append("upload_preset", "newerror");
-        data.append("folder", "farmer-stories");
-
-        try {
-            setLoading(true);
-            const res = await axios.post(
-                "https://api.cloudinary.com/v1_1/dsauuyk9v/image/upload",
-                data
-            );
-            setFormData({ ...formData, storyImg: res.data.secure_url });
-        } catch (error) {
-            console.error("Image upload failed:", error);
-        } finally {
-            setLoading(false);
+        const { name, value, files } = e.target;
+        if (files && files.length > 0) {
+            setFormData({ ...formData, storyImg: files[0] });
+        } else {
+            setFormData({ ...formData, [name]: value });
         }
     };
 
@@ -66,15 +41,33 @@ const AddStories = () => {
     const handleSubmit = async (e) => {
         e.preventDefault();
 
+        if (formData.storyImg && formData.storyImg.size > 10 * 1024 * 1024) { // 10MB
+            alert("File size too large! Please upload an image under 10MB.");
+            return; // ⛔ stop the upload process
+        }
+
         try {
             let imageUrl = formData.storyImg;
 
             // Upload only if storyImg is a File
-            if (formData.storyImg instanceof File) {
-                imageUrl = await uploadFile(formData.storyImg);
+            if (formData.storyImg && typeof formData.storyImg !== 'string') {
+                const data = new FormData();
+                data.append("file", formData.storyImg);
+                data.append("upload_preset", "newerror");
+
+                const res = await axios.post("https://api.cloudinary.com/v1_1/dsauuyk9v/image/upload", data);
+
+                imageUrl = res.data.secure_url;
             }
 
-            const dataToSend = { ...formData, storyImg: imageUrl };
+            // const dataToSend = { ...formData, storyImg: imageUrl };
+
+            const dataToSend = {
+                name: formData.name,
+                role: formData.role,
+                quote: formData.quote,
+                storyImg: imageUrl,
+            }
 
             if (editingId) {
                 await axios.put(`https://dhamanjali-group.vercel.app/api/farmerStories/${editingId}`, dataToSend);
@@ -85,25 +78,13 @@ const AddStories = () => {
                 alert("Story added successfully!");
             }
 
-            setFormData({ name: "", role: "", quote: "", storyImg: null });
-            setPreview(null);
             fetchStories();
+            setFormData({ name: "", role: "", quote: "", storyImg: null });
+            setEditingId(null);
         } catch (error) {
             console.error("Error submitting story:", error);
         }
     };
-
-    // helper to upload file to Cloudinary
-    const uploadFile = async (file) => {
-        const data = new FormData();
-        data.append("file", file);
-        data.append("upload_preset", "newerror");
-        data.append("folder", "farmer-stories");
-
-        const res = await axios.post("https://api.cloudinary.com/v1_1/dsauuyk9v/image/upload", data);
-        return res.data.secure_url;
-    };
-
 
     const handleEdit = (story) => {
         setFormData({
@@ -112,7 +93,6 @@ const AddStories = () => {
             quote: story.quote,
             storyImg: story.storyImg,
         });
-        setPreview(story.storyImg);
         setEditingId(story._id);
         window.scrollTo({ top: 0, behavior: "smooth" });
     };
@@ -138,9 +118,9 @@ const AddStories = () => {
 
                 <form
                     onSubmit={handleSubmit}
-                    className="bg-white p-6 rounded-xl shadow-md mb-8"
+                    className="max-w-md bg-white p-6 rounded-xl shadow-md mb-8"
                 >
-                    <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <div className="  space-y-4">
                         <input
                             type="text"
                             name="name"
@@ -170,46 +150,61 @@ const AddStories = () => {
                         <input
                             type="file"
                             accept="image/*"
-                            onChange={handleImageUpload}
+                            onChange={handleChange}
                             className="border p-2 rounded w-full"
+                            required={!editingId}
                         />
 
-                        {preview && (
-                            <div className="mt-4">
-                                <p className="text-sm text-gray-600 mb-2">Image Preview:</p>
+                        {/* ✅ Live Preview */}
+                        {formData.storyImg && (
+                            <div className="mt-3">
+                                <p className="text-gray-600 text-sm mb-1">Image Preview:</p>
                                 <img
-                                    src={preview}
+                                    src={
+                                        typeof formData.storyImg === "string"
+                                            ? formData.storyImg
+                                            : URL.createObjectURL(formData.storyImg)
+                                    }
                                     alt="Preview"
-                                    className="w-40 h-40 object-cover rounded-lg border"
+                                    className="w-full h-48 object-cover rounded border"
                                 />
                             </div>
                         )}
 
                     </div>
 
-                    <div className="mt-4 flex items-center">
-                        <button
-                            type="submit"
-                            disabled={loading}
-                            className="bg-green-600 text-white px-4 py-2 rounded hover:bg-green-700"
-                        >
-                            {loading ? "Uploading..." : editingId ? "Update Story" : "Add Story"}
-                        </button>
-
-                        {editingId && (
+                    {editingId ? (
+                        <div className="flex gap-3">
+                            <button
+                                type="submit"
+                                className="bg-green-600 text-white px-4 py-2 rounded"
+                            >
+                                Update Story
+                            </button>
                             <button
                                 type="button"
                                 onClick={() => {
                                     setEditingId(null);
-                                    setFormData({ name: "", role: "", quote: "", storyImg: null });
-                                    setPreview(null);
+                                    setFormData({
+                                        name: "",
+                                        role: "",
+                                        quote: "",
+                                        storyImg: null,
+                                    });
                                 }}
-                                className="ml-4 bg-gray-400 text-white px-4 py-2 rounded hover:bg-gray-500"
+                                className="bg-gray-400 text-white px-4 py-2 rounded"
                             >
                                 Cancel
                             </button>
-                        )}
-                    </div>
+                        </div>
+                    ) : (
+                        <button
+                            type="submit"
+                            className="bg-indigo-600 text-white px-4 py-2 rounded"
+                        >
+                            Add Story
+                        </button>
+                    )}
                 </form>
 
                 {/* Display stories */}

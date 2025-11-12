@@ -6,9 +6,9 @@ export const addStory = async (req, res) => {
     const { name, role, quote, storyImg } = req.body;
     const newStory = new FarmerStory({ name, role, quote, storyImg });
     await newStory.save();
-    res.status(201).json(newStory);
+    res.status(201).json({ success: true, data: newStory });
   } catch (error) {
-    res.status(500).json({ message: error.message });
+    res.status(500).json({ success: false, message: error.message });
   }
 };
 
@@ -18,23 +18,19 @@ export const getStories = async (req, res) => {
     const stories = await FarmerStory.find().sort({ createdAt: -1 });
     res.status(200).json(stories);
   } catch (error) {
-    res.status(500).json({ message: error.message });
+    res.status(500).json({ success: false, message: error.message });
   }
 };
 
 // PUT - Update a story by ID
-// ✅ PUT - Update story by ID
 export const updateFarmerStory = async (req, res) => {
   try {
-    const { name, role, quote, storyImg } = req.body;
-    const updatedStory = await FarmerStory.findByIdAndUpdate(
-      req.params.id,
-      { name, role, quote, storyImg },
-      { new: true }
-    );
-    res.status(200).json(updatedStory);
+    const { id } = req.params;
+    const updatedStory = await FarmerStory.findByIdAndUpdate(id, req.body, { new: true });
+    if (!updatedStory) return res.status(404).json({ success: false, message: "Story not found" });
+    res.status(200).json({ success: true, data: updatedStory });
   } catch (error) {
-    res.status(500).json({ message: "Error updating story", error });
+    res.status(500).json({ success: false, message: "Error updating story", error });
   }
 };
 

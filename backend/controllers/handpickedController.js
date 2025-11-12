@@ -22,7 +22,7 @@ export const addHandpickedProject = async (req, res) => {
 // Get all projects
 export const getHandpickedProjects = async (req, res) => {
   try {
-    const projects = await HandpickedProject.find();
+    const projects = await HandpickedProject.find().sort({ createdAt: -1 });
     res.status(200).json(projects);
   } catch (error) {
     res.status(500).json({ success: false, message: error.message });
