@@ -8,6 +8,7 @@ import foodRoutes from "./routes/foodRoutes.js";
 import hospitalityRoutes from "./routes/HospitalityRoutes.js";
 import handpickedRoutes from "./routes/handpickedRoutes.js";
 import farmerStoryRoutes from "./routes/farmerStoryRoutes.js";
+import testimonialRoutes from "./routes/testimonialRoutes.js";
 
 
 dotenv.config();
@@ -89,6 +90,7 @@ app.use("/api/food", foodRoutes);
 app.use("/api/hospitality", hospitalityRoutes);
 app.use("/api/handpicked", handpickedRoutes);
 app.use("/api/farmerStories", farmerStoryRoutes);
+app.use("/api/testimonials", testimonialRoutes);
   
 
 // Add health check routes

@@ -1,8 +1,5 @@
-import React, { useState } from "react";
-import testimonial1 from "../../assets/images/amogh.png";
-import testimonial2 from "../../assets/images/girl-2.jpg";
-import testimonial3 from "../../assets/images/nitesh.png";
-import testimonial4 from "../../assets/images/girl-1.jpg";
+import React, { useState, useEffect } from "react";
+import axios from "axios";
 
 // Testimonial Card Component
 const TestimonialCard = ({
@@ -40,43 +37,15 @@ const TestimonialCard = ({
 };
 
 function Testimonial() {
-  // Sample testimonial data - you can replace this with API data
-  const testimonials = [
-    {
-      id: 1,
-      name: "Rajesh Kumar",
-      role: "Business Owner",
-      description:
-        "Dhamanjali Group has been instrumental in growing my business. Their expertise and dedication are unmatched.",
-      image: testimonial1,
-    },
-    {
-      id: 2,
-      name: "Priya Sharma",
-      role: "Marketing Director",
-      description:
-        "The team at Dhamanjali Group provided exceptional service and delivered results beyond our expectations.",
-      image: testimonial2,
-    },
-    {
-      id: 3,
-      name: "Amit Patel",
-      role: "CEO",
-      description:
-        "Working with Dhamanjali Group was a game-changer for our company. Highly recommended!",
-      image: testimonial3,
-    },
-    {
-      id: 4,
-      name: "Sneha Gupta",
-      role: "Project Manager",
-      description:
-        "Professional, reliable, and results-driven. Dhamanjali Group exceeded all our expectations.",
-      image: testimonial4,
-    },
-  ];
-
+  const [testimonials, setTestimonials] = useState([]);
   const [currentIndex, setCurrentIndex] = useState(0);
+
+  useEffect(() => {
+    axios
+      .get("https://dhamanjali-group.vercel.app/api/testimonials")
+      .then((res) => setTestimonials(res.data))
+      .catch((err) => console.error("Error fetching testimonials:", err));
+  }, []);
 
   // Show 2 testimonials at a time
   const displayedTestimonials = testimonials.slice(
