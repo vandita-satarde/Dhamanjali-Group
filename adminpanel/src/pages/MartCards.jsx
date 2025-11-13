@@ -82,7 +82,7 @@ function AddMartItem() {
     data.append("image", formData.image);
 
     try {
-      await axios.post("https://dhamanjali-group.vercel.app/api/mart/add", data, {
+      await axios.post("http://localhost:5000/api/mart/add", data, {
         headers: { "Content-Type": "multipart/form-data" },
         timeout: 30000 // 30 second timeout
       });
@@ -101,7 +101,7 @@ function AddMartItem() {
 
   const fetchMartItems = async () => {
     try {
-      const res = await axios.get("https://dhamanjali-group.vercel.app/api/mart");
+      const res = await axios.get("http://localhost:5000/api/mart");
       setMartItems(res.data);
     } catch (error) {
       console.error("Error fetching mart items:", error);
@@ -114,7 +114,7 @@ function AddMartItem() {
     }
 
     try {
-      await axios.delete(`https://dhamanjali-group.vercel.app/api/mart/${id}`);
+      await axios.delete(`http://localhost:5000/api/mart/${id}`);
       alert("Mart item deleted successfully!");
       fetchMartItems(); // Refresh the list
     } catch (error) {
@@ -132,7 +132,7 @@ function AddMartItem() {
       <Sidebar />
       <div className="pl-5 md:pl-80 lg:pl-85 pt-24 md:pt-10 lg:pt-8 bg-[#F5F9FE] min-h-screen pr-6 md:pr-8 lg:pr-16">
         <h2 className=" text-[#0f2769] text-[22px] md:text-[30px] font-bold mb-3 md:mb-6 lg:mb-8"> Add Mart Item</h2>
-        <form onSubmit={handleSubmit} className="flex flex-col gap-3 max-w-md">
+        <form onSubmit={handleSubmit} className="flex flex-col gap-3 max-w-md shadow-lg p-6 rounded-xl">
           <input
             type="text"
             name="title"
@@ -156,7 +156,7 @@ function AddMartItem() {
               name="image"
               accept="image/*"
               onChange={handleChange}
-              className="border p-2 rounded w-full"
+              className="bg-blue-100 p-2 rounded w-full"
               required
             />
             {formData.image && (
@@ -179,16 +179,16 @@ function AddMartItem() {
         </form>
 
         {/* Display existing mart items */}
-        <div className="mt-8 grid grid-cols-1 md:grid-cols-3 gap-4">
+        <div className="mt-8 mb-10 grid grid-cols-1 md:grid-cols-3 gap-4">
           {martItems.map((item) => (
             <div
               key={item._id}
-              className="p-4 border rounded shadow flex flex-col items-center relative"
+              className="p-4 rounded shadow-lg flex flex-col items-center relative"
             >
               <img
                 src={item.imageUrl}
                 alt={item.title}
-                className="h-24 w-24 object-cover mb-2 rounded"
+                className="h-34 w-34 object-cover mb-2 rounded-xl"
               />
               <h3 className="font-semibold text-center">{item.title}</h3>
               <p className="text-sm text-gray-600 text-center mb-3">{item.description}</p>

@@ -48,12 +48,12 @@ const AddHospitalityCards = () => {
     try {
       if (editingId) {
         // update existing record
-        await axios.put(`https://dhamanjali-group.vercel.app/api/hospitality/${editingId}`, formData);
+        await axios.put(`http://localhost:5000/api/hospitality/${editingId}`, formData);
         alert("Updated successfully");
         setEditingId(null);
       } else {
         // add new
-        await axios.post("https://dhamanjali-group.vercel.app/api/hospitality", formData);
+        await axios.post("http://localhost:5000/api/hospitality", formData);
         alert("Added successfully");
       }
 
@@ -65,7 +65,7 @@ const AddHospitalityCards = () => {
   };
 
   const fetchImages = async () => {
-    const res = await axios.get("https://dhamanjali-group.vercel.app/api/hospitality");
+    const res = await axios.get("http://localhost:5000/api/hospitality");
     setImages(res.data);
   };
 
@@ -84,7 +84,7 @@ const AddHospitalityCards = () => {
   const handleDelete = async (id) => {
     if (window.confirm("Are you sure you want to delete this card?")) {
       try {
-        await axios.delete(`https://dhamanjali-group.vercel.app/api/hospitality/${id}`);
+        await axios.delete(`http://localhost:5000/api/hospitality/${id}`);
         fetchImages();
       } catch (err) {
         console.error(err);
@@ -104,7 +104,7 @@ const AddHospitalityCards = () => {
           { editingId ? "Edit Hospitality Card" : "Add Hospitality Card" }
         </h2>
 
-        <form onSubmit={handleSubmit} className="space-y-4 mb-6 max-w-md">
+        <form onSubmit={handleSubmit} className="space-y-4 mb-6 max-w-md shadow-lg p-6 rounded-xl">
           <input
             type="text"
             name="title"
@@ -132,7 +132,7 @@ const AddHospitalityCards = () => {
             name="image"
             accept="image/*"
             onChange={handleImageUpload}
-            className="border p-2 w-full rounded"
+            className=" bg-blue-100  p-2 w-full rounded"
           />
 
           {uploading ? (
@@ -157,8 +157,8 @@ const AddHospitalityCards = () => {
 
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
           {images.map((item) => (
-            <div key={item._id} className="border rounded-lg overflow-hidden shadow-md bg-white">
-              <img src={item.image} alt={item.title} className="h-40 w-full object-cover" />
+            <div key={item._id} className=" rounded-lg overflow-hidden shadow-lg p-4 mb-10">
+              <img src={item.image} alt={item.title} className="h-40 w-full object-cover rounded-xl" />
               <div className="p-3">
                 <p className="font-semibold text-gray-800">{item.title}</p>
                 <div className="flex justify-between">

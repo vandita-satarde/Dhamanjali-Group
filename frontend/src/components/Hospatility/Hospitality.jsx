@@ -198,7 +198,7 @@ const GallerySection = () => {
   // Step 1: Fetch all gallery items from backend
   useEffect(() => {
     axios
-      .get("https://dhamanjali-group.vercel.app/api/hospitality") // your backend route
+      .get("http://localhost:5000/api/hospitality") // your backend route
       .then((res) => setImages(res.data))
       .catch((err) => console.error("Error fetching hospitality:", err));
   }, []);

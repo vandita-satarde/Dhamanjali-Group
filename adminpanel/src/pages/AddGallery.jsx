@@ -12,7 +12,7 @@ function AddGallery() {
 
   const fetchGallery = async () => {
     try {
-      const res = await axios.get("https://dhamanjali-group.vercel.app/api/gallery");
+      const res = await axios.get("http://localhost:5000/api/gallery");
       setGallery(res.data);
     } catch (err) {
       console.error("Failed to fetch gallery images", err);
@@ -72,7 +72,7 @@ function AddGallery() {
     data.append("image", image);
 
     try {
-      await axios.post("https://dhamanjali-group.vercel.app/api/gallery/add", data, {
+      await axios.post("http://localhost:5000/api/gallery/add", data, {
         headers: {
           'Content-Type': 'multipart/form-data'
         },
@@ -96,7 +96,7 @@ function AddGallery() {
     if (!window.confirm("Are you sure you want to delete this image?")) return;
 
     try {
-      await axios.delete(`https://dhamanjali-group.vercel.app/api/gallery/${id}`);
+      await axios.delete(`http://localhost:5000/api/gallery/${id}`);
       alert("Image deleted successfully");
       fetchGallery(); // refresh
     } catch (error) {
@@ -111,14 +111,14 @@ function AddGallery() {
         <h2 className=" text-[#0f2769] text-[22px] md:text-[30px] font-bold mb-3 md:mb-6 lg:mb-8">
           Upload Gallery Image
         </h2>
-        <form onSubmit={handleSubmit} className="space-y-4">
+        <form onSubmit={handleSubmit} className="space-y-4 max-w-lg ">
           <div>
             <input 
               type="file" 
               onChange={handleFileChange} 
               accept="image/*"
               required 
-              className="bg-blue-100 p-2 rounded-lg w-full" 
+              className="bg-blue-100 p-2 rounded-lg" 
             />
             {image && (
               <p className="text-sm text-gray-600 mt-2">
@@ -145,16 +145,16 @@ function AddGallery() {
         {gallery.length === 0 ? (
           <p className="text-gray-500">No images uploaded yet.</p>
         ) : (
-          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
+          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6 ">
             {gallery.map((img) => (
               <div
                 key={img._id}
-                className="rounded-lg overflow-hidden shadow-md bg-white"
+                className="rounded-lg overflow-hidden shadow-lg p-4"
               >
                 <img
                   src={img.imageUrl}
                   alt="Gallery"
-                  className="w-full h-56 object-cover hover:scale-105 transition-transform duration-300"
+                  className="w-full h-56 rounded-xl object-cover hover:scale-105 transition-transform duration-300"
                 />
                  <button
                   onClick={() => handleDelete(img._id)}

@@ -153,9 +153,9 @@ const MartDynamic = () => {
     // Fetch mart items from backend with better error handling
     const fetchMartItems = async () => {
       try {
-        console.log("Fetching mart items from:", "https://dhamanjali-group.vercel.app/api/mart");
+        console.log("Fetching mart items from:", "http://localhost:5000/api/mart");
         
-        const response = await fetch("https://dhamanjali-group.vercel.app/api/mart", {
+        const response = await fetch("http://localhost:5000/api/mart", {
           method: 'GET',
           headers: {
             'Content-Type': 'application/json',

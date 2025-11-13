@@ -153,7 +153,7 @@ const Agriculture = () => {
   const [stories, setStories] = useState([]);
 
   useEffect(() => {
-    axios.get("https://dhamanjali-group.vercel.app/api/farmerstories")
+    axios.get("http://localhost:5000/api/farmerstories")
       .then((res) => setStories(res.data))
       .catch((err) => console.error("Error fetching farmer stories:", err));
   }, []);

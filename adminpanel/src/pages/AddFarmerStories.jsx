@@ -19,7 +19,7 @@ const AddStories = () => {
 
     const fetchStories = async () => {
         try {
-            const res = await axios.get("https://dhamanjali-group.vercel.app/api/farmerStories");
+            const res = await axios.get("http://localhost:5000/api/farmerStories");
             setStories(res.data);
         } catch (error) {
             console.error("Error fetching stories:", error);
@@ -70,11 +70,11 @@ const AddStories = () => {
             }
 
             if (editingId) {
-                await axios.put(`https://dhamanjali-group.vercel.app/api/farmerStories/${editingId}`, dataToSend);
+                await axios.put(`http://localhost:5000/api/farmerStories/${editingId}`, dataToSend);
                 alert("Story updated successfully!");
                 setEditingId(null);
             } else {
-                await axios.post("https://dhamanjali-group.vercel.app/api/farmerStories", dataToSend);
+                await axios.post("http://localhost:5000/api/farmerStories", dataToSend);
                 alert("Story added successfully!");
             }
 
@@ -102,7 +102,7 @@ const AddStories = () => {
     const handleDelete = async (id) => {
         if (!window.confirm("Delete this story?")) return;
         try {
-            await axios.delete(`https://dhamanjali-group.vercel.app/api/farmerStories/${id}`);
+            await axios.delete(`http://localhost:5000/api/farmerStories/${id}`);
             fetchStories();
         } catch (error) {
             console.error("Error deleting story:", error);
@@ -118,7 +118,7 @@ const AddStories = () => {
 
                 <form
                     onSubmit={handleSubmit}
-                    className="max-w-md bg-white p-6 rounded-xl shadow-md mb-8"
+                    className="max-w-md p-6 rounded-xl shadow-lg mb-8"
                 >
                     <div className="  space-y-4">
                         <input
@@ -151,7 +151,7 @@ const AddStories = () => {
                             type="file"
                             accept="image/*"
                             onChange={handleChange}
-                            className="border p-2 rounded w-full"
+                            className="bg-blue-100 p-2 rounded w-full mb-4 "
                             required={!editingId}
                         />
 
@@ -166,11 +166,10 @@ const AddStories = () => {
                                             : URL.createObjectURL(formData.storyImg)
                                     }
                                     alt="Preview"
-                                    className="w-full h-48 object-cover rounded border"
+                                    className="w-full h-48 object-cover rounded border mb-5"
                                 />
                             </div>
                         )}
-
                     </div>
 
                     {editingId ? (
@@ -208,11 +207,11 @@ const AddStories = () => {
                 </form>
 
                 {/* Display stories */}
-                <div className="grid md:grid-cols-3 gap-6">
+                <div className="grid md:grid-cols-3 gap-6 mb-10 ">
                     {stories.map((story) => (
                         <div
                             key={story._id}
-                            className="bg-white rounded-xl shadow-md overflow-hidden p-4"
+                            className=" rounded-xl shadow-lg overflow-hidden p-4"
                         >
                             <img
                                 src={story.storyImg}

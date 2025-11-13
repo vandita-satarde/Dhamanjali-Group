@@ -14,7 +14,7 @@ function AddFood() {
 
   // Fetch existing food items
   useEffect(() => {
-    axios.get("https://dhamanjali-group.vercel.app/api/food")
+    axios.get("http://localhost:5000/api/food")
       .then(res => setFoodItems(res.data))
       .catch(err => console.error(err));
   }, []);
@@ -56,16 +56,16 @@ function AddFood() {
 
       if (editingId) {
         // 🟢 UPDATE existing food item
-        await axios.put(`https://dhamanjali-group.vercel.app/api/food/${editingId}`, foodData);
+        await axios.put(`http://localhost:5000/api/food/${editingId}`, foodData);
         alert("Food item updated successfully!");
       } else {
         // 🟢 ADD new food item
-        await axios.post("https://dhamanjali-group.vercel.app/api/food", foodData);
+        await axios.post("http://localhost:5000/api/food", foodData);
         alert("Food item added successfully!");
       }
 
       // ✅ Refresh the list
-      const res = await axios.get("https://dhamanjali-group.vercel.app/api/food");
+      const res = await axios.get("http://localhost:5000/api/food");
       setFoodItems(res.data);
 
       // Reset form
@@ -95,7 +95,7 @@ function AddFood() {
 
   const handleDelete = async (id) => {
     if (window.confirm("Delete this food item?")) {
-      await axios.delete(`https://dhamanjali-group.vercel.app/api/food/${id}`);
+      await axios.delete(`http://localhost:5000/api/food/${id}`);
       setFoodItems(foodItems.filter(item => item._id !== id));
     }
   };
@@ -108,7 +108,7 @@ function AddFood() {
           {editingId ? "Edit" : "Add"} Food Item
         </h2>
 
-        <form onSubmit={handleSubmit} className="flex flex-col gap-4 max-w-md">
+        <form onSubmit={handleSubmit} className="flex flex-col gap-4 max-w-md p-4 rounded-xl shadow-lg mb-10">
           <input
             type="text"
             name="title"
@@ -135,16 +135,23 @@ function AddFood() {
             className="border p-2 rounded"
             required
           />
-          <input type="file" name="image" accept="image/*" onChange={handleChange} required />
+          <input
+            type="file"
+            name="image"
+            accept="image/*"
+            onChange={handleChange}
+            className="bg-blue-100 p-2 rounded"
+            required
+          />
           <button type="submit" className="bg-blue-900 text-white hover:bg-blue-800 px-4 py-2 rounded">
             {editingId ? "Update" : "Add"} Item
           </button>
         </form>
 
         {/* Display food items */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mt-10">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mt-10 mb-10">
           {foodItems.map((item) => (
-            <div key={item._id} className="border p-4 rounded-lg shadow">
+            <div key={item._id} className=" p-4 rounded-lg shadow-lg ">
               <img src={item.image} alt={item.title} className="h-40 w-full object-cover rounded mb-2" />
               <h3 className="font-semibold text-lg">{item.title}</h3>
               <p className="text-gray-500 text-sm">{item.description}</p>

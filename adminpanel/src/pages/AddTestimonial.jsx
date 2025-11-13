@@ -10,6 +10,7 @@ const AddTestimonial = () => {
         image: "",
     });
     const [imageFile, setImageFile] = useState(null);
+    const [editing, setEditing] = useState(null);
     const [testimonials, setTestimonials] = useState([]);
 
     const handleChange = (e) =>
@@ -38,23 +39,39 @@ const AddTestimonial = () => {
         try {
             const imageUrl = await uploadImageToCloudinary();
 
-            await axios.post("https://dhamanjali-group.vercel.app/api/testimonials", {
-                ...formData,
-                image: imageUrl,
-            });
-
-            alert("Testimonial added successfully");
+            if (editing) {
+                // ✅ Update existing testimonial
+                await axios.put(`http://localhost:5000/api/testimonials/${editing}`, {
+                    ...formData,
+                    image: imageUrl,
+                });
+                alert("Testimonial updated successfully!");
+            } else {
+                // ✅ Add new testimonial
+                await axios.post("http://localhost:5000/api/testimonials", {
+                    ...formData,
+                    image: imageUrl,
+                });
+                alert("Testimonial added successfully!");
+            }
             setFormData({ name: "", role: "", description: "", image: "" });
             setImageFile(null);
+            setEditing(null);
             fetchTestimonials();
         } catch (err) {
-            console.error(err);
+            console.error("Error saving testimonial:", err);
+            alert("Failed to save testimonial!");
         }
     };
 
+    // Fetch all testimonials
     const fetchTestimonials = async () => {
-        const res = await axios.get("https://dhamanjali-group.vercel.app/api/testimonials");
-        setTestimonials(res.data);
+        try {
+            const res = await axios.get("http://localhost:5000/api/testimonials");
+            setTestimonials(res.data);
+        } catch (err) {
+            console.error("Error fetching testimonials:", err);
+        }
     };
 
     useEffect(() => {
@@ -66,7 +83,7 @@ const AddTestimonial = () => {
         if (!confirmDelete) return; // stop if user clicks "Cancel"
 
         try {
-            await axios.delete(`https://dhamanjali-group.vercel.app/api/testimonials/${id}`);
+            await axios.delete(`http://localhost:5000/api/testimonials/${id}`);
             alert("Testimonial deleted successfully!");
             fetchTestimonials(); // refresh list
         } catch (error) {
@@ -75,58 +92,109 @@ const AddTestimonial = () => {
         }
     };
 
+    // Set data for editing
+    const handleEdit = (t) => {
+        setEditing(t._id);
+        setFormData({
+            name: t.name,
+            role: t.role,
+            description: t.description,
+            image: t.image,
+        });
+        window.scrollTo({ top: 0, behavior: "smooth" }); // scroll to form
+    };
+
+    // Cancel edit
+    const handleCancelEdit = () => {
+        setEditing(null);
+        setFormData({ name: "", role: "", description: "", image: "" });
+        setImageFile(null);
+    };
 
     return (
         <>
             <Sidebar />
             <div className="pl-5 md:pl-80 lg:pl-85 pt-24 md:pt-10 lg:pt-8 bg-[#F5F9FE] min-h-screen pr-6 md:pr-8 lg:pr-16">
                 <h2 className="text-[#0f2769] text-[22px] md:text-[30px] font-bold mb-6">
-                    Add Testimonial</h2>
+                    {editing ? "Edit Testimonial" : "Add Testimonial"}
+                </h2>
 
-                <form onSubmit={handleSubmit} className="space-y-3">
+                <form onSubmit={handleSubmit} className="space-y-3 max-w-md shadow-lg p-6 rounded-xl" >
                     <input
                         name="name"
                         placeholder="Name"
                         onChange={handleChange}
                         value={formData.name}
-                        className="border p-2 w-full"
+                        className="border p-2 w-full rounded"
                     />
                     <input
                         name="role"
                         placeholder="Role"
                         onChange={handleChange}
                         value={formData.role}
-                        className="border p-2 w-full"
+                        className="border p-2 w-full rounded"
                     />
                     <textarea
                         name="description"
                         placeholder="Description"
                         onChange={handleChange}
                         value={formData.description}
-                        className="border p-2 w-full"
+                        className="border p-2 w-full rounded"
                     />
-                    <input type="file" onChange={handleImageChange} />
-                    <button
-                        type="submit"
-                        className="bg-indigo-600 text-white px-4 py-2 rounded"
-                    >
-                        Submit
-                    </button>
+                    <input type="file" onChange={handleImageChange} className="bg-blue-100 p-2 rounded w-full " />
+                    {formData.image && !imageFile && (
+                        <img
+                            src={formData.image}
+                            alt="preview"
+                            className="w-20 h-20 rounded-full mt-2"
+                        />
+                    )}
+
+                    <div className="flex gap-3">
+                        <button
+                            type="submit"
+                            className="bg-indigo-600 text-white px-4 py-2 rounded"
+                        >
+                            {editing ? "Update" : "Submit"}
+                        </button>
+                        {editing && (
+                            <button
+                                type="button"
+                                onClick={handleCancelEdit}
+                                className="bg-gray-400 text-white px-4 py-2 rounded"
+                            >
+                                Cancel
+                            </button>
+                        )}
+                    </div>
                 </form>
 
                 <div className="mt-6 grid grid-cols-2 gap-4">
                     {testimonials.map((t) => (
-                        <div key={t._id} className="border p-3 rounded shadow">
-                            <img src={t.image} alt={t.name} className="w-24 h-24 rounded-full" />
-                            <h3 className="font-bold">{t.name}</h3>
-                            <p>{t.role}</p>
+                        <div key={t._id} className=" p-4 rounded shadow-lg ">
+                            <div className="flex items-center gap-4 ">
+                                <img src={t.image} alt={t.name} className="w-24 h-24 rounded-full" />
+                                <div className="">
+                                    <h3 className="font-bold">{t.name}</h3>
+                                    <p>{t.role}</p>
+                                </div>
+                            </div>
+
                             <p className="text-gray-600">{t.description}</p>
-                            <button
-                                onClick={() => handleDelete(t._id)}
-                                className="text-red-500 mt-2"
-                            >
-                                Delete
-                            </button>
+                            <div className="flex gap-3 mt-3">
+                                <button
+                                    onClick={() => handleEdit(t)}
+                                    className="text-blue-600 font-semibold"
+                                >
+                                    Edit
+                                </button>
+                                <button
+                                    onClick={() => handleDelete(t._id)}
+                                    className="text-red-500 font-semibold"
+                                >
+                                    Delete
+                                </button>
+                            </div>
                         </div>
                     ))}
                 </div>

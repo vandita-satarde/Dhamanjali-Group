@@ -18,7 +18,7 @@ const AddHandpicked = () => {
 
     const fetchProjects = async () => {
         try {
-            const res = await axios.get("https://dhamanjali-group.vercel.app/api/handpicked");
+            const res = await axios.get("http://localhost:5000/api/handpicked");
             setProjects(res.data);
         } catch (err) {
             console.error("Error fetching projects:", err);
@@ -79,11 +79,11 @@ const AddHandpicked = () => {
 
             if (editingId) {
                 // Update existing project
-                await axios.put(`https://dhamanjali-group.vercel.app/api/handpicked/${editingId}`, projectData);
+                await axios.put(`http://localhost:5000/api/handpicked/${editingId}`, projectData);
                 alert("Project updated successfully!");
             } else {
                 // Add new project
-                await axios.post("https://dhamanjali-group.vercel.app/api/handpicked", projectData);
+                await axios.post("http://localhost:5000/api/handpicked", projectData);
                 alert("Project added successfully!");
             }
 
@@ -121,7 +121,7 @@ const AddHandpicked = () => {
     // ✅ Delete project
     const handleDelete = async (id) => {
         if (window.confirm("Delete this project?")) {
-            await axios.delete(`https://dhamanjali-group.vercel.app/api/handpicked/${id}`);
+            await axios.delete(`http://localhost:5000/api/handpicked/${id}`);
             setProjects(projects.filter((p) => p._id !== id));
         }
     };
@@ -134,14 +134,14 @@ const AddHandpicked = () => {
                     {editingId ? "Edit" : "Add"} Handpicked Project
                 </h2>
 
-                <form onSubmit={handleSubmit} className="space-y-3 max-w-md">
+                <form onSubmit={handleSubmit} className="space-y-3 max-w-md shadow-lg p-6 rounded-xl" >
                     <input
                         type="text"
                         name="name"
                         placeholder="Project Name"
                         value={formData.name}
                         onChange={handleChange}
-                        className="border p-2 w-full"
+                        className="border p-2 w-full rounded"
                         required
                     />
                     <input
@@ -150,7 +150,7 @@ const AddHandpicked = () => {
                         placeholder="Location"
                         value={formData.plotArea}
                         onChange={handleChange}
-                        className="border p-2 w-full"
+                        className="border p-2 w-full rounded"
                         required
                     />
 
@@ -165,7 +165,7 @@ const AddHandpicked = () => {
                                     placeholder="Min Price"
                                     value={formData.priceFrom || ""}
                                     onChange={handleChange}
-                                    className="w-full p-2 outline-none"
+                                    className="w-full p-2 outline-none rounded"
                                     required
                                 />
                             </div>
@@ -178,7 +178,7 @@ const AddHandpicked = () => {
                                     placeholder="Max Price"
                                     value={formData.priceTo || ""}
                                     onChange={handleChange}
-                                    className="w-full p-2 outline-none"
+                                    className="w-full p-2 outline-none rounded"
                                     required
                                 />
                             </div>
@@ -194,7 +194,7 @@ const AddHandpicked = () => {
                         name="image"
                         accept="image/*"
                         onChange={handleChange}
-                        className="border p-2 w-full"
+                        className="bg-blue-100 p-2 w-full rounded"
                         required={!editingId}
                     />
 
@@ -219,7 +219,7 @@ const AddHandpicked = () => {
                         placeholder="Description"
                         value={formData.description}
                         onChange={handleChange}
-                        className="border p-2 w-full"
+                        className="border p-2 w-full rounded"
                         required
                     />
                     <input
@@ -228,7 +228,7 @@ const AddHandpicked = () => {
                         placeholder="Highlights (comma-separated)"
                         value={formData.highlights}
                         onChange={handleChange}
-                        className="border p-2 w-full"
+                        className="border p-2 w-full rounded"
                     />
                     {editingId ? (
                         <div className="flex gap-3">
@@ -268,13 +268,13 @@ const AddHandpicked = () => {
                 </form>
 
                 {/* ✅ Display projects */}
-                <div className="mt-8 grid grid-cols-1 md:grid-cols-3 gap-4">
+                <div className="mt-8 grid grid-cols-1 md:grid-cols-3 gap-4 mb-10">
                     {projects.map((p) => (
-                        <div key={p._id} className="border p-3 rounded shadow">
+                        <div key={p._id} className="p-4 rounded shadow-lg ">
                             <img
                                 src={p.imageUrl}
                                 alt={p.name}
-                                className="w-full h-40 object-cover rounded"
+                                className="w-full h-40 object-cover rounded-xl"
                             />
                             <h3 className="font-bold mt-2">{p.name}</h3>
                             <p className="text-sm text-gray-600">{p.plotArea}</p>
