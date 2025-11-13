@@ -1,4 +1,5 @@
-import React, { useEffect, useRef } from "react";
+import React, { useEffect, useState, useRef } from "react";
+import axios from "axios";
 
 // AnnouncementsTitle Component
 const AnnouncementsTitle = ({
@@ -104,54 +105,22 @@ const staticData = {
       description: "FDA-approved and CE-marked devices",
     },
   ],
-  testimonials: [
-    {
-      name: "Dr. Ramesh Iyer",
-      text: "The medical devices provided by Dhammanjali are of top-notch quality and extremely reliable in day-to-day healthcare operations. Their precision and durability make them a preferred choice in our clinic.",
-    },
-    {
-      name: "Pooja Nair",
-      text: "As a caregiver, having access to Dhammanjali's home-use diagnostic devices has made my work so much easier. They are user-friendly, accurate, and come with clear instructions. Highly recommended!",
-    },
-    {
-      name: "Dr. Pratik Mehra",
-      text: "Their commitment to innovation in medical technology is commendable. We've been using their portable ECG and BP monitors for community health programs with excellent results.",
-    },
-    {
-      name: "Anita Sharma",
-      text: "Affordable and reliable medical tools are hard to find, but Dhammanjali has truly impressed us with their range of diagnostic and surgical instruments. Great support team too!",
-    },
-    {
-      name: "Dr. Farheen Khan",
-      text: "From thermometers to pulse oximeters, every device we've sourced from Dhammanjali has been trustworthy and delivered consistent results. Their after-sales support is also prompt and helpful.",
-    },
-    {
-      name: "Rahul Deshmukh",
-      text: "We've partnered with Dhammanjali for our rural medical camps and the devices have always functioned flawlessly even in tough conditions. A real boost for field healthcare.",
-    },
-    {
-      name: "Dr. Anjali Patil",
-      text: "What I admire most is their attention to quality standards and compliance. Every device we've received comes with clear documentation and certifications. Trustworthy and safe.",
-    },
-    {
-      name: "Karthik Srinivasan",
-      text: "I was surprised by the advanced features in their diagnostic kits. Easy connectivity, long battery life, and lightweight – exactly what mobile health units need.",
-    },
-    {
-      name: "Meera Kapoor",
-      text: "Being able to monitor my mother's vitals at home with Dhammanjali's homecare kit has been life-changing. Thank you for making healthcare accessible and convenient!",
-    },
-    {
-      name: "Dr. Suraj Chaudhary",
-      text: "We rely on Dhammanjali's equipment in our day-to-day hospital operations. Their products are robust, easy to maintain, and designed with healthcare practitioners in mind.",
-    },
-  ],
 };
 
 function Medical() {
   const testimonialsRef = useRef(null);
+  const [testimonials, setTestimonials] = useState([]);
 
-  const { hero, intro, tech, devices, features, testimonials } = staticData;
+  const API_URL = "https://dhamanjali-group.vercel.app/api/healthTestimonials";
+
+  useEffect(() => {
+    axios
+      .get(API_URL)
+      .then((res) => setTestimonials(res.data))
+      .catch((err) => console.error("Error fetching testimonials:", err));
+  }, []);
+
+  const { hero, intro, tech, devices, features } = staticData;
 
   return (
     <div className="min-h-screen bg-white font-montserrat text-gray-800 pt-16 md:pt-20">
@@ -264,26 +233,32 @@ function Medical() {
         ))}
       </section>
 
-      {/* Testimonials Section */}
+      {/* ✅ Dynamic Testimonials Section */}
       <section
         ref={testimonialsRef}
         className="flex gap-8 bg-gray-100 py-10 px-6 overflow-x-auto scrollbar-thin scrollbar-track-gray-200 scrollbar-thumb-gray-400"
         style={{ flexWrap: "nowrap", scrollBehavior: "smooth" }}
       >
-        {testimonials.map((testimonial, index) => (
-          <div
-            key={index}
-            className="bg-white rounded-xl shadow-md p-6 min-w-[150px] lg:min-w-[340px] max-w-[280px] lg:max-w-[400px] flex-shrink-0 mx-4 text-left hover:shadow-lg transition-shadow duration-300"
-          >
-            <div className="text-yellow-400 text-lg mb-3">★★★★★</div>
-            <p className="text-gray-800 text-base mb-5 leading-relaxed">
-              {testimonial.text}
-            </p>
-            <div className="font-bold text-gray-800 text-lg">
-              {testimonial.name}
+        {testimonials.length > 0 ? (
+          testimonials.map((testimonial, index) => (
+            <div
+              key={index}
+              className="bg-white rounded-xl shadow-md p-6 min-w-[150px] lg:min-w-[340px] max-w-[280px] lg:max-w-[400px] flex-shrink-0 mx-4 text-left hover:shadow-lg transition-shadow duration-300"
+            >
+              <div className="text-yellow-400 text-lg mb-3">★★★★★</div>
+              <p className="text-gray-800 text-base mb-5 leading-relaxed">
+                {testimonial.text}
+              </p>
+              <div className="font-bold text-gray-800 text-lg">
+                {testimonial.name}
+              </div>
             </div>
-          </div>
-        ))}
+          ))
+        ) : (
+          <p className="text-center text-gray-500 w-full">
+            No testimonials available yet.
+          </p>
+        )}
       </section>
     </div>
   );

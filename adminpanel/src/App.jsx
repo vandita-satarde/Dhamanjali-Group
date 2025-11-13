@@ -8,6 +8,7 @@ import AddHospitalityCards from './pages/AddHospitalityCards'
 import AddHandpicked from './pages/AddHandpicked'
 import AddFarmerStories from './pages/AddFarmerStories'
 import AddTestimonial from './pages/AddTestimonial'
+import AddHealthTestimonial from './pages/AddHealthTestimonial'
 
 function App() {
 
@@ -24,6 +25,7 @@ function App() {
           <Route path='/handpicked' element={<AddHandpicked />} />
           <Route path='/farmer-stories' element={<AddFarmerStories />} />
           <Route path='/testimonials' element={<AddTestimonial />} />
+          <Route path='/health-testimonials' element={<AddHealthTestimonial />} />
         </Routes>
       </div>
     </Router>
