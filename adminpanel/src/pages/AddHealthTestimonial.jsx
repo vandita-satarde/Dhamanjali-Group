@@ -51,7 +51,7 @@ const AddHealthTestimonial = () => {
     }
   };
 
-   // ✅ Cancel edit
+  // ✅ Cancel edit
   const handleCancelEdit = () => {
     setEditingId(null);
     setFormData({ name: "", text: "" });
@@ -129,16 +129,11 @@ const AddHealthTestimonial = () => {
                 key={t._id}
                 className="flex flex-col justify-between w-[350px] md:w-[400px] rounded-2xl shadow-lg p-6 transition-all duration-300 hover:shadow-xl hover:-translate-y-1"
               >
-                {/* Stars */}
                 <div className="text-yellow-400 text-xl mb-2">★★★★★</div>
-
-                {/* Content */}
                 <div className="flex-1">
                   <p className="font-semibold text-gray-800 text-lg mb-2">{t.name}</p>
                   <p className="text-gray-600 text-sm leading-relaxed">{t.text}</p>
                 </div>
-
-                {/* Buttons */}
                 <div className="flex justify-end mt-4 gap-3">
                   <button
                     onClick={() => handleEdit(t)}

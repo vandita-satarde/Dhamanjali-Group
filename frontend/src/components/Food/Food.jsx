@@ -69,29 +69,6 @@ const specialitiesData = {
 };
 
 
-const testimonialsData = [
-  {
-    id: 1,
-    text: "The quality of food products from Dhammanjali is exceptional. Fresh ingredients and great taste every time!",
-    author: "Priya Sharma",
-  },
-  {
-    id: 2,
-    text: "I've been ordering from them for months now. Their dairy products are always fresh and delivered on time.",
-    author: "Rajesh Kumar",
-  },
-  {
-    id: 3,
-    text: "Outstanding service and premium quality rice. Highly recommended for all your food needs.",
-    author: "Anita Singh",
-  },
-  {
-    id: 4,
-    text: "Their organic vegetables are the best in the market. Fresh, healthy, and reasonably priced.",
-    author: "Suresh Gupta",
-  },
-];
-
 // Main Food Component
 function Food() {
   const scrollRef = useRef(null);
@@ -101,6 +78,14 @@ function Food() {
   useEffect(() => {
     axios.get("https://dhamanjali-group.vercel.app/api/food")
       .then(res => setFoodItems(res.data))
+      .catch(err => console.error(err));
+  }, []);
+
+  const [testimonials, setTestimonials] = useState([]);
+
+  useEffect(() => {
+    axios.get("https://dhamanjali-group.vercel.app/api/foodTestimonials")
+      .then(res => setTestimonials(res.data))
       .catch(err => console.error(err));
   }, []);
 
@@ -209,10 +194,10 @@ function Food() {
         </h2>
         <div
           ref={scrollRef}
-          className="flex gap-6 px-6 md:px-12 min-w-[700px] overflow-x-auto scrollbar-hide"
+          className="flex gap-6 px-6 md:px-12 min-w-[700px] overflow-x-auto scrollbar-hide pb-10"
           style={{ scrollbarWidth: "none", msOverflowStyle: "none" }}
         >
-          {testimonialsData.map((t, idx) => (
+          {testimonials.map((t, idx) => (
             <motion.div
               key={t.id}
               initial={{ opacity: 0, scale: 0.9 }}
@@ -225,8 +210,8 @@ function Food() {
               <p className="text-gray-800 text-base font-medium leading-relaxed mb-4 min-h-[90px]">
                 {t.text}
               </p>
-              <div className="font-semibold text-gray-900 text-lg">
-                — {t.author}
+              <div className="font-semibold text-gray-900 text-lg flex gap-4">
+                — {t.author}<p>{t.name} </p>
               </div>
             </motion.div>
           ))}
