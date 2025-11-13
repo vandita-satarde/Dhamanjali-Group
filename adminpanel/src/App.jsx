@@ -10,6 +10,7 @@ import AddFarmerStories from './pages/AddFarmerStories'
 import AddTestimonial from './pages/AddTestimonial'
 import AddHealthTestimonial from './pages/AddHealthTestimonial'
 import AddFoodTestimonials from './pages/AddFoodTestimonials'
+import ViewContacts from './pages/ViewContacts'
 
 function App() {
 
@@ -28,6 +29,7 @@ function App() {
           <Route path='/testimonials' element={<AddTestimonial />} />
           <Route path='/health-testimonials' element={<AddHealthTestimonial />} />
           <Route path='/food-testimonials' element={<AddFoodTestimonials />} />
+          <Route path='/view-contacts' element={<ViewContacts />} />
         </Routes>
       </div>
     </Router>

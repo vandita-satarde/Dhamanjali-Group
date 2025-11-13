@@ -16,10 +16,34 @@ function ContactUs() {
     });
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log("Form Data:", formData);
-    // Handle form submission here
+
+    try {
+      const response = await fetch("https://dhamanjali-group.vercel.app/api/contact", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(formData),
+      });
+
+      const data = await response.json();
+
+      if (data.success) {
+        alert("Form submitted successfully!");
+        setFormData({
+          fullName: "",
+          email: "",
+          phoneNumber: "",
+          address: "",
+          occupation: "",
+        });
+      } else {
+        alert("Failed to submit. Please try again.");
+      }
+    } catch (error) {
+      console.error(error);
+      alert("Something went wrong!");
+    }
   };
 
   return (

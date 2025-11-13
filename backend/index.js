@@ -11,6 +11,7 @@ import farmerStoryRoutes from "./routes/farmerStoryRoutes.js";
 import testimonialRoutes from "./routes/testimonialRoutes.js";
 import healthTestimonialRoutes from "./routes/healthTestimonialRoutes.js";
 import foodTestimonialRoutes from "./routes/foodTestimonialRoutes.js";
+import contactRoutes from "./routes/contactRoutes.js";
 
 
 dotenv.config();
@@ -95,6 +96,7 @@ app.use("/api/farmerStories", farmerStoryRoutes);
 app.use("/api/testimonials", testimonialRoutes);
 app.use("/api/healthTestimonials", healthTestimonialRoutes);
 app.use("/api/foodTestimonials", foodTestimonialRoutes);
+app.use("/api/contact", contactRoutes);
 
   
 // Add health check routes
