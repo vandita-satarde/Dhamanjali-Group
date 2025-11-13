@@ -99,7 +99,7 @@ function Food() {
   const [foodItems, setFoodItems] = useState([]);
 
   useEffect(() => {
-    axios.get("http://localhost:5000/api/food")
+    axios.get("https://dhamanjali-group.vercel.app/api/food")
       .then(res => setFoodItems(res.data))
       .catch(err => console.error(err));
   }, []);
