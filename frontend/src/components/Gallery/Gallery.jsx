@@ -5,7 +5,7 @@ function Gallery() {
   const [images, setImages] = useState([]);
 
   useEffect(() => {
-    axios.get("https://dhamanjali-group.vercel.app/api/gallery")
+    axios.get("http://localhost:5000/api/gallery")
       .then((res) => setImages(res.data))
       .catch((err) => console.error(err));
   }, []);

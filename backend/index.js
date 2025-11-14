@@ -12,6 +12,7 @@ import testimonialRoutes from "./routes/testimonialRoutes.js";
 import healthTestimonialRoutes from "./routes/healthTestimonialRoutes.js";
 import foodTestimonialRoutes from "./routes/foodTestimonialRoutes.js";
 import contactRoutes from "./routes/contactRoutes.js";
+import emailRoutes from "./routes/emailRoutes.js";
 
 
 dotenv.config();
@@ -21,7 +22,7 @@ const app = express();
 app.use(cors({
   origin: [
     'http://localhost:5173',
-    'http://localhost:5174', 
+    'http://localhost:5174',
     'http://192.168.1.7:5174',
     'https://dhamanjali-group.vercel.app',
     'https://your-frontend-domain.vercel.app'  // Replace with your actual frontend domain
@@ -59,7 +60,7 @@ const connectToDatabase = async () => {
       minPoolSize: 0,
       maxIdleTimeMS: 30000,
     });
-    
+
     console.log('MongoDB connected successfully');
   } catch (error) {
     console.error('MongoDB connection failed:', error);
@@ -80,7 +81,7 @@ app.use('/api', async (req, res, next) => {
     next();
   } catch (error) {
     console.error('Database connection middleware error:', error);
-    return res.status(500).json({ 
+    return res.status(500).json({
       error: 'Database connection failed',
       message: 'Unable to connect to MongoDB. Please check your connection string and IP whitelist.'
     });
@@ -97,11 +98,12 @@ app.use("/api/testimonials", testimonialRoutes);
 app.use("/api/healthTestimonials", healthTestimonialRoutes);
 app.use("/api/foodTestimonials", foodTestimonialRoutes);
 app.use("/api/contact", contactRoutes);
+app.use("/api/email", emailRoutes);
 
-  
+
 // Add health check routes
 app.get("/", (req, res) => {
-  res.json({ 
+  res.json({
     message: "Backend API is running!",
     timestamp: new Date().toISOString(),
     status: "healthy"

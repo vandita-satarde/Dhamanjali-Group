@@ -111,7 +111,7 @@ function Medical() {
   const testimonialsRef = useRef(null);
   const [testimonials, setTestimonials] = useState([]);
 
-  const API_URL = "https://dhamanjali-group.vercel.app/api/healthTestimonials";
+  const API_URL = "http://localhost:5000/api/healthTestimonials";
 
   useEffect(() => {
     axios

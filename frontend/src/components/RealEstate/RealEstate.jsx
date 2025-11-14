@@ -162,7 +162,7 @@ const HandpickedProjects = () => {
   const [projects, setProjects] = useState([]);
 
   useEffect(() => {
-    axios.get("https://dhamanjali-group.vercel.app/api/handpicked")
+    axios.get("http://localhost:5000/api/handpicked")
       .then((res) => setProjects(res.data))
       .catch((err) => console.error(err));
   }, []);

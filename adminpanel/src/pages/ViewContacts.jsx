@@ -6,7 +6,7 @@ const ViewContacts = () => {
     const [contacts, setContacts] = useState([]);
     const [remarks, setRemarks] = useState({});
 
-    const API_URL = "https://dhamanjali-group.vercel.app/api/contact";
+    const API_URL = "http://localhost:5000/api/contact";
 
     // Function to fetch contacts
     const fetchContacts = () => {
@@ -68,14 +68,14 @@ const ViewContacts = () => {
                 </h2>
                 <div className="overflow-x-auto">
                     <table className="min-w-full shadow-md">
-                        <thead className=" bg-blue-900 text-white">
+                        <thead className=" bg-[#0f2769] text-white">
                             <tr className="">
-                                <th className="py-3 px-4 text-left">Name</th>
-                                <th className="py-3 px-4 text-left">Email</th>
-                                <th className="py-3 px-4 text-left">Phone</th>
-                                <th className="py-3 px-4 text-left">Address</th>
-                                <th className="py-3 px-4 text-left">Occupation</th>
-                                <th className="py-3 px-4 text-left">Remark</th>
+                                <th className="py-3 px-4 text-left border">Name</th>
+                                <th className="py-3 px-4 text-left border">Email</th>
+                                <th className="py-3 px-4 text-left border">Phone</th>
+                                <th className="py-3 px-4 text-left border">Address</th>
+                                <th className="py-3 px-4 text-left border">Occupation</th>
+                                <th className="py-3 px-4 text-left border">Remark</th>
                                 <th className="py-3 px-4 text-left">Action</th>
                             </tr>
                         </thead>

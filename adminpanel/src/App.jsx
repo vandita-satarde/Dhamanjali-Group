@@ -12,6 +12,7 @@ import AddTestimonial from './pages/AddTestimonial'
 import AddHealthTestimonial from './pages/AddHealthTestimonial'
 import AddFoodTestimonials from './pages/AddFoodTestimonials'
 import ViewContacts from './pages/ViewContacts'
+import ViewEmails from './pages/ViewEmails'
 
 function App() {
 
@@ -31,6 +32,7 @@ function App() {
           <Route path='/health-testimonials' element={<AddHealthTestimonial />} />
           <Route path='/food-testimonials' element={<AddFoodTestimonials />} />
           <Route path='/view-contacts' element={<ViewContacts />} />
+          <Route path='/view-emails' element={<ViewEmails />} />
         </Routes>
       </div>
     </Router>
