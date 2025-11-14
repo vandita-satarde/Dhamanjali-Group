@@ -1,5 +1,6 @@
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
 import './App.css'
+import Login from './pages/Login'
 import Dashboard from './pages/Dashboard'
 import Gallery from './pages/AddGallery'
 import MartCards from './pages/MartCards'
@@ -18,8 +19,8 @@ function App() {
     <Router>
       <div>
         <Routes>
-          {/* <Route path='/' element={<Login />} /> */}
-          <Route path='/' element={<Dashboard />} />
+          <Route path='/' element={<Login />} />
+          <Route path='/dashboard' element={<Dashboard />} />
           <Route path='/gallery' element={<Gallery />} />
           <Route path='/mart' element={<MartCards />} />
           <Route path='/food' element={<FoodItems />} />

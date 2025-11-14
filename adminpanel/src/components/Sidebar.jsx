@@ -31,7 +31,7 @@ function Sidebar() {
         <div>
           <p className='text-[25px] hidden md:block'>Admin Panel</p>
           <div className='py-18 md:py-8 px-2 md:px-4 space-y-4 md:space-y-5 lg:space-y-3 '>
-            <p><Link to='/' >Dashboard</Link></p>
+            <p><Link to='/dashboard' >Dashboard</Link></p>
             <p><Link to='/gallery' >Gallery</Link></p>
             <p><Link to='/mart' >MMart Cards</Link></p>
             <p><Link to='/food' >Food Items</Link></p>
