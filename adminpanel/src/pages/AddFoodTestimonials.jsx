@@ -7,7 +7,7 @@ const AddFoodTestimonials = () => {
     const [testimonials, setTestimonials] = useState([]);
     const [editingId, setEditingId] = useState(null);
 
-    const API_URL = "http://localhost:5000/api/foodTestimonials";
+    const API_URL = "https://dhamanjali-group.vercel.app/api/foodTestimonials";
 
     // Fetch all testimonials on load
     useEffect(() => {

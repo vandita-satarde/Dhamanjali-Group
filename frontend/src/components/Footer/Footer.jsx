@@ -24,7 +24,7 @@ function Footer() {
 
     try {
       setLoading(true);
-      const res = await axios.post("http://localhost:5000/api/email", {
+      const res = await axios.post("https://dhamanjali-group.vercel.app/api/email", {
         email,
       });
 
@@ -36,7 +36,7 @@ function Footer() {
     } catch (error) {
       // If duplicate email → backend sends 400
       if (error.response && error.response.status === 400) {
-        setMessage("This email is already subscribed ❌");
+        setMessage("You have already subscribed with this email ❌");
       } else {
         setMessage("Something went wrong. Try again.");
       }
@@ -50,7 +50,7 @@ function Footer() {
 
   return (
     <footer className="bg-white py-8 md:py-12 px-4 sm:px-6 border-t-2 border-amber-100 shadow-lg font-montserrat font-medium">
-      {/* Footer Container */}
+        {/* Footer Container */}
       <div className="max-w-[1200px] mx-auto px-2 sm:px-8 max-[600px]:max-w-full max-[600px]:px-2 max-[400px]:px-[2px]">
         {/* Main Sections with Vertical Lines */}
         <div className="flex flex-col justify-between items-stretch gap-12 md:flex-row md:items-stretch max-[600px]:flex-col max-[600px]:gap-5 max-[600px]:items-stretch">
