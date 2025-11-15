@@ -18,7 +18,7 @@ const AddHandpicked = () => {
 
     const fetchProjects = async () => {
         try {
-            const res = await axios.get("http://localhost:5000/api/handpicked");
+            const res = await axios.get("https://dhamanjali-group.vercel.app/api/handpicked");
             setProjects(res.data);
         } catch (err) {
             console.error("Error fetching projects:", err);
@@ -79,11 +79,11 @@ const AddHandpicked = () => {
 
             if (editingId) {
                 // Update existing project
-                await axios.put(`http://localhost:5000/api/handpicked/${editingId}`, projectData);
+                await axios.put(`https://dhamanjali-group.vercel.app/api/handpicked/${editingId}`, projectData);
                 alert("Project updated successfully!");
             } else {
                 // Add new project
-                await axios.post("http://localhost:5000/api/handpicked", projectData);
+                await axios.post("https://dhamanjali-group.vercel.app/api/handpicked", projectData);
                 alert("Project added successfully!");
             }
 
@@ -121,7 +121,7 @@ const AddHandpicked = () => {
     // ✅ Delete project
     const handleDelete = async (id) => {
         if (window.confirm("Delete this project?")) {
-            await axios.delete(`http://localhost:5000/api/handpicked/${id}`);
+            await axios.delete(`https://dhamanjali-group.vercel.app/api/handpicked/${id}`);
             setProjects(projects.filter((p) => p._id !== id));
         }
     };

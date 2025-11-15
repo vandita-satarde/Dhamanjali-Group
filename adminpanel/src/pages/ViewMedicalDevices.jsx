@@ -6,7 +6,7 @@ const ViewMedicalDevices = () => {
     const [devices, setDevices] = useState([]);
     const [loading, setLoading] = useState(true);
 
-    const API_URL = "http://localhost:5000/api/medical-devices";
+    const API_URL = "https://dhamanjali-group.vercel.app/api/medical-devices";
 
     // Function to fetch medical devices
     const fetchDevices = () => {

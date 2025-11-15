@@ -6,7 +6,7 @@ function ViewEmails() {
   const [emails, setEmails] = useState([]);
 
   useEffect(() => {
-    axios.get("http://localhost:5000/api/email")
+    axios.get("https://dhamanjali-group.vercel.app/api/email")
       .then((res) => setEmails(res.data))
       .catch(() => console.error("Error fetching emails"));
   }, []);
