@@ -42,7 +42,7 @@ function Testimonial() {
 
   useEffect(() => {
     axios
-      .get("https://dhamanjali-group.vercel.app/api/testimonials")
+      .get("http://localhost:5000/api/testimonials")
       .then((res) => setTestimonials(res.data))
       .catch((err) => console.error("Error fetching testimonials:", err));
   }, []);

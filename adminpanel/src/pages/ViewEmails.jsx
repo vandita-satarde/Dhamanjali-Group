@@ -6,7 +6,7 @@ function ViewEmails() {
   const [emails, setEmails] = useState([]);
 
   useEffect(() => {
-    axios.get("https://dhamanjali-group.vercel.app/api/email")
+    axios.get("http://localhost:5000/api/email")
       .then((res) => setEmails(res.data))
       .catch(() => console.error("Error fetching emails"));
   }, []);
@@ -19,7 +19,7 @@ function ViewEmails() {
           Subscribers
         </h2>
 
-        <table className="w-full border">
+        <table className="max-w-3xl w-full border">
           <thead>
             <tr className="bg-[#0f2769] text-gray-200">
               <th className="p-2 border">Email</th>
@@ -29,9 +29,9 @@ function ViewEmails() {
 
           <tbody>
             {emails.map((item) => (
-              <tr key={item._id} className="text-[#0f2769]">
-                <td className="border p-2">{item.email}</td>
-                <td className="border p-2">{new Date(item.createdAt).toLocaleString()}</td>
+              <tr key={item._id} className=" text-center">
+                <td className="border p-2 w-2/3">{item.email}</td>
+                <td className="border p-2 w-1/3">{new Date(item.createdAt).toLocaleString()}</td>
               </tr>
             ))}
           </tbody>

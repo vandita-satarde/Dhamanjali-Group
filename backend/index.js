@@ -13,6 +13,7 @@ import healthTestimonialRoutes from "./routes/healthTestimonialRoutes.js";
 import foodTestimonialRoutes from "./routes/foodTestimonialRoutes.js";
 import contactRoutes from "./routes/contactRoutes.js";
 import emailRoutes from "./routes/emailRoutes.js";
+import medicalDeviceRoutes from "./routes/medicalDeviceRoutes.js";
 
 
 dotenv.config();
@@ -99,6 +100,7 @@ app.use("/api/healthTestimonials", healthTestimonialRoutes);
 app.use("/api/foodTestimonials", foodTestimonialRoutes);
 app.use("/api/contact", contactRoutes);
 app.use("/api/email", emailRoutes);
+app.use("/api/medical-devices", medicalDeviceRoutes);
 
 
 // Add health check routes

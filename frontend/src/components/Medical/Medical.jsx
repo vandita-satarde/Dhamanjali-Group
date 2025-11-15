@@ -1,5 +1,6 @@
 import React, { useEffect, useState, useRef } from "react";
 import axios from "axios";
+import waterIonizer from "../../assets/images/water-ionizer.jpg";
 
 // AnnouncementsTitle Component
 const AnnouncementsTitle = ({
@@ -83,6 +84,25 @@ const staticData = {
     imageUrl:
       "https://res.cloudinary.com/dwudu5pep/image/upload/v1761552072/medical1_x3ozmf.png",
   },
+  devices2: {
+    title: "OUR MEDICAL DEVICES",
+    description: "Certified device creating healthier, safer drinking water daily",
+
+    deviceName: "DHAMMANJALI HIMALAYAN WATER IONIZER",
+
+    deviceDescription:
+      "A medical-grade device (ISO 13485 certified). Designed to provide pure, safe, ionized alkaline water for improved health and wellness.",
+
+    deviceFeatures: [
+      "Medical Grade • ISO 13485",
+      "27 Patents",
+      "58 Certifications",
+      "102 Awards",
+      "Ionized Alkaline Water",
+      "Antioxidant-rich Hydration"
+    ],
+    imageUrl: waterIonizer,
+  },
   features: [
     {
       icon: "🧡",
@@ -111,7 +131,7 @@ function Medical() {
   const testimonialsRef = useRef(null);
   const [testimonials, setTestimonials] = useState([]);
 
-  const API_URL = "https://dhamanjali-group.vercel.app/api/healthTestimonials";
+  const API_URL = "http://localhost:5000/api/healthTestimonials";
 
   useEffect(() => {
     axios
@@ -121,6 +141,15 @@ function Medical() {
   }, []);
 
   const { hero, intro, tech, devices, features } = staticData;
+
+  const [medicalDevices, setMedicalDevices] = useState([]);
+
+  useEffect(() => {
+    axios
+      .get("http://localhost:5000/api/medical-devices")
+      .then((res) => setMedicalDevices(res.data))
+      .catch((err) => console.log(err));
+  }, []);
 
   return (
     <div className="min-h-screen bg-white font-montserrat text-gray-800 pt-16 md:pt-20">
@@ -150,6 +179,51 @@ function Medical() {
           arrowColor="#FFA500"
         />
       </section>
+
+      {/* Dynamic Medical Devices From Backend */}
+      {medicalDevices.map((d, i) => (
+        <section
+          key={i}
+          className="flex flex-col md:flex-row items-center justify-between mx-auto px-4 sm:px-6 py-8 gap-10 max-w-7xl"
+        >
+          <div className="flex-1 text-center">
+            <h3 className="text-3xl md:text-4xl font-bold mb-2 text-center">
+              {d.title}
+            </h3>
+            <p className="text-gray-700 mb-4 md:text-xl">{d.description}</p>
+            <br />
+            <div className="mb-6">
+              <strong className="text-2xl md:text-3xl font-light text-gray-800 mb-2">
+                {d.deviceName}
+              </strong>
+
+              <span className="block text-gray-600 mb-2">
+                {d.deviceDescription}
+              </span>
+
+              <div className="flex justify-center gap-2 mb-5 flex-wrap">
+                {d.features.map((f, index) => (
+                  <span
+                    key={index}
+                    className="bg-orange-400 text-white text-sm px-3 py-1 rounded-full"
+                  >
+                    {f}
+                  </span>
+                ))}
+              </div>
+            </div>
+          </div>
+
+          <div className="medical-devices-img w-full max-w-xs sm:max-w-sm md:max-w-md lg:max-w-lg xl:max-w-xl flex justify-center">
+            <img
+              src={d.imageUrl}
+              alt={d.deviceName}
+              className="w-full lg:h-[450px] object-cover rounded-[40%_20%_40%_20%] shadow-lg"
+            />
+          </div>
+        </section>
+      ))}
+
 
       {/* Innovative Technology Section */}
       <section className="flex flex-col md:flex-row items-center justify-between mx-auto px-4 sm:px-6 md:py-8 gap-10 max-w-6xl">

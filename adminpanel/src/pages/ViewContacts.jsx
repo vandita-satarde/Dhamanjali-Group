@@ -6,7 +6,7 @@ const ViewContacts = () => {
     const [contacts, setContacts] = useState([]);
     const [remarks, setRemarks] = useState({});
 
-    const API_URL = "https://dhamanjali-group.vercel.app/api/contact";
+    const API_URL = "http://localhost:5000/api/contact";
 
     // Function to fetch contacts
     const fetchContacts = () => {
