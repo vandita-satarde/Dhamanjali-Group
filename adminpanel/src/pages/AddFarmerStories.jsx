@@ -207,32 +207,36 @@ const AddStories = () => {
                 </form>
 
                 {/* Display stories */}
-                <div className="grid md:grid-cols-3 gap-6 mb-10 ">
+                <div className="mx-7 md:mx-auto grid md:grid-cols-3 gap-6 mb-10 ">
                     {stories.map((story) => (
                         <div
                             key={story._id}
-                            className=" rounded-xl shadow-lg overflow-hidden p-4"
+                            className=" rounded-xl shadow-lg overflow-hidden p-3 md:p-4"
                         >
                             <img
                                 src={story.storyImg}
                                 alt={story.name}
-                                className="w-full h-48 object-cover rounded-lg mb-3"
+                                className="w-full h-38 md:h-48 object-cover rounded-lg"
                             />
-                            <h3 className="text-lg font-semibold">{story.name}</h3>
-                            <p className="text-gray-500 text-sm">{story.role}</p>
-                            <p className="mt-2 text-gray-700 text-sm">“{story.quote}”</p>
-                            <button
-                                onClick={() => handleEdit(story)}
-                                className="mt-3 bg-blue-500 text-white px-3 py-1 rounded hover:bg-blue-600 mr-2"
-                            >
-                                Edit
-                            </button>
-                            <button
-                                onClick={() => handleDelete(story._id)}
-                                className="mt-3 bg-red-500 text-white px-3 py-1 rounded hover:bg-red-600"
-                            >
-                                Delete
-                            </button>
+                            <div className="p-2">
+                                <h3 className="text-lg font-semibold">{story.name}</h3>
+                                <p className="text-gray-500 text-sm">{story.role}</p>
+                                <p className="mt-2 text-gray-700 text-sm md:h-[100px]">“{story.quote}”</p>
+                                <div className="flex justify-between mt-2 items-end">
+                                    <button
+                                        onClick={() => handleEdit(story)}
+                                        className="px-3 py-1 text-sm font-medium text-blue-600 border border-blue-600 rounded-lg hover:bg-blue-600 hover:text-white transition-all duration-200"
+                                    >
+                                        Edit
+                                    </button>
+                                    <button
+                                        onClick={() => handleDelete(story._id)}
+                                        className="px-3 py-1 text-sm font-medium text-red-600 border border-red-600 rounded-lg hover:bg-red-600 hover:text-white transition-all duration-200"
+                                    >
+                                        Delete
+                                    </button>
+                                </div>
+                            </div>
                         </div>
                     ))}
                 </div>

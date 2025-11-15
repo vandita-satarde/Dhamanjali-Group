@@ -149,22 +149,22 @@ function AddFood() {
         </form>
 
         {/* Display food items */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mt-10 mb-10">
+        <div className="mx-9 md:mx-auto grid grid-cols-1 md:grid-cols-3 gap-6 mt-10 mb-10">
           {foodItems.map((item) => (
-            <div key={item._id} className=" p-4 rounded-lg shadow-lg ">
+            <div key={item._id} className="text-sm md:text-[16px] p-4 rounded-lg shadow-lg ">
               <img src={item.image} alt={item.title} className="h-40 w-full object-cover rounded mb-2" />
               <h3 className="font-semibold text-lg">{item.title}</h3>
               <p className="text-gray-500 text-sm">{item.description}</p>
               <div className="flex gap-3 mt-3">
                 <button
                   onClick={() => handleEdit(item)}
-                  className="bg-blue-500 text-white px-3 py-1 rounded"
+                  className="px-3 py-1 text-sm font-medium text-blue-600 border border-blue-600 rounded-lg hover:bg-blue-600 hover:text-white transition-all duration-200"
                 >
                   Edit
                 </button>
                 <button
                   onClick={() => handleDelete(item._id)}
-                  className="bg-red-500 text-white px-3 py-1 rounded"
+                  className="px-3 py-1 text-sm font-medium text-red-600 border border-red-600 rounded-lg hover:bg-red-600 hover:text-white transition-all duration-200"
                 >
                   Delete
                 </button>

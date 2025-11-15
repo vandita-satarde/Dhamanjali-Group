@@ -155,22 +155,22 @@ const AddHospitalityCards = () => {
           </button>
         </form>
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
+        <div className="mx-7 md:mx-auto grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
           {images.map((item) => (
-            <div key={item._id} className=" rounded-lg overflow-hidden shadow-lg p-4 mb-10">
+            <div key={item._id} className=" rounded-lg overflow-hidden shadow-lg p-2 md:p-4 mb-5 md:mb-10">
               <img src={item.image} alt={item.title} className="h-40 w-full object-cover rounded-xl" />
-              <div className="p-3">
+              <div className="p-1 md:p-3">
                 <p className="font-semibold text-gray-800">{item.title}</p>
-                <div className="flex justify-between">
+                <div className="flex justify-between mt-3">
                   <button
                     onClick={() => handleEdit(item)}
-                    className="text-blue-700 hover:text-blue-900 text-sm font-semibold"
+                    className="px-3 py-1 text-sm font-medium text-blue-600 border border-blue-600 rounded-lg hover:bg-blue-600 hover:text-white transition-all duration-200"
                   >
                     Edit
                   </button>
                   <button
                     onClick={() => handleDelete(item._id)}
-                    className="text-red-600 hover:text-red-800 text-sm font-semibold"
+                    className="px-3 py-1 text-sm font-medium text-red-600 border border-red-600 rounded-lg hover:bg-red-600 hover:text-white transition-all duration-200"
                   >
                     Delete
                   </button>

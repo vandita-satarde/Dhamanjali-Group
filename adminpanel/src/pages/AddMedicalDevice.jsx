@@ -56,11 +56,11 @@ const AddMedicalDevice = () => {
             <Sidebar />
             <div className="pl-5 md:pl-80 lg:pl-85 pt-24 md:pt-10 lg:pt-8 bg-[#F5F9FE] min-h-screen pr-6 md:pr-8 lg:pr-16">
                 <div className="flex justify-between items-center mb-6">
-                    <h2 className="text-[#0f2769] text-[22px] md:text-[30px] font-bold">
+                    <h2 className="text-[#0f2769] text-[18px] md:text-[30px] font-bold">
                         Add Medical Device</h2>
                     <button 
                         onClick={() => navigate("/medical-devices")}
-                        className="bg-gray-600 text-white px-4 py-2 rounded hover:bg-gray-700"
+                        className="bg-gray-600 text-white px-3 md:px-4 py-2 rounded hover:bg-gray-700"
                     >
                         View All Devices
                     </button>

@@ -268,31 +268,33 @@ const AddHandpicked = () => {
                 </form>
 
                 {/* ✅ Display projects */}
-                <div className="mt-8 grid grid-cols-1 md:grid-cols-3 gap-4 mb-10">
+                <div className="mx-8 md:mx-auto mt-8 grid grid-cols-1 md:grid-cols-3 gap-4 mb-10">
                     {projects.map((p) => (
-                        <div key={p._id} className="p-4 rounded shadow-lg ">
+                        <div key={p._id} className="p-2 md:p-4 rounded shadow-lg ">
                             <img
                                 src={p.imageUrl}
                                 alt={p.name}
                                 className="w-full h-40 object-cover rounded-xl"
                             />
-                            <h3 className="font-bold mt-2">{p.name}</h3>
-                            <p className="text-sm text-gray-600">{p.plotArea}</p>
-                            <p className="text-gray-500 text-sm">₹{p.price?.from} - ₹{p.price?.to}</p>
+                            <div className=" p-1 md:p-3" >
+                                <h3 className="font-bold">{p.name}</h3>
+                                <p className="text-sm text-gray-600">{p.plotArea}</p>
+                                <p className="text-gray-500 text-sm">₹{p.price?.from} - ₹{p.price?.to}</p>
 
-                            <div className="flex gap-2 mt-3">
-                                <button
-                                    onClick={() => handleEdit(p)}
-                                    className="bg-blue-500 text-white px-3 py-1 rounded"
-                                >
-                                    Edit
-                                </button>
-                                <button
-                                    onClick={() => handleDelete(p._id)}
-                                    className="bg-red-500 text-white px-3 py-1 rounded"
-                                >
-                                    Delete
-                                </button>
+                                <div className="flex justify-between gap-2 mt-3">
+                                    <button
+                                        onClick={() => handleEdit(p)}
+                                        className="px-3 py-1 text-sm font-medium text-blue-600 border border-blue-600 rounded-lg hover:bg-blue-600 hover:text-white transition-all duration-200"
+                                    >
+                                        Edit
+                                    </button>
+                                    <button
+                                        onClick={() => handleDelete(p._id)}
+                                        className="px-3 py-1 text-sm font-medium text-red-600 border border-red-600 rounded-lg hover:bg-red-600 hover:text-white transition-all duration-200"
+                                    >
+                                        Delete
+                                    </button>
+                                </div>
                             </div>
                         </div>
                     ))}

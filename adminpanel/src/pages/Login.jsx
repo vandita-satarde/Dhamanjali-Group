@@ -25,7 +25,7 @@ function Login() {
         <>
             <div className="flex justify-center items-center min-h-screen bg-[#0E1836] text-white">
                 <form
-                    className="max-w-sm w-full"
+                    className="max-w-3xs md:max-w-sm w-full"
                     onSubmit={(e) => e.preventDefault()}  // prevent page reload
                 >
                     <h2 className="text-2xl mb-6 text-center">Admin Panel Login</h2>
@@ -56,7 +56,7 @@ function Login() {
                         <button
                             type="button"
                             onClick={handleLogin}
-                            className=" max-w-3xs w-full bg-blue-900 border-2 border-gray-800 hover:border-2 hover:border-gray-600 p-2 rounded text-white "
+                            className=" max-w-[200px] md:max-w-3xs w-full bg-blue-900 border-2 border-gray-800 hover:border-2 hover:border-gray-600 p-2 rounded text-white "
                         >
                             Login
                         </button>

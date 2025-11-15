@@ -30,7 +30,7 @@ function Sidebar() {
       <div className={`text-[15px] md:text-[18px] lg:text-[17px] fixed z-5 bg-[#0E1836] text-[#F5F9FE] p-6 md:p-8 w-[230px] md:w-[290px] h-full ${isOpen ? 'translate-x-0' : '-translate-x-full'} md:translate-x-0 flex flex-col justify-between  `}>
         <div>
           <p className='text-[25px] hidden md:block'>Admin Panel</p>
-          <div className='py-18 md:py-8 px-2 md:px-4 space-y-4 md:space-y-5 lg:space-y-3 '>
+          <div className='py-18 md:py-8 px-2 md:px-4 space-y-4 md:space-y-5 lg:space-y-5 overflow-y-auto h-[65vh] scrollbar scrollbar-thin scrollbar-thumb-black/50 scrollbar-track-black/20 '>
             <p><Link to='/dashboard' >Dashboard</Link></p>
             <p><Link to='/gallery' >Gallery</Link></p>
             <p><Link to='/mart' >MMart Cards</Link></p>

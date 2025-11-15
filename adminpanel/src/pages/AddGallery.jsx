@@ -6,7 +6,7 @@ function AddGallery() {
   const [image, setImage] = useState(null);
   const [gallery, setGallery] = useState([]); // store uploaded images
 
-   useEffect(() => {
+  useEffect(() => {
     fetchGallery();
   }, []);
 
@@ -25,21 +25,21 @@ function AddGallery() {
       const canvas = document.createElement('canvas');
       const ctx = canvas.getContext('2d');
       const img = new Image();
-      
+
       img.onload = () => {
         // Calculate new dimensions
         const ratio = Math.min(maxWidth / img.width, maxWidth / img.height);
         const newWidth = img.width * ratio;
         const newHeight = img.height * ratio;
-        
+
         canvas.width = newWidth;
         canvas.height = newHeight;
-        
+
         // Draw and compress
         ctx.drawImage(img, 0, 0, newWidth, newHeight);
         canvas.toBlob(resolve, 'image/jpeg', quality);
       };
-      
+
       img.src = URL.createObjectURL(file);
     });
   };
@@ -113,12 +113,12 @@ function AddGallery() {
         </h2>
         <form onSubmit={handleSubmit} className="space-y-4 max-w-lg ">
           <div>
-            <input 
-              type="file" 
-              onChange={handleFileChange} 
+            <input
+              type="file"
+              onChange={handleFileChange}
               accept="image/*"
-              required 
-              className="bg-blue-100 p-2 rounded-lg" 
+              required
+              className="bg-blue-100 p-2 rounded-lg"
             />
             {image && (
               <p className="text-sm text-gray-600 mt-2">
@@ -149,14 +149,14 @@ function AddGallery() {
             {gallery.map((img) => (
               <div
                 key={img._id}
-                className="rounded-lg overflow-hidden shadow-lg p-4"
+                className="rounded-lg overflow-hidden shadow-lg p-5 md:p-4"
               >
                 <img
                   src={img.imageUrl}
                   alt="Gallery"
-                  className="w-full h-56 rounded-xl object-cover hover:scale-105 transition-transform duration-300"
+                  className="w-full h-40 md:h-56 rounded-xl object-cover hover:scale-105 transition-transform duration-300"
                 />
-                 <button
+                <button
                   onClick={() => handleDelete(img._id)}
                   className="bg-red-600 text-white text-[12px] m-2 p-1 rounded-md hover:bg-red-700 hover:scale-105 transition"
                 >

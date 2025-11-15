@@ -169,7 +169,7 @@ const AddTestimonial = () => {
                     </div>
                 </form>
 
-                <div className="mt-6 grid grid-cols-2 gap-4">
+                <div className="mt-6 grid md:grid-cols-2 gap-4">
                     {testimonials.map((t) => (
                         <div key={t._id} className=" p-4 rounded shadow-lg ">
                             <div className="flex items-center gap-4 ">
@@ -180,20 +180,22 @@ const AddTestimonial = () => {
                                 </div>
                             </div>
 
-                            <p className="text-gray-600">{t.description}</p>
-                            <div className="flex gap-3 mt-3">
-                                <button
-                                    onClick={() => handleEdit(t)}
-                                    className="text-blue-600 font-semibold"
-                                >
-                                    Edit
-                                </button>
-                                <button
-                                    onClick={() => handleDelete(t._id)}
-                                    className="text-red-500 font-semibold"
-                                >
-                                    Delete
-                                </button>
+                            <div className="p-1 ">
+                                <p className="text-gray-600">{t.description}</p>
+                                <div className="flex justify-end gap-3 mt-3">
+                                    <button
+                                        onClick={() => handleEdit(t)}
+                                        className="px-3 py-1 text-sm font-medium text-blue-600 border border-blue-600 rounded-lg hover:bg-blue-600 hover:text-white transition-all duration-200"
+                                    >
+                                        Edit
+                                    </button>
+                                    <button
+                                        onClick={() => handleDelete(t._id)}
+                                        className="px-3 py-1 text-sm font-medium text-red-600 border border-red-600 rounded-lg hover:bg-red-600 hover:text-white transition-all duration-200"
+                                    >
+                                        Delete
+                                    </button>
+                                </div>
                             </div>
                         </div>
                     ))}

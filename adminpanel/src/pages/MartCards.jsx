@@ -179,16 +179,16 @@ function AddMartItem() {
         </form>
 
         {/* Display existing mart items */}
-        <div className="mt-8 mb-10 grid grid-cols-1 md:grid-cols-3 gap-4">
+        <div className="mt-8 mb-10 mx-9 md:mx-auto grid grid-cols-1 md:grid-cols-3 gap-4">
           {martItems.map((item) => (
             <div
               key={item._id}
-              className="p-4 rounded shadow-lg flex flex-col items-center relative"
+              className=" p-3 md:p-4 rounded shadow-lg flex flex-col items-center relative"
             >
               <img
                 src={item.imageUrl}
                 alt={item.title}
-                className="h-34 w-34 object-cover mb-2 rounded-xl"
+                className="h-30 md:h-34 w-30 md:w-34 object-cover mb-2 rounded-xl"
               />
               <h3 className="font-semibold text-center">{item.title}</h3>
               <p className="text-sm text-gray-600 text-center mb-3">{item.description}</p>
@@ -196,7 +196,7 @@ function AddMartItem() {
               {/* Delete Button */}
               <button
                 onClick={() => handleDelete(item._id, item.title)}
-                className="mt-auto bg-red-500 text-white px-4 py-2 rounded hover:bg-red-600 transition-colors duration-200 text-sm"
+                className="px-3 py-1 text-sm font-medium text-red-600 border border-red-600 rounded-lg hover:bg-red-600 hover:text-white transition-all duration-200"
               >
                 Delete
               </button>

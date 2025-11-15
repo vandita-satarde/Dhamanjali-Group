@@ -57,12 +57,12 @@ const ViewMedicalDevices = () => {
             <Sidebar />
             <div className="pl-5 md:pl-80 lg:pl-85 pt-24 md:pt-10 lg:pt-8 bg-[#F5F9FE] min-h-screen pr-6 md:pr-8 lg:pr-16">
                 <div className="flex justify-between items-center mb-6">
-                    <h2 className="text-[#0f2769] text-[22px] md:text-[30px] font-bold">
+                    <h2 className="text-[#0f2769] text-[18px] md:text-[30px] font-bold">
                         Medical Devices ({devices.length})
                     </h2>
-                    <a 
-                        href="/add-medical-device" 
-                        className="bg-[#0f2769] text-white px-4 py-2 rounded hover:bg-blue-700"
+                    <a
+                        href="/add-medical-device"
+                        className="bg-[#0f2769] text-white px-3 md:px-4 py-2 rounded hover:bg-blue-700"
                     >
                         Add New Device
                     </a>
@@ -73,12 +73,12 @@ const ViewMedicalDevices = () => {
                         <p className="text-gray-500">No medical devices found.</p>
                     </div>
                 ) : (
-                    <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+                    <div className="mx-2 mb-10 grid gap-6 md:grid-cols-2 lg:grid-cols-3">
                         {devices.map((device) => (
-                            <div key={device._id} className="bg-white rounded-lg shadow-md p-6">
+                            <div key={device._id} className="bg-white rounded-lg shadow-md p-4 md:p-6">
                                 <div className="mb-4">
-                                    <img 
-                                        src={device.imageUrl} 
+                                    <img
+                                        src={device.imageUrl}
                                         alt={device.deviceName}
                                         className="w-full h-48 object-cover rounded-lg"
                                     />
@@ -92,7 +92,7 @@ const ViewMedicalDevices = () => {
                                             {device.description}
                                         </p>
                                     </div>
-                                    
+
                                     <div>
                                         <h4 className="font-semibold text-[#0f2769]">
                                             Device: {device.deviceName}
@@ -114,10 +114,10 @@ const ViewMedicalDevices = () => {
                                         </ul>
                                     </div>
 
-                                    <div className="pt-4 border-t">
+                                    <div className="pt-4 border-t text-center">
                                         <button
                                             onClick={() => handleDelete(device._id)}
-                                            className="w-full bg-red-600 text-white py-2 px-4 rounded hover:bg-red-700 transition-colors"
+                                            className="px-4 py-2 w-full text-sm font-medium text-red-600 border border-red-600 rounded-lg hover:bg-red-600 hover:text-white transition-all duration-200"
                                         >
                                             Delete Device
                                         </button>

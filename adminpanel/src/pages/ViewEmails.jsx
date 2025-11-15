@@ -30,8 +30,8 @@ function ViewEmails() {
           <tbody>
             {emails.map((item) => (
               <tr key={item._id} className=" text-center">
-                <td className="border p-2 w-2/3">{item.email}</td>
-                <td className="border p-2 w-1/3">{new Date(item.createdAt).toLocaleString()}</td>
+                <td className="border p-2 md:w-2/3">{item.email}</td>
+                <td className="border p-2 md:w-1/3">{new Date(item.createdAt).toLocaleString()}</td>
               </tr>
             ))}
           </tbody>
