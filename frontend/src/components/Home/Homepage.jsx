@@ -40,12 +40,6 @@ const Homepage = () => {
         className="relative w-full min-h-[400px] md:min-h-[520px] lg:min-h-screen flex items-center overflow-hidden"
         aria-label="Homepage hero"
       >
-        {/* Background image */}
-        {/* <img
-          src={imageUrl}
-          alt="Hero background"
-          className="absolute inset-0 w-full h-full object-cover pointer-events-none filter brightness-90"
-        /> */}
 
         {/* ✅ Background Image Carousel */}
         <div className="absolute inset-0 w-full h-full overflow-hidden">
@@ -71,7 +65,7 @@ const Homepage = () => {
         <div className="relative z-10 max-w-6xl w-full mx-auto px-4 sm:px-6">
           <div className="pt-24 pb-16 md:pt-24 md:pb-24 lg:pt-32 lg:pb-32">
             <div className="max-w-3xl mx-auto md:ml-[-4rem] lg:ml-[-6rem] text-center md:text-left">
-              <h1 className="text-[35px] md:text-5xl lg:text-6xl font-bold tracking-tight text-white leading-tight mb-3 drop-shadow-lg">
+              <h1 className="text-[37px] md:text-5xl lg:text-6xl font-bold tracking-tight text-white leading-tight mb-3 drop-shadow-lg">
                 <span className="bg-gradient-to-r from-yellow-300 to-orange-400 bg-clip-text text-transparent">
                   Dhammanjali India
                 </span>
@@ -105,29 +99,28 @@ const Homepage = () => {
       {/* About Section - DHAMMANJALI WE CARE */}
       <section className="py-16 md:py-24 bg-gray-50">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 md:px-8">
-          <div className="grid grid-cols-1 lg:grid-cols-2 md:gap-8 lg:gap-16 items-center mb-16">
-            <div>
-              <div className="mb-8">
-                <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold text-gray-900 mb-4">
-                  DHAMMANJALI
-                </h2>
-                <div className="flex items-center gap-4">
-                  <h3 className="text-2xl md:text-3xl lg:text-4xl font-light text-gray-700">
-                    WE CARE
-                  </h3>
-                  <div className="hidden md:block">
-                    <svg
-                      viewBox="0 0 200 60"
-                      className="text-yellow-400 w-full h-15"
-                    >
-                      <path
-                        d="M10 30 L170 30 M150 15 L170 30 L150 45"
-                        stroke="currentColor"
-                        strokeWidth="3"
-                        fill="none"
-                      />
-                    </svg>
-                  </div>
+          <div className="grid grid-cols-1 lg:grid-cols-2 md:gap-8 lg:gap-16 items-center mb-10 md:mb-16">
+
+            <div className="mb-4 md:mb-8">
+              <h2 className="text-2xl md:text-5xl lg:text-6xl font-bold text-gray-900 mb-1 md:mb-4">
+                DHAMMANJALI
+              </h2>
+              <div className="flex items-center gap-4">
+                <h3 className="text-xl md:text-3xl lg:text-4xl font-light text-gray-700">
+                  WE CARE
+                </h3>
+                <div className="hidden md:block">
+                  <svg
+                    viewBox="0 0 200 60"
+                    className="text-yellow-400 w-full h-15"
+                  >
+                    <path
+                      d="M10 30 L170 30 M150 15 L170 30 L150 45"
+                      stroke="currentColor"
+                      strokeWidth="3"
+                      fill="none"
+                    />
+                  </svg>
                 </div>
               </div>
             </div>
@@ -146,15 +139,6 @@ const Homepage = () => {
 
           {/* Energy Wind Energy Section */}
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-16 items-center">
-            {/* <div className="order-2 lg:order-1">
-              <div className="relative">
-                <img
-                  src="https://res.cloudinary.com/dwudu5pep/image/upload/v1761450416/DHAMMANJALI_GROUP_ez07yj.jpg"
-                  alt="workflow"
-                  className="w-full h-full object-cover "
-                />
-              </div>
-            </div> */}
 
             {/* Image with popup for mobile */}
             <div className="order-2 lg:order-1">
@@ -185,7 +169,7 @@ const Homepage = () => {
                     />
                     {/* Close button */}
                     <button
-                      className="absolute top-30 right-3 bg-red-400 text-black rounded-full px-2 py-1 text-[10px]"
+                      className="absolute top-30 right-3 text-white rounded-full px-2 py-1 text-[16px]"
                       onClick={() => setIsOpen(false)}
                     >
                       ✕
@@ -196,10 +180,10 @@ const Homepage = () => {
             </div>
 
             <div className="order-1 lg:order-2">
-              <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-gray-900 mb-4">
+              <h2 className="text-2xl md:text-4xl lg:text-5xl font-bold text-gray-900 mb-1 md:mb-4">
                 We Care
               </h2>
-              <h3 className="text-2xl md:text-3xl font-light text-gray-700 mb-6">
+              <h3 className="text-xl md:text-3xl font-light text-gray-700 mb-5 md:mb-6">
                 We Empower
               </h3>
               <div className="space-y-4 text-gray-600 text-sm md:text-base leading-relaxed">
@@ -214,7 +198,7 @@ const Homepage = () => {
               </div>
               <div className="mt-8">
                 <Link to="/gallery" className="inline-block">
-                  <button className="bg-orange-400 hover:bg-orange-500 text-white font-semibold py-2 lg:py-3 px-5 lg:px-8 rounded-full transition-colors duration-200 shadow-lg hover:shadow-xl">
+                  <button className="bg-orange-400 hover:bg-orange-500 text-white font-semibold text-[13px] md:text-[16px] py-2 lg:py-3 px-5 lg:px-8 rounded-full transition-colors duration-200 shadow-lg hover:shadow-xl">
                     READ MORE
                   </button>
                 </Link>
@@ -246,7 +230,7 @@ const Homepage = () => {
                     to="/agriculture"
                     className="w-full sm:w-auto inline-block"
                   >
-                    <button className="w-full sm:w-auto bg-orange-400 hover:bg-orange-500 text-white font-semibold py-3 px-6 sm:px-8 rounded-full transition-colors duration-200 shadow-lg hover:shadow-xl">
+                    <button className=" w-full bg-orange-400 hover:bg-orange-500 text-white font-semibold text-[13px] md:text-[16px] py-2 lg:py-3 px-5 lg:px-8 rounded-full transition-colors duration-200 shadow-lg hover:shadow-xl">
                       READ MORE
                     </button>
                   </Link>
@@ -266,7 +250,7 @@ const Homepage = () => {
       </section>
 
       {/* Corporate Section */}
-      <section className="relative bg-[#a6d3f4] py-6 md:py-8 px-4 sm:px-6 md:px-10 my-4 md:my-6 flex flex-col md:flex-row items-center md:items-stretch gap-6 md:gap-8 font-montserrat overflow-hidden shadow-xl rounded-2xl md:rounded-3xl lg:-mt-5">
+      <section className="relative bg-[#a6d3f4] py-6 md:py-10 px-6 md:px-10 mx-3 md:mx-5 my-4 md:my-6 flex flex-col md:flex-row items-center md:items-stretch gap-6 md:gap-8 font-montserrat overflow-hidden shadow-xl rounded-2xl md:rounded-3xl lg:-mt-5">
         {/* Background blur shape */}
         <div className="absolute -top-10 -left-10 w-64 h-64 bg-blue-200 rounded-full opacity-20 blur-2xl z-0" />
 
@@ -274,11 +258,11 @@ const Homepage = () => {
         <div className="flex-1 flex flex-col items-center md:items-start justify-start z-10 order-2 md:order-1">
           {/* Title and arrow */}
           <div className="mb-4 pl-2 md:pl-4 text-center md:text-left">
-            <h2 className="md:ml-4 text-xl sm:text-2xl md:text-3xl lg:text-4xl font-extrabold uppercase tracking-wide leading-tight">
+            <h2 className="md:ml-4 text-xl md:text-3xl lg:text-4xl font-extrabold uppercase tracking-wide leading-tight">
               CORPORATE
             </h2>
-            <div className="md:ml-4 flex items-center justify-center md:justify-start mt-2">
-              <span className="text-base sm:text-lg md:text-xl lg:text-2xl font-light text-[#5a5a7a] tracking-widest uppercase">
+            <div className="md:ml-4 mt-2 mb-6 flex items-center justify-center md:justify-start ">
+              <span className="text-lg md:text-xl lg:text-2xl font-light text-[#5a5a7a] tracking-widest uppercase">
                 {activeTab}
               </span>
               <svg
@@ -311,9 +295,9 @@ const Homepage = () => {
         </div>
 
         {/* Right Panel */}
-        <div className="flex-1 flex flex-col justify-start py-6 md:py-20 px-2 md:px-10 md:mr-3 z-10 order-1 md:order-2">
+        <div className="flex-1 flex flex-col justify-start py-2 md:py-20 md:px-10 md:mr-3 z-10 order-1 md:order-2">
           {/* Tabs */}
-          <div className="flex gap-10 sm:gap-4 md:gap-8 lg:gap-12 border-b border-[#2C2C54]/20 mb-4 text-xs sm:text-sm md:text-base lg:text-lg overflow-x-auto">
+          <div className="flex gap-8 sm:gap-4 md:gap-8 lg:gap-12 border-b border-[#2C2C54]/20  mb-4 text-xs sm:text-sm md:text-base lg:text-lg overflow-x-auto">
             <button
               className={`font-semibold uppercase pb-1 border-b-2 transition-all duration-200 whitespace-nowrap ${activeTab === "SUSTAINABILITY"
                 ? "border-[#2C2C54] text-[#2C2C54]"
@@ -350,7 +334,7 @@ const Homepage = () => {
           </div>
 
           {/* Tab Content */}
-          <div className="mb-4">
+          <div className=" px-2 mb-4">
             {activeTab === "SUSTAINABILITY" && (
               <p className="text-[#23223a] lg:leading-relaxed text-justify text-sm sm:text-base">
                 Our growth strategy is rooted in a blend of sharp business
@@ -425,88 +409,81 @@ const Homepage = () => {
       </section>
 
       {/* Announcements Section */}
-      <section className="py-12 md:py-16 ">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 md:px-8">
-          <div className="w-full flex flex-col md:flex-row justify-between gap-6 px-2 md:px-0 mb-8">
-            {/* Title and arrow */}
-            <div className="flex flex-col w-full md:w-auto">
-              <h2 className="text-2xl md:text-3xl lg:text-4xl font-extrabold tracking-tight uppercase leading-tight">
-                ANNOUNCEMENTS
-              </h2>
-              <div className="flex items-center mt-1">
-                <span className="text-lg font-semibold text-gray-500 tracking-widest uppercase mr-2">
-                  LATEST
-                </span>
-                <svg
-                  className="ml-10 md:ml-24 hidden md:inline"
-                  width="250"
-                  height="25"
-                  viewBox="0 0 200 20"
-                  fill="none"
-                  xmlns="http://www.w3.org/2000/svg"
-                >
-                  <path
-                    d="M1 10H114M114 10L106 2M114 10L106 18"
-                    stroke="#FFA500"
-                    strokeWidth="2.5"
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                  />
-                </svg>
-              </div>
-            </div>
 
-            {/* Description aligned to title */}
-            <div
-              className="md:pt-1 pt-2 max-w-3xl text-gray-700 text-base leading-relaxed text-left"
-              style={{ wordBreak: "break-word", letterSpacing: "0.01em" }}
+      <section className="py-8 md:py-16 mx-auto px-6 md:px-8 mb-3 md:mb-8 max-w-7xl w-full flex flex-col md:flex-row justify-between gap-3 md:gap-6 ">
+        {/* Title and arrow */}
+        <div className="flex flex-col w-full md:w-auto">
+          <h2 className="text-2xl md:text-3xl lg:text-4xl font-extrabold tracking-tight uppercase leading-tight">
+            ANNOUNCEMENTS
+          </h2>
+          <div className="flex items-center mt-1">
+            <span className="text-xl font-semibold text-gray-500 tracking-widest uppercase mr-2">
+              LATEST
+            </span>
+            <svg
+              className="ml-10 md:ml-24 hidden md:inline"
+              width="250"
+              height="25"
+              viewBox="0 0 200 20"
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg"
             >
-              DHAMMANJALI GROUP, At, our gallery captures the essence of our
-              journey—showcasing our commitment to quality, community
-              engagement, and innovation. Each image reflects our dedication to
-              excellence and the meaningful connections we've built within the
-              communities we serve. Explore our visual story and witness the
-              milestones that define our brand.
-            </div>
+              <path
+                d="M1 10H114M114 10L106 2M114 10L106 18"
+                stroke="#FFA500"
+                strokeWidth="2.5"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+              />
+            </svg>
           </div>
+        </div>
+
+        {/* Description aligned to title */}
+        <div
+          className="md:pt-1 max-w-3xl text-gray-700 text-base leading-relaxed text-left"
+          style={{ wordBreak: "break-word", letterSpacing: "0.01em" }}
+        >
+          DHAMMANJALI GROUP, At, our gallery captures the essence of our
+          journey—showcasing our commitment to quality, community
+          engagement, and innovation. Each image reflects our dedication to
+          excellence and the meaningful connections we've built within the
+          communities we serve. Explore our visual story and witness the
+          milestones that define our brand.
         </div>
       </section>
 
       {/* Announcement Card Section */}
-      <section className="py-12 md:py-16 lg:-mt-20 -mt-20">
-        <div className="max-w-[1600px] mx-auto px-4 sm:px-6 md:px-8">
-          <div className="w-full flex flex-col md:flex-row items-center justify-between rounded-[30px] pb-6 md:p-10 mb-10 shadow-md bg-[radial-gradient(ellipse_at_center,_#FDE6A0_0%,_#F8B938_40%,_#F89E00_100%)]">
-            <div className="flex-1 flex flex-col items-center md:items-start text-center md:text-left gap-2 md:gap-3 px-4 md:px-0 py-6 md:py-0">
-              <h3 className="text-[18px] sm:text-[20px] md:text-[24px] lg:text-[28px] font-bold text-[#2C2C54] uppercase leading-snug text-center md:text-left">
-                DHAMMANJALI GROUP
-              </h3>
-              <p className="text-[14px] sm:text-[16px] md:text-[18px] font-semibold text-[#D97706] tracking-wide font-montserrat">
-                - Your Gateway to Purposeful Retail
-              </p>
-              <p className="text-[#333] leading-relaxed text-justify max-w-2xl mt-1 mb-3 py-4 md:py-6 font-montserrat text-sm sm:text-base">
-                Start your own retail mart and make a meaningful difference in
-                your community by offering convenient access to a wide range of
-                essential products, including groceries, utensils, stationery,
-                kids’ items, and more. Backed by the Dhammanjali Group, our
-                franchise model is designed to help aspiring entrepreneurs like
-                you build a sustainable and profitable business that benefits
-                both your livelihood and your local area. We provide
-                comprehensive support, including training, marketing assistance,
-                and operational guidance, ensuring you have everything needed
-                for success. As a franchise partner, you’ll not only generate a
-                stable income but also create employment opportunities and
-                improve the quality of life for those around you. Our mission is
-                to foster self-reliance and community development.
-              </p>
-            </div>
-            <div className="flex-1 flex items-center justify-center mt-4 md:mt-6 md:ml-6 font-montserrat px-4 md:px-0 max-w-full lg:mt-1">
-              <img
-                src="https://res.cloudinary.com/dwudu5pep/image/upload/v1761450500/c7bxt9cfe0ztmiloku3s_xd2mi1.jpg"
-                alt="DHAMMANJALI GROUP Announcement"
-                className=" max-w-[300px] sm:max-w-[400px] md:w-[500px] lg:min-w-[600px] h-[200px] sm:h-[250px] md:h-[450px] rounded-[4px] object-cover shadow-lg font-montserrat"
-              />
-            </div>
-          </div>
+      <section className=" md:max-w-[1600px] px-4 md:px-8 py-6 md:py-16 mx-4 md:mx-8 mb-15 flex flex-col md:flex-row items-center justify-between rounded-[30px] shadow-md bg-[radial-gradient(ellipse_at_center,_#FDE6A0_0%,_#F8B938_40%,_#F89E00_100%)]">
+        <div className="flex-1 flex flex-col items-center md:items-start text-center md:text-left gap-1 md:gap-3">
+          <h3 className="text-[18px] sm:text-[20px] md:text-[24px] lg:text-[28px] font-bold text-[#2C2C54] uppercase leading-snug text-center md:text-left">
+            DHAMMANJALI GROUP
+          </h3>
+          <p className="text-[14px] sm:text-[16px] md:text-[18px] font-semibold text-[#D97706] tracking-wide font-montserrat">
+            - Your Gateway to Purposeful Retail
+          </p>
+          <p className="text-[#333] leading-relaxed text-justify max-w-2xl md:mt-1 md:mb-3 py-1 md:py-6 font-montserrat text-sm sm:text-base">
+            Start your own retail mart and make a meaningful difference in
+            your community by offering convenient access to a wide range of
+            essential products, including groceries, utensils, stationery,
+            kids’ items, and more. Backed by the Dhammanjali Group, our
+            franchise model is designed to help aspiring entrepreneurs like
+            you build a sustainable and profitable business that benefits
+            both your livelihood and your local area. We provide
+            comprehensive support, including training, marketing assistance,
+            and operational guidance, ensuring you have everything needed
+            for success. As a franchise partner, you’ll not only generate a
+            stable income but also create employment opportunities and
+            improve the quality of life for those around you. Our mission is
+            to foster self-reliance and community development.
+          </p>
+        </div>
+        <div className="flex-1 flex items-center justify-center mt-4 lg:mt-1 md:mt-6 md:ml-6 font-montserrat ">
+          <img
+            src="https://res.cloudinary.com/dwudu5pep/image/upload/v1761450500/c7bxt9cfe0ztmiloku3s_xd2mi1.jpg"
+            alt="DHAMMANJALI GROUP Announcement"
+            className=" md:w-[500px] lg:min-w-[600px] h-[200px] md:h-[450px] rounded-2xl md:rounded-[4px] object-cover shadow-lg font-montserrat"
+          />
         </div>
       </section>
 
@@ -514,7 +491,7 @@ const Homepage = () => {
       <AnnouncementCards />
       {/* Key Highlights AGM Section */}
       <section
-        className="my-4 md:my-5 py-12 md:py-16 bg-cover bg-center bg-no-repeat text-white text-center rounded-3xl md:rounded-[150px] mx-2 sm:mx-4 md:mx-12 relative mb-15 lg:-mt-10"
+        className="relative mx-2 sm:mx-4 md:mx-12 mb-15 lg:-mt-10 my-4 md:my-5 py-12 md:py-16 bg-cover bg-center bg-no-repeat text-white text-center rounded-3xl md:rounded-[150px] "
         style={{
           backgroundImage: `url(https://res.cloudinary.com/dwudu5pep/image/upload/v1761451174/20240821_181618_csmxwz.jpg)`,
         }}
@@ -533,7 +510,7 @@ const Homepage = () => {
               <div>
                 <a href="/about">
                   <button
-                    className="mx-auto bottom-[-6rem] sm:bottom-[-7rem] md:bottom-[-7rem] right-[calc(50%-1.5rem)] sm:right-[calc(88%-3rem)] md:right-[calc(75%-10rem)] absolute flex items-center justify-center w-10 h-10 sm:w-12 sm:h-12 rounded-full bg-orange-400 hover:bg-orange-500/20 transition-all focus:outline-none focus:ring-2 focus:ring-orange-400 shadow-lg hover:shadow-xl hover:-translate-y-1 animate-bounce border-4 sm:border-6 border-white/70 border-solid text-white"
+                    className="mx-auto bottom-[-6rem] sm:bottom-[-7rem] md:bottom-[-7rem] right-[calc(50%-1.5rem)] sm:right-[calc(88%-3rem)] md:right-[calc(75%-10rem)] absolute flex items-center justify-center w-10 sm:w-12 h-10 sm:h-12 rounded-full bg-orange-400 hover:bg-orange-500/20 transition-all focus:outline-none focus:ring-2 focus:ring-orange-400 shadow-lg hover:shadow-xl hover:-translate-y-1 animate-bounce border-4 sm:border-6 border-white/70 border-solid text-white"
                     aria-label="Scroll for more details"
                   >
                     <svg

@@ -45,11 +45,11 @@ const BusinessCards = () => {
 
 
   return (
-    <section className="py-16 md:py-20 bg-white -mt-20 lg:-mt-20">
+    <section className="py-8 md:py-20 bg-white">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 md:px-8">
         {/* Section Header */}
-        <div className="text-center mb-12 md:mb-16">
-          <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold text-gray-900 mb-4">
+        <div className="text-center mb-7 md:mb-16">
+          <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold text-gray-900 mb-3 md:mb-4">
             Our Business
             <span className="text-orange-500"> Sectors</span>
           </h2>

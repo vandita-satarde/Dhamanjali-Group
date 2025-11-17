@@ -147,24 +147,24 @@ function About() {
   return (
     <div className="w-[100%] min-h-screen bg-gray-50 mt-10 lg:mt-10">
       {/* Hero Section with padding to account for fixed navbar */}
-      <section className="pt-20 md:pt-24 pb-16 md:pb-20 bg-white ">
+      <section className="pt-25 md:pt-30 pb-3 md:pb-14 bg-white ">
         <div className="max-w-full mx-auto px-4 sm:px-6 md:px-8">
           <div className="text-center">
             {/* Main Title */}
-            <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-gray-900 mb-4 md:mb-6 leading-tight">
+            <h1 className="text-3xl md:text-5xl lg:text-6xl font-bold text-gray-900 mb-2 md:mb-6 md:leading-tight">
               Growth Through
               <br />
               <span className="text-orange-500">Service</span>
             </h1>
 
             {/* Subtitle */}
-            <h2 className="text-lg sm:text-xl md:text-2xl lg:text-3xl font-light text-gray-600 mb-8 md:mb-12">
+            <h2 className="text-[15px] md:text-2xl lg:text-3xl font-light text-gray-600 mb-6 md:mb-12">
               Dhammanjali India Private Limited
             </h2>
 
             {/* Content Description */}
-            <div className="max-w-full mx-auto mb-8 md:mb-12">
-              <p className="text-sm sm:text-base md:text-lg text-gray-700 leading-relaxed text-justify sm:text-center px-2 sm:px-4">
+            <div className="max-w-full mx-auto ">
+              <p className="text-sm sm:text-base md:text-lg text-gray-700 leading-relaxed text-justify sm:text-center px-2 md:px-50">
                 DHAMMANJALI INDIA PRIVATE LIMITED is a leading shopping mart
                 dedicated to offering a wide variety of high-quality products.
                 From home appliances and gift items to kids products, utensils,
@@ -182,16 +182,16 @@ function About() {
       <BusinessCards />
 
       {/* Aspirations and Desired Section */}
-      <section className="w-full px-4 py-12 md:py-20 font-montserrat bg-white">
+      <section className="w-full px-4 py-14 md:py-20 font-montserrat bg-white">
         {/* Heading */}
-        <div className="text-center mb-10">
-          <div className="text-4xl md:text-5xl font-bold text-orange-600">
+        <div className="text-center mb-10 md:mb-16">
+          <div className="text-3xl md:text-5xl font-bold text-orange-600">
             ASPIRATIONS AND
           </div>
           <div className="text-3xl md:text-4xl font-light text-gray-700">
             DESIRED
           </div>
-          <div className="flex justify-center mt-4">
+          {/* <div className="flex justify-center mt-4 ">
             <svg
               className="w-24 h-6 md:w-32 md:h-8"
               xmlns="http://www.w3.org/2000/svg"
@@ -205,13 +205,13 @@ function About() {
               <line x1="4" y1="12" x2="90" y2="12" />
               <polyline points="82 6 90 12 82 18" />
             </svg>
-          </div>
+          </div> */}
         </div>
 
         {/* Vision Row */}
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-5xl mx-auto mb-8">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-12 max-w-6xl mx-auto mb-10">
           {/* Vision English */}
-          <div className="bg-yellow-50 rounded-xl shadow-lg p-8 flex flex-col">
+          <div className="bg-yellow-100 rounded-xl shadow-lg p-8 flex flex-col">
             <h3 className="text-2xl font-extrabold text-orange-600 mb-3">
               Vision:
             </h3>
@@ -227,7 +227,7 @@ function About() {
             </p>
           </div>
           {/* Vision Hindi */}
-          <div className="bg-yellow-50 rounded-xl shadow-lg p-8 flex flex-col">
+          <div className="bg-yellow-100 rounded-xl shadow-lg p-8 flex flex-col">
             <h3 className="text-2xl font-extrabold text-orange-600 mb-3">
               दृष्टिकोण:
             </h3>
@@ -244,9 +244,9 @@ function About() {
         </div>
 
         {/* Mission Row */}
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-5xl mx-auto">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-12 max-w-6xl mx-auto">
           {/* Mission English */}
-          <div className="bg-yellow-50 rounded-xl shadow-lg p-8 flex flex-col">
+          <div className="bg-yellow-100 rounded-xl shadow-lg p-8 flex flex-col">
             <h3 className="text-2xl font-extrabold text-orange-600 mb-3">
               Mission:
             </h3>
@@ -260,7 +260,7 @@ function About() {
             </p>
           </div>
           {/* Mission Hindi */}
-          <div className="bg-yellow-50 rounded-xl shadow-lg p-8 flex flex-col">
+          <div className="bg-yellow-100 rounded-xl shadow-lg p-8 flex flex-col">
             <h3 className="text-2xl font-extrabold text-orange-600 mb-3">
               मिशन:
             </h3>
@@ -279,15 +279,15 @@ function About() {
       {/* Value Creation Section */}
       <section className="w-full px-4 py-12 md:py-20 bg-gray-50 lg:mb-10">
         <div className="max-w-7xl mx-auto">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-16 items-start">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 lg:gap-16 items-start">
             {/* Left - Title and Arrow */}
             <div className="order-1 lg:order-1">
-              <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold text-gray-900 leading-tight mb-4">
+              <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold text-gray-900 leading-tight md:mb-4">
                 OUR VALUE-CREATION APPROACH
               </h2>
               <div className="flex items-center">
                 <svg
-                  className="ml-1"
+                  className="ml-1 hidden md:block"
                   width="120"
                   height="16"
                   viewBox="0 0 120 16"

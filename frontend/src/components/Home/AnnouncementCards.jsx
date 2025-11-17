@@ -63,8 +63,8 @@ const AnnouncementCards = () => {
     const cardClasses = `
       snap-center flex-shrink-0 
       bg-[radial-gradient(ellipse_at_center,_#FDE6A0_0%,_#F8B938_40%,_#F89E00_100%)] 
-      rounded-3xl w-72 
-      ${isMobile ? "min-h-[430px]" : "min-h-[400px]"} 
+      rounded-3xl w-65 
+      ${isMobile ? "min-h-[300px]" : "min-h-[400px]"} 
       p-5 shadow-${isMobile ? "lg" : "xl"} 
       border border-yellow-300 flex flex-col justify-between 
       transition-transform 
@@ -72,7 +72,7 @@ const AnnouncementCards = () => {
     `;
 
     const imageClasses = `
-      ${isMobile ? "w-40 h-40" : "w-44 h-44"} 
+      ${isMobile ? "w-35 h-35" : "w-44 h-44"} 
       rounded-full object-cover mx-auto 
       border-${isMobile ? "4" : "6"} border-yellow-400 
       shadow-${isMobile ? "md" : "lg"} 
