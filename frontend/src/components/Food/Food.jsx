@@ -17,7 +17,7 @@ const AnnouncementsTitle = ({
       <h2 className="text-2xl md:text-3xl lg:text-4xl font-extrabold tracking-tight uppercase leading-tight">
         {title}
       </h2>
-      <div className="flex items-center mt-1">
+      <div className="flex items-center mt-1 md:mt-1">
         {subtitle && (
           <span className="text-lg font-semibold text-gray-500 tracking-widest uppercase mr-2">
             {subtitle}
@@ -45,7 +45,7 @@ const AnnouncementsTitle = ({
     {/* Description aligned to title */}
     {description && (
       <div
-        className="md:pt-1 pt-2 max-w-3xl text-gray-700 text-base leading-relaxed text-left"
+        className="md:pt-1 max-w-3xl text-gray-700 text-base leading-relaxed text-left"
         style={{ wordBreak: "break-word", letterSpacing: "0.01em" }}
       >
         {description}
@@ -76,7 +76,7 @@ function Food() {
   const [foodItems, setFoodItems] = useState([]);
 
   useEffect(() => {
-    axios.get("https://dhamanjali-group.vercel.app/api/food")
+    axios.get("http://localhost:5000/api/food")
       .then(res => setFoodItems(res.data))
       .catch(err => console.error(err));
   }, []);
@@ -84,7 +84,7 @@ function Food() {
   const [testimonials, setTestimonials] = useState([]);
 
   useEffect(() => {
-    axios.get("https://dhamanjali-group.vercel.app/api/foodTestimonials")
+    axios.get("http://localhost:5000/api/foodTestimonials")
       .then(res => setTestimonials(res.data))
       .catch(err => console.error(err));
   }, []);
@@ -126,22 +126,29 @@ function Food() {
     <div className="bg-white font-montserrat text-gray-900 text-lg pt-16 md:pt-20">
       {/* Hero Section */}
       <section
-        className="relative w-full h-80 max-h-80 overflow-hidden flex items-center justify-center bg-cover bg-center"
+        className="relative w-full h-60 md:h-80 overflow-hidden flex items-center justify-center bg-cover bg-center"
         style={{ backgroundImage: `url(${heroData.imageUrl})` }}
       >
         <div className="absolute inset-0 bg-black/50"></div>
-        <h1 className="relative z-10 text-white text-4xl md:text-[2.9em] font-bold tracking-wide bg-black/70 px-8 py-2 rounded-lg shadow-lg text-center">
+        <h1 className="relative z-10 text-white text-xl md:text-4xl lg:text-5xl font-bold tracking-wide bg-black/70 px-8 py-2 rounded-lg shadow-lg text-center">
           {heroData.title}
         </h1>
       </section>
 
-      {/* Specialities Section */}
-      <section className="max-w-7xl mx-auto px-4 md:px-10">
-        <div className="m-10">
+      <motion.section
+        initial={{ opacity: 0, y: 30 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.4 }}
+        viewport={{ once: true, margin: "-100px" }}
+        className="max-w-7xl mx-auto px-4 py-10 md:py-20 lg:py-28 z-10 relative"
+      >
+
+        {/* Specialities Section */}
+        <div className="mx-4 md:mx-10 lg:mx-20 md:my-5 pb-8 md:pb-10 ">
           <AnnouncementsTitle
             title={specialitiesData.title}
             subtitle={
-              <span className="font-rymaneco font-normal text-[2rem] md:text-[2rem]">
+              <span className="font-rymaneco font-normal text-xl md:text-3xl">
                 {specialitiesData.subtitle}
               </span>
             }
@@ -157,7 +164,7 @@ function Food() {
             No food items uploaded yet.
           </p>
         ) : (
-          <div className="flex flex-col gap-32 mb-20">
+          <div className="flex flex-col gap-16 md:gap-32 mb-8 md:mb-20">
             {filteredSpecialities.map((item, idx) => (
               <motion.div
                 key={item.id}
@@ -172,24 +179,24 @@ function Food() {
                   <h3 className="mb-4 text-3xl md:text-4xl font-bold text-orange-600">
                     {item.title}
                   </h3>
-                  <p className="text-gray-700 text-lg md:text-xl leading-relaxed">
+                  <p className="text-gray-700 text-base md:text-xl md:leading-relaxed">
                     {item.description}
                   </p>
                 </motion.div>
                 <motion.img
                   src={item.image}
                   alt={item.title}
-                  className="flex-1 w-full md:w-[500px] h-[300px] md:h-[350px] object-cover rounded-2xl shadow-xl hover:scale-105 transition-transform duration-300"
+                  className="flex-1 w-full md:w-[500px] h-[200px] md:h-[350px] object-cover rounded-2xl shadow-xl hover:scale-105 transition-transform duration-300"
                 />
               </motion.div>
             ))}
           </div>
         )}
-      </section>
+      </motion.section>
 
       {/* Testimonials Section */}
-      <section className="w-full overflow-x-auto py-16 bg-gradient-to-b from-orange-50 to-white">
-        <h2 className="text-3xl md:text-4xl pt-2 font-bold text-center text-orange-600 mb-10">
+      <section className="w-full overflow-x-auto py-8 md:py-16 bg-gradient-to-b from-orange-50 to-white">
+        <h2 className="text-2xl md:text-4xl pt-2 font-bold text-center text-orange-600 mb-10">
           What Our Customers Say
         </h2>
         <div
@@ -204,13 +211,13 @@ function Food() {
               whileInView={{ opacity: 1, scale: 1 }}
               transition={{ duration: 0.5, delay: idx * 0.1 }}
               viewport={{ once: true }}
-              className="inline-block min-w-[280px] max-w-[400px] bg-white rounded-2xl shadow-lg p-6 text-left flex-shrink-0 hover:shadow-xl transition-shadow duration-300"
+              className="inline-block w-[300px] md:w-[400px] bg-white rounded-2xl shadow-lg p-5 md:p-6 text-left flex-shrink-0 hover:shadow-xl transition-shadow duration-300"
             >
               <div className="text-yellow-400 text-xl mb-3">★★★★★</div>
-              <p className="text-gray-800 text-base font-medium leading-relaxed mb-4 min-h-[90px]">
+              <p className="text-gray-800 text-base font-medium md:leading-relaxed mb-2 md:mb-4 min-h-[90px]">
                 {t.text}
               </p>
-              <div className="font-semibold text-gray-900 text-lg flex gap-4">
+              <div className="font-semibold text-gray-900 text-lg flex gap-3 md:gap-4">
                 — {t.author}<p>{t.name} </p>
               </div>
             </motion.div>

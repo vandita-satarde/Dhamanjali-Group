@@ -5,7 +5,7 @@ function Gallery() {
   const [images, setImages] = useState([]);
 
   useEffect(() => {
-    axios.get("https://dhamanjali-group.vercel.app/api/gallery")
+    axios.get("http://localhost:5000/api/gallery")
       .then((res) => setImages(res.data))
       .catch((err) => console.error(err));
   }, []);
@@ -13,11 +13,11 @@ function Gallery() {
   return (
     <div className="w-full min-h-screen bg-gray-50">
       {/* Gallery Header Section */}
-      <section className="px-4 md:px-8 pt-28 md:pt-32 lg:pt-36 pb-16 max-w-7xl mx-auto w-full">
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-8 items-center">
+      <section className="px-4 md:px-8 pt-32 md:pt-32 lg:pt-36 pb-2 md:pb-16 max-w-7xl mx-auto w-full">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-3 lg:gap-8 items-center">
           {/* Left - Title */}
           <div className="lg:col-span-4 order-1">
-            <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold text-gray-900 leading-tight">
+            <h1 className="text-center md:text-left text-3xl md:text-6xl lg:text-7xl font-bold text-gray-900 leading-tight">
               OUR
               <br />
               GALLERY
@@ -25,14 +25,14 @@ function Gallery() {
           </div>
 
           {/* Middle - Arrow */}
-          <div className="lg:col-span-2 order-2 flex justify-center lg:justify-start">
+          <div className=" lg:col-span-2 order-2 flex justify-center lg:justify-start">
             <svg
               width="150"
               height="20"
               viewBox="0 0 150 20"
               fill="none"
               xmlns="http://www.w3.org/2000/svg"
-              className="w-24 sm:w-32 md:w-36 lg:w-40"
+              className="w-24 sm:w-32 md:w-36 lg:w-40 hidden md:block"
             >
               <line
                 x1="0"

@@ -22,7 +22,7 @@ const AnnouncementsTitle = ({
   className = "",
 }) => (
   <div
-    className={`w-full flex flex-col md:flex-row justify-between gap-6 px-2 md:px-0 mb-8 ${className}`}
+    className={`w-full flex flex-col md:flex-row justify-between gap-6 px-2 md:px-0 mb-6 md:mb-8 ${className}`}
   >
     {/* Title and arrow */}
     <div className="flex flex-col w-full md:w-auto">
@@ -31,7 +31,7 @@ const AnnouncementsTitle = ({
       </h2>
       <div className="flex items-center mt-1">
         {subtitle && (
-          <span className="text-lg font-semibold text-gray-500 tracking-widest uppercase mr-2">
+          <span className=" text-lg font-semibold text-gray-500 tracking-widest uppercase mr-2">
             {subtitle}
           </span>
         )}
@@ -57,7 +57,7 @@ const AnnouncementsTitle = ({
     {/* Description aligned to title */}
     {description && (
       <div
-        className="md:pt-1 pt-2 max-w-3xl text-gray-700 text-base leading-relaxed text-left"
+        className="md:pt-1 max-w-3xl text-gray-700 text-base leading-relaxed text-left"
         style={{ wordBreak: "break-word", letterSpacing: "0.01em" }}
       >
         {description}
@@ -153,7 +153,7 @@ const Agriculture = () => {
   const [stories, setStories] = useState([]);
 
   useEffect(() => {
-    axios.get("https://dhamanjali-group.vercel.app/api/farmerstories")
+    axios.get("http://localhost:5000/api/farmerstories")
       .then((res) => setStories(res.data))
       .catch((err) => console.error("Error fetching farmer stories:", err));
   }, []);
@@ -184,7 +184,7 @@ const Agriculture = () => {
         style={{ backgroundImage: `url(${hero.mainImage})` }}
       >
         <div className="absolute inset-0 bg-black/50"></div>
-        <h1 className="relative z-10 text-white text-2xl md:text-3xl lg:text-[2.9em] font-bold tracking-wide bg-black/70 px-4 md:px-8 py-2 md:py-3 rounded-lg shadow-lg text-center">
+        <h1 className="relative z-10 text-white text-xl md:text-4xl lg:text-5xl font-bold tracking-wide bg-black/70 px-4 md:px-8 py-2 md:py-3 rounded-lg shadow-lg text-center">
           {hero.title}
         </h1>
       </section>
@@ -197,11 +197,11 @@ const Agriculture = () => {
         viewport={{ once: true, margin: "-100px" }}
         className="max-w-7xl mx-auto px-4 py-10 md:py-20 lg:py-28 z-10 relative"
       >
-        <div className="mx-4 md:mx-10 lg:mx-20 my-5">
+        <div className="mx-4 md:mx-10 lg:mx-20 md:my-5">
           <AnnouncementsTitle
             title={details.title}
             subtitle={
-              <span className="font-rymaneco font-normal text-xl md:text-[2rem]">
+              <span className="font-rymaneco font-normal text-xl md:text-3xl">
                 {details.subtitle}
               </span>
             }

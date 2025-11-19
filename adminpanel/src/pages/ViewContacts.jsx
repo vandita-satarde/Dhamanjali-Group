@@ -6,7 +6,7 @@ const ViewContacts = () => {
     const [contacts, setContacts] = useState([]);
     const [remarks, setRemarks] = useState({});
 
-    const API_URL = "https://dhamanjali-group.vercel.app/api/contact";
+    const API_URL = "http://localhost:5000/api/contact";
 
     // Function to fetch contacts
     const fetchContacts = () => {
@@ -17,7 +17,7 @@ const ViewContacts = () => {
                 // initialize remarks for each contact
                 const initialRemarks = {};
                 res.data.forEach((contact) => {
-                    initialRemarks[contact._id] = contact.remark || "";
+                    initialRemarks[contact._id] = contact.remarks || "";
                 });
                 setRemarks(initialRemarks);
             })
@@ -102,7 +102,7 @@ const ViewContacts = () => {
                                     <td className="py-3 px-4 ">
                                         <button
                                             onClick={() => handleSaveRemark(contact._id)}
-                                            className="bg-blue-900 text-white m-1 px-3 py-1 rounded-md hover:bg-orange-600 text-sm"
+                                            className="bg-blue-700 text-white m-1 px-3 py-1 rounded-md hover:bg-blue-800 text-sm"
                                         >
                                             Save
                                         </button>

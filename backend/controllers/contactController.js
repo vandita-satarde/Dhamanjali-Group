@@ -28,7 +28,7 @@ export const updateRemark = async (req, res) => {
 
     const updatedContact = await Contact.findByIdAndUpdate(
       id,
-      { remark },
+      { remarks: remark },
       { new: true }
     );
 

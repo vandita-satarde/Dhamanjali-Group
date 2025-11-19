@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
+import { motion } from "framer-motion";
 import {
   FaHandshake,
   FaShippingFast,
@@ -105,15 +106,15 @@ const AnnouncementsTitle = ({
   className = "",
 }) => (
   <div
-    className={`w-full flex flex-col md:flex-row justify-between gap-6 px-2 md:px-0 mb-8 ${className}`}
+    className={`w-full flex flex-col md:flex-row justify-between gap-6 px-2 md:px-0  md:mb-10 ${className}`}
   >
     <div className="flex flex-col w-full md:w-auto">
       <h2 className="text-2xl md:text-3xl lg:text-4xl font-extrabold tracking-tight uppercase leading-tight">
         {title}
       </h2>
-      <div className="flex items-center mt-1">
+      <div className="flex items-center mt-1 md:mt-1">
         {subtitle && (
-          <span className="text-lg font-semibold text-gray-500 tracking-widest uppercase mr-2">
+          <span className=" text-xl md:text-3xl font-semibold text-gray-500 tracking-widest uppercase mr-2">
             {subtitle}
           </span>
         )}
@@ -136,7 +137,7 @@ const AnnouncementsTitle = ({
       </div>
     </div>
     {description && (
-      <div className="md:pt-1 pt-2 max-w-3xl text-gray-700 text-base leading-relaxed text-left">
+      <div className="md:pt-1 max-w-3xl text-gray-700 text-base leading-relaxed text-left">
         {description}
       </div>
     )}
@@ -153,26 +154,26 @@ const MartDynamic = () => {
     // Fetch mart items from backend with better error handling
     const fetchMartItems = async () => {
       try {
-        console.log("Fetching mart items from:", "https://dhamanjali-group.vercel.app/api/mart");
-        
-        const response = await fetch("https://dhamanjali-group.vercel.app/api/mart", {
+        console.log("Fetching mart items from:", "http://localhost:5000/api/mart");
+
+        const response = await fetch("http://localhost:5000/api/mart", {
           method: 'GET',
           headers: {
             'Content-Type': 'application/json',
             'Accept': 'application/json'
           }
         });
-        
+
         console.log("Response status:", response.status);
         console.log("Response ok:", response.ok);
-        
+
         if (!response.ok) {
           throw new Error(`HTTP error! status: ${response.status}`);
         }
-        
+
         const data = await response.json();
         console.log("Fetched mart items:", data);
-        
+
         setItems(Array.isArray(data) ? data : []);
         setLoading(false);
       } catch (err) {
@@ -212,19 +213,19 @@ const MartDynamic = () => {
     );
 
   return (
-    <div className="pt-0 pb-8 px-4 max-w-6xl mx-auto">
-      <h2 className="text-3xl font-bold mb-8 text-center">Our Mart Items</h2>
+    <div className="pt-0 pb-8 px-4 max-w-6xl md:mx-auto">
+      <h2 className="text-[28px] md:text-3xl font-bold mb-8 text-center">Our Mart Items</h2>
       <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
         {items.map((item) => (
           <div
             key={item._id}
-            className="border rounded-lg p-4 flex flex-col items-center bg-white shadow hover:shadow-lg transition duration-300"
+            className=" rounded-lg p-4 flex flex-col items-center bg-white shadow-xs shadow-gray-400 hover:scale-105 hover:shadow-md hover:transition hover:duration-400"
           >
             {item.imageUrl && (
               <img
                 src={item.imageUrl}
                 alt={item.title}
-                className="h-32 w-32 object-cover mb-4 rounded"
+                className="h-32 w-38 object-cover mb-4 rounded"
               />
             )}
             <h3 className="font-semibold text-lg mb-2 text-center">
@@ -261,28 +262,26 @@ const USPs = () => {
   const arrangedUSPs = getArrangedUSPs();
 
   return (
-    <section className="bg-[#4a90a4] py-16 px-4 text-center font-montserrat overflow-x-hidden">
-      <h2 className="text-3xl sm:text-4xl font-bold text-gray-900 lg:mb-25 mb-10 tracking-wide text-center">
+    <section className="bg-[#4a90a4] py-12 md:py-16 px-4 text-center font-montserrat overflow-x-hidden">
+      <h2 className="text-2xl md:text-4xl font-bold text-gray-900 mb-10 lg:mb-25  tracking-wide text-center">
         OUR UNIQUE SELLING POINTS
       </h2>
 
-      <div className="flex flex-wrap justify-center items-start gap-16 md:gap-24 max-w-6xl mx-auto">
+      <div className="flex flex-wrap justify-center items-start gap-12 md:gap-24 max-w-6xl mx-auto">
         {arrangedUSPs.map((item, idx) => (
           <div
             key={idx}
-            className={`flex flex-col items-center group transform transition-all duration-300 cursor-pointer ${
-              idx === 1 ? "md:-mt-14" : "hover:-translate-y-2"
-            }`}
+            className={`flex flex-col items-center group transform transition-all duration-300 cursor-pointer ${idx === 1 ? "md:-mt-14" : "hover:-translate-y-2"
+              }`}
             onClick={() =>
               handleCardClick(uspData.findIndex((u) => u.title === item.title))
             }
           >
             <div
-              className={`w-52 h-52 sm:w-64 sm:h-64 rounded-full border-4 bg-white shadow-lg overflow-hidden flex items-center justify-center transition-all duration-300 ${
-                idx === 1
-                  ? "border-orange-400 shadow-xl scale-110"
-                  : "border-gray-300 hover:border-orange-300"
-              }`}
+              className={`w-38 h-38 md:w-64 md:h-64 rounded-full border-4 bg-white shadow-lg overflow-hidden flex items-center justify-center transition-all duration-300 ${idx === 1
+                ? "border-orange-400 shadow-xl scale-110"
+                : "border-gray-300 hover:border-orange-300"
+                }`}
             >
               <img
                 src={item.image}
@@ -290,7 +289,7 @@ const USPs = () => {
                 className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
               />
             </div>
-            <p className="mt-5 text-xl sm:text-2xl font-semibold text-gray-900 max-w-xs text-center">
+            <p className="mt-3 md:mt-5 text-xl md:text-2xl font-semibold text-gray-900 max-w-xs text-center">
               {item.title}
             </p>
           </div>
@@ -303,13 +302,13 @@ const USPs = () => {
 // FeatureCards Component
 const FeatureCards = () => {
   return (
-    <div className="p-8 bg-white">
+    <div className="p-6 md:p-8 bg-white">
       {/* Desktop View */}
       <div className="hidden md:flex flex-wrap justify-center gap-4">
         {features.map((item, index) => (
           <div
             key={index}
-            className="bg-amber-50 p-8 text-center w-full sm:w-[calc(50%-1rem)] lg:w-[calc(25%-1rem)] min-w-[200px] max-w-[320px] shadow-sm transition-transform duration-300 hover:-translate-y-1 rounded-xl"
+            className="bg-amber-100 p-8 text-center w-full sm:w-[calc(50%-1rem)] lg:w-[calc(25%-1rem)] min-w-[200px] max-w-[320px] shadow-lg transition-transform duration-300 hover:-translate-y-2 rounded-xl"
           >
             <div className="w-16 h-16 border-4 border-orange-500 rounded-full mx-auto mb-4 flex items-center justify-center bg-amber-50">
               {item.icon}
@@ -329,7 +328,7 @@ const FeatureCards = () => {
         {features.map((item, index) => (
           <div
             key={index}
-            className="flex-shrink-0 w-80 snap-center bg-amber-50 p-8 text-center shadow-sm transition-transform duration-300 hover:-translate-y-1 rounded-xl"
+            className="flex-shrink-0 w-68 snap-center bg-amber-100 p-8 text-center shadow-lg transition-transform duration-300 hover:-translate-y-2 rounded-xl"
           >
             <div className="w-16 h-16 border-4 border-orange-500 rounded-full mx-auto mb-4 flex items-center justify-center bg-amber-50">
               {item.icon}
@@ -364,28 +363,37 @@ function Mmart() {
       </style>
       {/* Header Section */}
       <div
-        className="bg-cover bg-center h-80 lg:h-80 relative flex items-center justify-center"
+        className="bg-cover bg-center h-60 lg:h-80 relative flex items-center justify-center"
         style={{ backgroundImage: `url(${headerBg})` }}
       >
         <div className="absolute inset-0 bg-black/50"></div>
-        <h1 className="relative z-10 text-white text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold tracking-wide bg-black/70 px-6 py-3 sm:px-8 sm:py-4 rounded-lg shadow-lg text-center">
+        <h1 className="relative z-10 text-white text-xl md:text-4xl lg:text-5xl font-bold tracking-wide bg-black/70 px-4 py-3 md:px-8 md:py-4 rounded-lg shadow-lg text-center">
           SHOPPING MART & MALL
         </h1>
       </div>
 
-      {/* Specialities Section */}
-      <div className="m-10">
-        <AnnouncementsTitle
-          title="Shopping Mart & Mall"
-          subtitle="Specialities"
-          description="Established in 2020 and headquartered in Prayagraj, Uttar Pradesh, Dhammanjali India Private Limited is a private, non-government company engaged in the food and beverages industry. The company focuses on creating lasting value not only through its products but also through meaningful contributions to the communities it serves."
-          arrowWidth={180}
-          arrowHeight={16}
-          arrowColor="#FFA500"
-        />
-        <div className="h-12"></div>
-        <MartDynamic />
-      </div>
+      <motion.section
+        initial={{ opacity: 0, y: 30 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.4 }}
+        viewport={{ once: true, margin: "-100px" }}
+        className="max-w-7xl mx-auto px-4 py-10 md:py-20 lg:py-28 z-10 relative"
+      >
+
+        {/* Specialities Section */}
+        <div className="mx-4 md:mx-10 lg:mx-20  md:my-5 ">
+          <AnnouncementsTitle
+            title="Shopping Mart & Mall"
+            subtitle="Specialities"
+            description="Established in 2020 and headquartered in Prayagraj, Uttar Pradesh, Dhammanjali India Private Limited is a private, non-government company engaged in the food and beverages industry. The company focuses on creating lasting value not only through its products but also through meaningful contributions to the communities it serves."
+            arrowWidth={180}
+            arrowHeight={16}
+            arrowColor="#FFA500"
+          />
+          <div className="h-12"></div>
+          <MartDynamic />
+        </div>
+      </motion.section>
 
       {/* Serving Section */}
       <div className="bg-white pt-2 pb-20 px-4 sm:px-6 md:px-[10%] text-center">
@@ -398,34 +406,12 @@ function Mmart() {
 
         {/* Desktop View */}
         <div className="hidden md:flex flex-col gap-16 items-center">
-          {/* Row 1 */}
+       
           <div className="flex flex-wrap justify-center gap-8 md:gap-16 lg:gap-5">
-            {clientTypes.slice(0, 3).map((client, index) => (
+            {clientTypes.slice(0, 5).map((client, index) => (
               <div
                 key={index}
-                className="bg-amber-50 rounded-xl w-full max-w-[350px] p-6 shadow-sm transform transition-transform duration-300 hover:-translate-y-1 text-center"
-              >
-                <img
-                  src={client.image}
-                  alt={client.title}
-                  className="h-12 mb-4 mx-auto object-cover rounded"
-                />
-                <h3 className="text-lg font-semibold text-gray-900 mb-2 text-center">
-                  {client.title}
-                </h3>
-                <p className="text-sm text-gray-600 leading-tight">
-                  {client.description}
-                </p>
-              </div>
-            ))}
-          </div>
-
-          {/* Row 2 */}
-          <div className="flex flex-wrap justify-center gap-8 md:gap-16 -mt-8 lg:-mt-8 lg:gap-5">
-            {clientTypes.slice(3).map((client, index) => (
-              <div
-                key={index}
-                className="bg-amber-50 rounded-xl w-full max-w-[350px] p-6 shadow-sm transform transition-transform duration-300 hover:-translate-y-1 text-center"
+                className="bg-amber-100 rounded-xl w-full max-w-[350px] p-6 shadow-lg transform transition-transform duration-300 hover:-translate-y-1 text-center"
               >
                 <img
                   src={client.image}
@@ -444,11 +430,11 @@ function Mmart() {
         </div>
 
         {/* Mobile View - Carousel */}
-        <div className="md:hidden flex overflow-x-auto snap-x snap-mandatory gap-4 px-4 pb-4 scrollbar-hide">
+        <div className="md:hidden flex overflow-x-auto snap-x snap-mandatory gap-4 scrollbar-hide">
           {clientTypes.map((client, index) => (
             <div
               key={index}
-              className="flex-shrink-0 w-80 snap-center bg-amber-50 rounded-xl p-6 shadow-sm transform transition-transform duration-300 hover:-translate-y-1 text-center"
+              className="flex-shrink-0 w-76 snap-center bg-amber-100 rounded-xl p-4 shadow-sm transform transition-transform duration-300 hover:-translate-y-1 text-center"
             >
               <img
                 src={client.image}

@@ -24,7 +24,7 @@ function Footer() {
 
     try {
       setLoading(true);
-      const res = await axios.post("https://dhamanjali-group.vercel.app/api/email", {
+      const res = await axios.post("http://localhost:5000/api/email", {
         email,
       });
 

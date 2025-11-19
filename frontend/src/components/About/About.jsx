@@ -70,14 +70,14 @@ function About() {
     arrowColor,
   }) => (
     <motion.div
-      className="text-center mb-8"
+      className="text-center md:mb-8"
       initial={{ opacity: 0, y: -30 }}
       whileInView={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.8, ease: "easeOut" }}
       viewport={{ once: true }}
     >
       <motion.h2
-        className="text-3xl sm:text-4xl md:text-5xl font-bold text-black mb-2"
+        className="text-2xl md:text-5xl font-bold text-black mb-2"
         initial={{ opacity: 0, scale: 0.8 }}
         whileInView={{ opacity: 1, scale: 1 }}
         transition={{ delay: 0.2, duration: 0.6, ease: "easeOut" }}
@@ -94,7 +94,7 @@ function About() {
         {subtitle}
       </motion.div>
       <motion.div
-        className="flex justify-center my-6"
+        className="flex justify-center my-3 md:my-6"
         initial={{ opacity: 0, scale: 0 }}
         whileInView={{ opacity: 1, scale: 1 }}
         transition={{ delay: 0.6, duration: 0.5, ease: "easeOut" }}
@@ -122,9 +122,8 @@ function About() {
             viewport={{ once: true }}
           />
           <motion.polygon
-            points={`${arrowWidth - 20},${arrowHeight / 2 - 4} ${arrowWidth},${
-              arrowHeight / 2
-            } ${arrowWidth - 20},${arrowHeight / 2 + 4}`}
+            points={`${arrowWidth - 20},${arrowHeight / 2 - 4} ${arrowWidth},${arrowHeight / 2
+              } ${arrowWidth - 20},${arrowHeight / 2 + 4}`}
             fill={arrowColor}
             initial={{ opacity: 0 }}
             whileInView={{ opacity: 1 }}
@@ -178,17 +177,17 @@ function About() {
           </div>
         </div>
       </section>
-      
+
       <BusinessCards />
 
       {/* Aspirations and Desired Section */}
-      <section className="w-full px-4 py-14 md:py-20 font-montserrat bg-white">
+      <section className="w-full px-4 py-10 md:py-20 font-montserrat bg-white">
         {/* Heading */}
         <div className="text-center mb-10 md:mb-16">
-          <div className="text-3xl md:text-5xl font-bold text-orange-600">
+          <div className="text-[27px] md:text-5xl font-bold text-orange-600">
             ASPIRATIONS AND
           </div>
-          <div className="text-3xl md:text-4xl font-light text-gray-700">
+          <div className="text-2xl md:text-4xl font-light text-gray-700">
             DESIRED
           </div>
           {/* <div className="flex justify-center mt-4 ">
@@ -209,9 +208,9 @@ function About() {
         </div>
 
         {/* Vision Row */}
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-12 max-w-6xl mx-auto mb-10">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-10 md:gap-12 max-w-6xl mx-1 md:mx-auto mb-5 md:mb-10">
           {/* Vision English */}
-          <div className="bg-yellow-100 rounded-xl shadow-lg p-8 flex flex-col">
+          <div className="bg-yellow-100 rounded-xl shadow-lg p-6 md:p-8 flex flex-col">
             <h3 className="text-2xl font-extrabold text-orange-600 mb-3">
               Vision:
             </h3>
@@ -227,7 +226,7 @@ function About() {
             </p>
           </div>
           {/* Vision Hindi */}
-          <div className="bg-yellow-100 rounded-xl shadow-lg p-8 flex flex-col">
+          <div className="bg-yellow-100 rounded-xl shadow-lg p-6 md:p-8 flex flex-col">
             <h3 className="text-2xl font-extrabold text-orange-600 mb-3">
               दृष्टिकोण:
             </h3>
@@ -241,12 +240,9 @@ function About() {
               गतिविधियों के माध्यम से लगातार प्रगति की ओर अग्रसर रहेंगे।
             </p>
           </div>
-        </div>
 
-        {/* Mission Row */}
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-12 max-w-6xl mx-auto">
           {/* Mission English */}
-          <div className="bg-yellow-100 rounded-xl shadow-lg p-8 flex flex-col">
+          <div className="bg-yellow-100 rounded-xl shadow-lg p-6 md:p-8 flex flex-col">
             <h3 className="text-2xl font-extrabold text-orange-600 mb-3">
               Mission:
             </h3>
@@ -260,7 +256,7 @@ function About() {
             </p>
           </div>
           {/* Mission Hindi */}
-          <div className="bg-yellow-100 rounded-xl shadow-lg p-8 flex flex-col">
+          <div className="bg-yellow-100 rounded-xl shadow-lg p-6 md:p-8 flex flex-col">
             <h3 className="text-2xl font-extrabold text-orange-600 mb-3">
               मिशन:
             </h3>
@@ -277,7 +273,7 @@ function About() {
       </section>
 
       {/* Value Creation Section */}
-      <section className="w-full px-4 py-12 md:py-20 bg-gray-50 lg:mb-10">
+      <section className="w-full px-4 py-10 md:py-20 bg-gray-50 lg:mb-10">
         <div className="max-w-7xl mx-auto">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 lg:gap-16 items-start">
             {/* Left - Title and Arrow */}
@@ -349,7 +345,7 @@ function About() {
                         {index <
                           valueCreationData.statsDescription.split("\n")
                             .length -
-                            1 && <br />}
+                          1 && <br />}
                       </React.Fragment>
                     ))}
                 </p>
@@ -357,8 +353,8 @@ function About() {
             </div>
 
             {/* Right - Customer Commitment Text */}
-            <div className="w-full lg:flex-1 lg:max-w-2xl mt-12 sm:mt-16 lg:mt-0 ml-0 lg:ml-8 px-4 lg:px-0">
-              <h3 className="text-xl sm:text-2xl lg:text-3xl font-bold text-gray-900 mb-4 lg:mb-6 uppercase tracking-wide text-center lg:text-center lg:mt-15">
+            <div className="w-full lg:flex-1 lg:max-w-2xl mt-6 lg:mt-0 ml-0 lg:ml-8 px-4 lg:px-0">
+              <h3 className="text-xl sm:text-2xl lg:text-3xl font-bold text-gray-900 mb-3 lg:mb-6 uppercase tracking-wide text-center lg:text-center lg:mt-15">
                 {valueCreationData.commitmentTitle}
               </h3>
               <p className="text-sm sm:text-base text-gray-600 leading-relaxed text-center lg:text-left">
@@ -369,7 +365,7 @@ function About() {
                       {line}
                       {index <
                         valueCreationData.commitmentText.split("\n").length -
-                          1 && <br />}
+                        1 && <br />}
                     </React.Fragment>
                   ))}
               </p>
@@ -378,8 +374,8 @@ function About() {
         </div>
       </section>
 
-      {/* Values & Behaviour Section */}
-      <section className="bg-[#4a90a4] pt-16 pb-16 px-4 text-white">
+      {/* Our Values Section */}
+      <section className="bg-[#4a90a4] pt-10 md:pt-16 pb-10 md:pb-16 px-4 text-white">
         <div className="max-w-6xl mx-auto">
           <AnnouncementsTitle
             title="Our Values"
@@ -394,9 +390,8 @@ function About() {
           {arrangedValues.map((value, i) => (
             <motion.div
               key={i}
-              className={`${
-                i === 1 ? "sm:-translate-y-6 md:-translate-y-10" : ""
-              } card-enhanced flex flex-col items-center text-center cursor-pointer`}
+              className={`${i === 1 ? "sm:-translate-y-6 md:-translate-y-10" : ""
+                } card-enhanced flex flex-col items-center text-center cursor-pointer`}
               custom={i}
               initial="hidden"
               whileInView="visible"
@@ -413,11 +408,10 @@ function About() {
               }
             >
               <motion.div
-                className={`image-wrapper-enhanced rounded-full overflow-hidden shadow-xl ${
-                  i === 1
-                    ? "highlight-image w-56 h-56 sm:w-64 sm:h-64 lg:w-72 lg:h-72"
-                    : "w-44 h-44 sm:w-48 sm:h-48 lg:w-52 lg:h-52"
-                }`}
+                className={`image-wrapper-enhanced rounded-full overflow-hidden shadow-xl ${i === 1
+                  ? "highlight-image w-56 h-56 sm:w-64 sm:h-64 lg:w-72 lg:h-72"
+                  : "w-44 h-44 sm:w-48 sm:h-48 lg:w-52 lg:h-52"
+                  }`}
                 whileHover={{
                   scale: 1.08,
                   transition: { duration: 0.4, ease: "easeOut" },
@@ -449,11 +443,10 @@ function About() {
                 )}
               </motion.div>
               <motion.h3
-                className={`mt-4 font-semibold text-black ${
-                  i === 1
-                    ? "text-xl sm:text-2xl md:text-3xl"
-                    : "text-lg sm:text-xl md:text-2xl"
-                }`}
+                className={`mt-4 font-semibold text-black ${i === 1
+                  ? "text-xl sm:text-2xl md:text-3xl"
+                  : "text-lg sm:text-xl md:text-2xl"
+                  }`}
                 initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 transition={{ delay: i * 0.2 + 0.3, duration: 0.5 }}

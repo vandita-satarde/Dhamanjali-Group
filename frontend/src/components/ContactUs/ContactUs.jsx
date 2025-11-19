@@ -20,7 +20,7 @@ function ContactUs() {
     e.preventDefault();
 
     try {
-      const response = await fetch("https://dhamanjali-group.vercel.app/api/contact", {
+      const response = await fetch("http://localhost:5000/api/contact", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(formData),
@@ -47,7 +47,7 @@ function ContactUs() {
   };
 
   return (
-    <div className="min-h-screen bg-gray-50 pt-16 md:pt-20 lg:pt-24">
+    <div className="min-h-screen bg-gray-50 pt-18 md:pt-20 ">
       {/* Hero Section */}
       <div className="relative w-full h-[120px] md:h-[150px] lg:h-[180px] bg-gray-800 overflow-hidden">
         <img
@@ -139,7 +139,7 @@ function ContactUs() {
               <div className="pt-4">
                 <button
                   type="submit"
-                  className="w-full bg-gradient-to-r from-orange-500 to-orange-600 hover:from-orange-600 hover:to-orange-700 text-white font-bold py-4 px-6 rounded-lg transition-all duration-300 transform hover:scale-[1.02] hover:shadow-xl focus:outline-none focus:ring-4 focus:ring-orange-300 text-lg shadow-lg"
+                  className=" w-full bg-gradient-to-r from-orange-500 to-orange-600 hover:from-orange-600 hover:to-orange-700 text-white font-bold py-3 md:py-4 px-6 rounded-lg transition-all duration-300 transform hover:scale-[1.02] hover:shadow-xl focus:outline-none focus:ring-4 focus:ring-orange-300 md:text-lg shadow-lg"
                 >
                   SUBMIT MESSAGE
                 </button>

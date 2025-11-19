@@ -40,7 +40,8 @@ const Navbar = () => {
 
   return (
     <nav className="w-full bg-gradient-to-r from-white via-yellow-50 to-orange-50 shadow-lg backdrop-blur-md fixed top-0 left-0 z-50 max-h-full animate-fadeInDown">
-      <div className="max-w-9xl mx-auto px-4 py-3 flex items-center justify-between relative">
+      <div className="max-w-9xl mx-auto px-4 py-2 md:py-3 flex items-center justify-between relative">
+        
         {/* Logo + Hamburger */}
         <div className="flex items-center justify-between w-full md:w-auto">
           <Link to="/" onClick={scrollToTop}>
@@ -48,7 +49,7 @@ const Navbar = () => {
               <img
                 src={logoimage}
                 alt="Logo"
-                className="h-12 w-auto drop-shadow-lg transition-all duration-500 hover:rotate-3"
+                className="h-10 md:h-12 w-auto drop-shadow-lg transition-all duration-500 hover:rotate-3"
               />
               <span className="tracking-widest animate-pulse">
                 Dhammanjali Group
@@ -58,20 +59,20 @@ const Navbar = () => {
 
           <div
             onClick={toggleMenu}
-            className="md:hidden cursor-pointer flex flex-col gap-1.5 ml-4"
+            className="md:hidden cursor-pointer flex flex-col gap-1 ml-4"
           >
             <span
-              className={`w-7 h-1 bg-gray-800 rounded transition-all duration-300 ${
+              className={`w-6 h-1 bg-gray-800 rounded transition-all duration-300 ${
                 menuOpen ? "rotate-45 translate-y-2 bg-amber-500" : ""
               }`}
             />
             <span
-              className={`w-7 h-1 bg-gray-800 rounded transition-all duration-300 ${
+              className={`w-6 h-1 bg-gray-800 rounded transition-all duration-300 ${
                 menuOpen ? "opacity-0" : ""
               }`}
             />
             <span
-              className={`w-7 h-1 bg-gray-800 rounded transition-all duration-300 ${
+              className={`w-6 h-1 bg-gray-800 rounded transition-all duration-300 ${
                 menuOpen ? "-rotate-45 -translate-y-2 bg-amber-500" : ""
               }`}
             />

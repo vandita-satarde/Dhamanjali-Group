@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { Link } from "react-router-dom";
+import { motion } from "framer-motion";
 import { FaUtensils, FaSpa, FaUsers, FaSwimmer } from "react-icons/fa";
 
 // AnnouncementsTitle Component
@@ -130,8 +131,14 @@ const ServicesTabs = ({ services }) => {
   if (!services || serviceKeys.length === 0) return null;
 
   return (
-    <section className="max-w-8xl mx-auto px-4 py-8 md:py-14">
-      <div className="max-w-7xl mx-auto">
+    <motion.section
+      initial={{ opacity: 0, y: 30 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.4 }}
+      viewport={{ once: true, margin: "-100px" }}
+      className="max-w-7xl mx-auto px-4 py-10 md:py-20 lg:py-28 z-10 relative"
+    >
+      <div className="mx-4 md:mx-10 lg:mx-20 md:my-5 ">
         <AnnouncementsTitle
           title={services[active]?.title || "Our Services"}
           subtitle="Explore Our Services"
@@ -187,7 +194,7 @@ const ServicesTabs = ({ services }) => {
           </ul>
         </div>
       )}
-    </section>
+    </motion.section>
   );
 };
 
@@ -198,7 +205,7 @@ const GallerySection = () => {
   // Step 1: Fetch all gallery items from backend
   useEffect(() => {
     axios
-      .get("https://dhamanjali-group.vercel.app/api/hospitality") // your backend route
+      .get("http://localhost:5000/api/hospitality") // your backend route
       .then((res) => setImages(res.data))
       .catch((err) => console.error("Error fetching hospitality:", err));
   }, []);
@@ -208,7 +215,7 @@ const GallerySection = () => {
 
   // Step 3: Filter images based on selected tab
   const filteredImages = images.filter(
-    (img) => img.category === activeTab
+    (img) =>  img.category === activeTab
   );
 
   return (
@@ -289,7 +296,7 @@ const Hospitality = () => {
         />
         <div className="absolute inset-0 bg-gradient-to-b from-black/50 to-transparent"></div>
         <div className="relative z-10 flex flex-col items-center justify-center w-full px-4 text-center">
-          <h1 className="text-2xl md:text-4xl lg:text-5xl xl:text-6xl font-extrabold tracking-wide text-white drop-shadow-2xl mb-3 md:mb-4 animate-fade-in">
+          <h1 className="text-2xl md:text-4xl lg:text-5xl font-extrabold tracking-wide text-white drop-shadow-2xl mb-3 md:mb-4 animate-fade-in">
             {staticHospitalityData.hero?.title}
           </h1>
           <p className="text-sm md:text-lg lg:text-xl xl:text-2xl text-white font-medium max-w-3xl animate-slide-up px-4">

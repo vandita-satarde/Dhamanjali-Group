@@ -41,14 +41,14 @@ const AddTestimonial = () => {
 
             if (editing) {
                 // ✅ Update existing testimonial
-                await axios.put(`https://dhamanjali-group.vercel.app/api/testimonials/${editing}`, {
+                await axios.put(`http://localhost:5000/api/testimonials/${editing}`, {
                     ...formData,
                     image: imageUrl,
                 });
                 alert("Testimonial updated successfully!");
             } else {
                 // ✅ Add new testimonial
-                await axios.post("https://dhamanjali-group.vercel.app/api/testimonials", {
+                await axios.post("http://localhost:5000/api/testimonials", {
                     ...formData,
                     image: imageUrl,
                 });
@@ -67,7 +67,7 @@ const AddTestimonial = () => {
     // Fetch all testimonials
     const fetchTestimonials = async () => {
         try {
-            const res = await axios.get("https://dhamanjali-group.vercel.app/api/testimonials");
+            const res = await axios.get("http://localhost:5000/api/testimonials");
             setTestimonials(res.data);
         } catch (err) {
             console.error("Error fetching testimonials:", err);
@@ -83,7 +83,7 @@ const AddTestimonial = () => {
         if (!confirmDelete) return; // stop if user clicks "Cancel"
 
         try {
-            await axios.delete(`https://dhamanjali-group.vercel.app/api/testimonials/${id}`);
+            await axios.delete(`http://localhost:5000/api/testimonials/${id}`);
             alert("Testimonial deleted successfully!");
             fetchTestimonials(); // refresh list
         } catch (error) {

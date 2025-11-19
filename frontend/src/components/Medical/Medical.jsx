@@ -1,5 +1,6 @@
 import React, { useEffect, useState, useRef } from "react";
 import axios from "axios";
+import { motion } from "framer-motion";
 import waterIonizer from "../../assets/images/water-ionizer.jpg";
 
 // AnnouncementsTitle Component
@@ -10,7 +11,7 @@ const AnnouncementsTitle = ({
   className = "",
 }) => (
   <div
-    className={`w-full flex flex-col md:flex-row justify-between gap-6 px-2 md:px-0 mb-8 ${className}`}
+    className={`w-full flex flex-col md:flex-row justify-between gap-6 px-2 md:px-0 md:mb-8 ${className}`}
   >
     {/* Title and arrow */}
     <div className="flex flex-col w-full md:w-auto">
@@ -45,7 +46,7 @@ const AnnouncementsTitle = ({
     {/* Description aligned to title */}
     {description && (
       <div
-        className="md:pt-1 pt-2 max-w-3xl text-gray-700 text-base leading-relaxed text-left"
+        className="md:pt-1 max-w-3xl text-gray-700 text-base leading-relaxed text-left"
         style={{ wordBreak: "break-word", letterSpacing: "0.01em" }}
       >
         {description}
@@ -131,7 +132,7 @@ function Medical() {
   const testimonialsRef = useRef(null);
   const [testimonials, setTestimonials] = useState([]);
 
-  const API_URL = "https://dhamanjali-group.vercel.app/api/healthTestimonials";
+  const API_URL = "http://localhost:5000/api/healthTestimonials";
 
   useEffect(() => {
     axios
@@ -146,58 +147,99 @@ function Medical() {
 
   useEffect(() => {
     axios
-      .get("https://dhamanjali-group.vercel.app/api/medical-devices")
+      .get("http://localhost:5000/api/medical-devices")
       .then((res) => setMedicalDevices(res.data))
       .catch((err) => console.log(err));
   }, []);
 
   return (
     <div className="min-h-screen bg-white font-montserrat text-gray-800 pt-16 md:pt-20">
+      <style>
+        {`
+          .custom-scrollbar {
+            scrollbar-width: thin;
+            scrollbar-color: #fbbf24 #fef3c7;
+          }
+          .custom-scrollbar::-webkit-scrollbar {
+            height: 8px;
+          }
+          .custom-scrollbar::-webkit-scrollbar-track {
+            background: #fef3c7;
+            border-radius: 4px;
+          }
+          .custom-scrollbar::-webkit-scrollbar-thumb {
+            background: #fbbf24;
+            border-radius: 4px;
+          }
+          .custom-scrollbar::-webkit-scrollbar-thumb:hover {
+            background: #f59e0b;
+          }
+        `}
+      </style>
       {/* Hero Section */}
       <header
-        className="relative w-full h-[320px] max-h-[320px] overflow-hidden flex items-center justify-center bg-cover bg-center"
+        className="relative w-full h-60 md:h-80 overflow-hidden flex items-center justify-center bg-cover bg-center"
         style={{ backgroundImage: `url(${hero.imageUrl})` }}
       >
         <div className="absolute inset-0 bg-black/40"></div>
-        <h1 className="relative z-10 text-white text-4xl md:text-[2.9em] font-bold tracking-wide bg-black/70 px-8 py-2 rounded-lg shadow-lg text-center">
+        <h1 className="relative z-10 text-white text-xl md:text-4xl lg:text-5xl font-bold tracking-wide bg-black/70 px-8 py-2 rounded-lg shadow-lg text-center">
           {hero.title}
         </h1>
       </header>
 
       {/* Intro Section */}
-      <section className="mx-4 md:mx-20 my-5 lg:my-15">
-        <AnnouncementsTitle
-          title={intro.title}
-          subtitle={
-            <span className="font-rymaneco font-normal text-[2rem] md:text-[2rem]">
-              {intro.subtitle}
-            </span>
-          }
-          description={intro.description}
-          arrowWidth={230}
-          arrowHeight={80}
-          arrowColor="#FFA500"
-        />
-      </section>
+      <motion.section
+        initial={{ opacity: 0, y: 30 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.4 }}
+        viewport={{ once: true, margin: "-100px" }}
+        className="max-w-7xl mx-auto px-4 py-10 md:py-20 lg:py-28 z-10 relative"
+      >
+
+        {/* Specialities Section */}
+        <div className="mx-4 md:mx-10 lg:mx-20 md:my-5 ">
+          <AnnouncementsTitle
+            title={intro.title}
+            subtitle={
+              <span className="font-rymaneco font-normal text-xl md:text-3xl">
+                {intro.subtitle}
+              </span>
+            }
+            description={intro.description}
+            arrowWidth={230}
+            arrowHeight={80}
+            arrowColor="#FFA500"
+          />
+        </div>
+      </motion.section>
 
       {/* Dynamic Medical Devices From Backend */}
       {medicalDevices.map((d, i) => (
         <section
           key={i}
-          className="flex flex-col md:flex-row items-center justify-between mx-auto px-4 sm:px-6 py-8 gap-10 max-w-7xl"
+          className={`flex flex-col md:flex-row items-center justify-between mx-auto px-4 sm:px-6 py-8 gap-10 max-w-7xl
+            ${i % 2 !== 0 ? "md:flex-row-reverse" : ""}`}
         >
+
+          <div className="medical-devices-img w-full max-w-xs sm:max-w-sm md:max-w-md lg:max-w-lg xl:max-w-xl flex justify-center">
+            <img
+              src={d.imageUrl}
+              alt={d.deviceName}
+              className="w-full lg:h-[450px] object-cover rounded-[40%_20%_40%_20%] shadow-lg"
+            />
+          </div>
           <div className="flex-1 text-center">
-            <h3 className="text-3xl md:text-4xl font-bold mb-2 text-center">
+            <h3 className="uppercase text-2xl md:text-4xl font-bold md:mb-2 text-center">
               {d.title}
             </h3>
-            <p className="text-gray-700 mb-4 md:text-xl">{d.description}</p>
-            <br />
+            <p className=" normal-case text-gray-700 mb-4 md:mb-8 md:text-xl">{d.description}</p>
+
             <div className="mb-6">
-              <strong className="text-2xl md:text-3xl font-light text-gray-800 mb-2">
+              <strong className="uppercase text-[21px] md:text-3xl font-light text-gray-800 mb-2">
                 {d.deviceName}
               </strong>
 
-              <span className="block text-gray-600 mb-2">
+              <span className="normal-case block text-gray-600 mb-2">
                 {d.deviceDescription}
               </span>
 
@@ -214,51 +256,13 @@ function Medical() {
             </div>
           </div>
 
-          <div className="medical-devices-img w-full max-w-xs sm:max-w-sm md:max-w-md lg:max-w-lg xl:max-w-xl flex justify-center">
-            <img
-              src={d.imageUrl}
-              alt={d.deviceName}
-              className="w-full lg:h-[450px] object-cover rounded-[40%_20%_40%_20%] shadow-lg"
-            />
-          </div>
+
         </section>
       ))}
 
 
-      {/* Innovative Technology Section */}
-      <section className="flex flex-col md:flex-row items-center justify-between mx-auto px-4 sm:px-6 md:py-8 gap-10 max-w-6xl">
-        <div className="medical-tech-img w-full max-w-xs sm:max-w-sm md:max-w-md lg:max-w-lg xl:max-w-xl flex justify-center">
-          <img
-            src={tech.imageUrl}
-            alt="Medical Device"
-            className="w-full lg:h-[450px] object-cover rounded-[40%_20%_40%_20%] shadow-lg"
-          />
-        </div>
-        <div className="text-center align-center">
-          <h3 className="text-3xl md:text-4xl font-bold mb-2 text-center">
-            {tech.title}
-          </h3>
-          <h4 className="text-2xl md:text-3xl font-light text-gray-800 mb-2">
-            {tech.subtitle}
-          </h4>
-          <p className="text-gray-600 mb-5">{tech.description}</p>
-          <div className="flex justify-center gap-4">
-            <a href="/retail">
-              <button className="bg-yellow-400 text-gray-800 font-semibold px-6 py-2 rounded-full hover:bg-yellow-500 transition-colors">
-                EXPLORE PRODUCT
-              </button>
-            </a>
-            <a href="/GetFrenchieForm">
-              <button className="bg-yellow-400 text-gray-800 font-semibold px-6 py-2 rounded-full border border-yellow-400 hover:bg-yellow-500 transition-colors">
-                REQUEST DEMO
-              </button>
-            </a>
-          </div>
-        </div>
-      </section>
-
       {/* Devices Section */}
-      <section className="flex flex-col md:flex-row items-center justify-between mx-auto px-4 sm:px-6 py-8 gap-10 max-w-6xl">
+      {/* <section className="flex flex-col md:flex-row items-center justify-between mx-auto px-4 sm:px-6 py-8 gap-10 max-w-6xl">
         <div className="medical-devices-img w-full max-w-xs sm:max-w-sm md:max-w-md lg:max-w-lg xl:max-w-xl flex justify-center md:order-last">
           <img
             src={devices.imageUrl}
@@ -291,14 +295,48 @@ function Medical() {
             </div>
           </div>
         </div>
+      </section> */}
+
+      {/* Innovative Technology Section */}
+      <section className="flex flex-col md:flex-row items-center justify-between mx-auto px-4 sm:px-6 py-8 md:py-8 gap-10 max-w-6xl">
+        <div className="medical-tech-img w-full max-w-xs sm:max-w-sm md:max-w-md lg:max-w-lg xl:max-w-xl flex justify-center">
+          <img
+            src={tech.imageUrl}
+            alt="Medical Device"
+            className="w-full lg:h-[450px] object-cover rounded-[40%_20%_40%_20%] shadow-lg"
+          />
+        </div>
+        <div className="text-center align-center">
+          <h3 className="text-3xl md:text-4xl font-bold mb-2 text-center">
+            {tech.title}
+          </h3>
+          <h4 className="text-2xl md:text-3xl font-light text-gray-800 mb-2">
+            {tech.subtitle}
+          </h4>
+          <p className="text-gray-600 mb-5">{tech.description}</p>
+          <div className="flex justify-center gap-3 md:gap-4 text-sm md:text-base ">
+            <a href="/retail">
+              <button className="bg-yellow-400 text-gray-800 font-semibold px-4 md:px-6 py-2 rounded-full hover:bg-yellow-500 transition-colors">
+                EXPLORE PRODUCT
+              </button>
+            </a>
+            <a href="/GetFrenchieForm">
+              <button className="bg-yellow-400 text-gray-800 font-semibold px-4 md:px-6 py-2 rounded-full border border-yellow-400 hover:bg-yellow-500 transition-colors">
+                REQUEST DEMO
+              </button>
+            </a>
+          </div>
+        </div>
       </section>
+
+
 
       {/* Features Section */}
       <section className="flex justify-center gap-8 bg-gray-100 py-10 px-6 flex-wrap">
         {features.map((feature, index) => (
           <div
             key={index}
-            className="bg-white rounded-xl shadow-md p-6 min-w-[220px] max-w-[260px] text-center hover:shadow-lg transition-shadow duration-300"
+            className="bg-white rounded-xl shadow-lg p-6 min-w-[220px] max-w-[260px] text-center hover:shadow-lg transition-shadow duration-300"
           >
             <div className="text-4xl mb-3">{feature.icon}</div>
             <h4 className="text-lg font-bold mb-2">{feature.title}</h4>
@@ -310,7 +348,7 @@ function Medical() {
       {/* ✅ Dynamic Testimonials Section */}
       <section
         ref={testimonialsRef}
-        className="flex gap-8 bg-gray-100 py-10 px-6 overflow-x-auto scrollbar-thin scrollbar-track-gray-200 scrollbar-thumb-gray-400"
+        className="flex gap-8 bg-gray-100 py-10 px-6 overflow-x-auto custom-scrollbar"
         style={{ flexWrap: "nowrap", scrollBehavior: "smooth" }}
       >
         {testimonials.length > 0 ? (

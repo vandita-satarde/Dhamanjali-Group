@@ -25,7 +25,7 @@ app.use(cors({
     'http://localhost:5173',
     'http://localhost:5174',
     'http://192.168.1.7:5174',
-    'https://dhamanjali-group.vercel.app',
+    'http://localhost:5000',
     'https://your-frontend-domain.vercel.app'  // Replace with your actual frontend domain
   ],
   credentials: true,

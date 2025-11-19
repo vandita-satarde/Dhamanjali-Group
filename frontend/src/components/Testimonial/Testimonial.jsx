@@ -42,7 +42,7 @@ function Testimonial() {
 
   useEffect(() => {
     axios
-      .get("https://dhamanjali-group.vercel.app/api/testimonials")
+      .get("http://localhost:5000/api/testimonials")
       .then((res) => setTestimonials(res.data))
       .catch((err) => console.error("Error fetching testimonials:", err));
   }, []);
@@ -374,8 +374,8 @@ function Testimonial() {
             padding: 1.5rem;
           }
           .testimonial-image {
-            width: 120px;
-            height: 120px;
+            width: 110px;
+            height: 110px;
           }
           .quote {
             font-size: 1.1rem;
