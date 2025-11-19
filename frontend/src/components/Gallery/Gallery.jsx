@@ -62,7 +62,7 @@ function Gallery() {
       </section>
 
       {/* Gallery Content Section - Add your gallery content here */}
-      <section className="px-4 md:px-8 pb-16 max-w-7xl mx-auto">
+      <section className="px-1 md:px-8 pb-5 md:pb-16 max-w-7xl mx-auto">
         {images.length === 0 ? (
           // ✅ Show this when there are no images
           <div className="text-center text-gray-500 text-lg font-medium py-16">
@@ -76,7 +76,7 @@ function Gallery() {
                 <img
                   src={img.imageUrl}
                   alt="Gallery"
-                  className="w-full h-64 object-cover hover:scale-105 transition-transform duration-300"
+                  className="w-full h-45 md:h-64 object-cover hover:scale-105 transition-transform duration-300"
                 />
               </div>
             ))}

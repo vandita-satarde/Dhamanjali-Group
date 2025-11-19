@@ -211,10 +211,10 @@ function About() {
         <div className="grid grid-cols-1 md:grid-cols-2 gap-10 md:gap-12 max-w-6xl mx-1 md:mx-auto mb-5 md:mb-10">
           {/* Vision English */}
           <div className="bg-yellow-100 rounded-xl shadow-lg p-6 md:p-8 flex flex-col">
-            <h3 className="text-2xl font-extrabold text-orange-600 mb-3">
+            <h3 className="text-xl md:text-2xl font-extrabold text-orange-600 mb-3">
               Vision:
             </h3>
-            <hr className="mb-4 border-orange-200" />
+            <hr className="mb-2 md:mb-4 border-orange-200" />
             <p className="text-gray-800 leading-relaxed">
               Our company aims to establish a balance between faith and economy
               by practically implementing our products, projects, and services
@@ -227,10 +227,10 @@ function About() {
           </div>
           {/* Vision Hindi */}
           <div className="bg-yellow-100 rounded-xl shadow-lg p-6 md:p-8 flex flex-col">
-            <h3 className="text-2xl font-extrabold text-orange-600 mb-3">
+            <h3 className="text-xl md:text-2xl font-extrabold text-orange-600 mb-3">
               दृष्टिकोण:
             </h3>
-            <hr className="mb-4 border-orange-200" />
+            <hr className="mb-2 md:mb-4 border-orange-200" />
             <p className="text-gray-800 leading-relaxed">
               धम्मांजलि ग्रुप ऑफ कंपनीज का उद्देश्य आस्था और अर्थव्यवस्था का
               समन्वय स्थापित कर देश-दुनिया में अपनी प्रोडक्ट्स, प्रोजेक्ट्स और
@@ -243,10 +243,10 @@ function About() {
 
           {/* Mission English */}
           <div className="bg-yellow-100 rounded-xl shadow-lg p-6 md:p-8 flex flex-col">
-            <h3 className="text-2xl font-extrabold text-orange-600 mb-3">
+            <h3 className="text-xl md:text-2xl font-extrabold text-orange-600 mb-3">
               Mission:
             </h3>
-            <hr className="mb-4 border-orange-200" />
+            <hr className="mb-2 md:mb-4 border-orange-200" />
             <p className="text-gray-800 leading-relaxed">
               By aligning faith with economic growth and moving forward while
               preserving our heritage, we are committed to making India a strong
@@ -257,10 +257,10 @@ function About() {
           </div>
           {/* Mission Hindi */}
           <div className="bg-yellow-100 rounded-xl shadow-lg p-6 md:p-8 flex flex-col">
-            <h3 className="text-2xl font-extrabold text-orange-600 mb-3">
+            <h3 className="text-xl md:text-2xl font-extrabold text-orange-600 mb-3">
               मिशन:
             </h3>
-            <hr className="mb-4 border-orange-200" />
+            <hr className="mb-2 md:mb-4 border-orange-200" />
             <p className="text-gray-800 leading-relaxed">
               आस्था और अर्थव्यवस्था का समन्वय स्थापित कर, विरासत के साथ विकास की
               ओर बढ़ते हुए, हम भारत को विश्व स्तर पर एक मजबूत और समृद्ध राष्ट्र
@@ -386,11 +386,11 @@ function About() {
           />
         </div>
 
-        <div className="values-container mt-12">
+        <div className="values-container mt-10 md:mt-12">
           {arrangedValues.map((value, i) => (
             <motion.div
               key={i}
-              className={`${i === 1 ? "sm:-translate-y-6 md:-translate-y-10" : ""
+              className={`${i === 1 ? "-translate-y-6 md:-translate-y-10" : ""
                 } card-enhanced flex flex-col items-center text-center cursor-pointer`}
               custom={i}
               initial="hidden"
@@ -408,9 +408,9 @@ function About() {
               }
             >
               <motion.div
-                className={`image-wrapper-enhanced rounded-full overflow-hidden shadow-xl ${i === 1
-                  ? "highlight-image w-56 h-56 sm:w-64 sm:h-64 lg:w-72 lg:h-72"
-                  : "w-44 h-44 sm:w-48 sm:h-48 lg:w-52 lg:h-52"
+                className={` md:mt-4 image-wrapper-enhanced rounded-full overflow-hidden shadow-xl ${i === 1
+                  ? "highlight-image w-45 h-45 md:w-64 md:h-64 lg:w-72 lg:h-72"
+                  : "w-35 h-35 md:w-48 md:h-48 lg:w-52 lg:h-52"
                   }`}
                 whileHover={{
                   scale: 1.08,
@@ -443,7 +443,7 @@ function About() {
                 )}
               </motion.div>
               <motion.h3
-                className={`mt-4 font-semibold text-black ${i === 1
+                className={`md:mt-4 font-semibold text-black ${i === 1
                   ? "text-xl sm:text-2xl md:text-3xl"
                   : "text-lg sm:text-xl md:text-2xl"
                   }`}
