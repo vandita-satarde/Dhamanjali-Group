@@ -76,7 +76,7 @@ function Food() {
   const [foodItems, setFoodItems] = useState([]);
 
   useEffect(() => {
-    axios.get("http://localhost:5000/api/food")
+    axios.get("https://dhamanjali-group.vercel.app/api/food")
       .then(res => setFoodItems(res.data))
       .catch(err => console.error(err));
   }, []);
@@ -84,7 +84,7 @@ function Food() {
   const [testimonials, setTestimonials] = useState([]);
 
   useEffect(() => {
-    axios.get("http://localhost:5000/api/foodTestimonials")
+    axios.get("https://dhamanjali-group.vercel.app/api/foodTestimonials")
       .then(res => setTestimonials(res.data))
       .catch(err => console.error(err));
   }, []);

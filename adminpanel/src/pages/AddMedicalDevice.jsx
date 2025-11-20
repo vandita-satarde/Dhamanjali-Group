@@ -38,7 +38,7 @@ const AddMedicalDevice = () => {
         sendData.append("image", imageFile);
 
         try {
-            await axios.post("http://localhost:5000/api/medical-devices", sendData, {
+            await axios.post("https://dhamanjali-group.vercel.app/api/medical-devices", sendData, {
                 headers: { "Content-Type": "multipart/form-data" },
             });
             alert("Device added successfully!");

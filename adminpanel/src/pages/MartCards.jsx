@@ -82,7 +82,7 @@ function AddMartItem() {
     data.append("image", formData.image);
 
     try {
-      await axios.post("http://localhost:5000/api/mart/add", data, {
+      await axios.post("https://dhamanjali-group.vercel.app/api/mart/add", data, {
         headers: { "Content-Type": "multipart/form-data" },
         timeout: 30000 // 30 second timeout
       });
@@ -101,7 +101,7 @@ function AddMartItem() {
 
   const fetchMartItems = async () => {
     try {
-      const res = await axios.get("http://localhost:5000/api/mart");
+      const res = await axios.get("https://dhamanjali-group.vercel.app/api/mart");
       setMartItems(res.data);
     } catch (error) {
       console.error("Error fetching mart items:", error);
@@ -114,7 +114,7 @@ function AddMartItem() {
     }
 
     try {
-      await axios.delete(`http://localhost:5000/api/mart/${id}`);
+      await axios.delete(`https://dhamanjali-group.vercel.app/api/mart/${id}`);
       alert("Mart item deleted successfully!");
       fetchMartItems(); // Refresh the list
     } catch (error) {

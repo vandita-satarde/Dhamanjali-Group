@@ -19,7 +19,7 @@ const AddStories = () => {
 
     const fetchStories = async () => {
         try {
-            const res = await axios.get("http://localhost:5000/api/farmerStories");
+            const res = await axios.get("https://dhamanjali-group.vercel.app/api/farmerStories");
             setStories(res.data);
         } catch (error) {
             console.error("Error fetching stories:", error);
@@ -70,11 +70,11 @@ const AddStories = () => {
             }
 
             if (editingId) {
-                await axios.put(`http://localhost:5000/api/farmerStories/${editingId}`, dataToSend);
+                await axios.put(`https://dhamanjali-group.vercel.app/api/farmerStories/${editingId}`, dataToSend);
                 alert("Story updated successfully!");
                 setEditingId(null);
             } else {
-                await axios.post("http://localhost:5000/api/farmerStories", dataToSend);
+                await axios.post("https://dhamanjali-group.vercel.app/api/farmerStories", dataToSend);
                 alert("Story added successfully!");
             }
 
@@ -102,7 +102,7 @@ const AddStories = () => {
     const handleDelete = async (id) => {
         if (!window.confirm("Delete this story?")) return;
         try {
-            await axios.delete(`http://localhost:5000/api/farmerStories/${id}`);
+            await axios.delete(`https://dhamanjali-group.vercel.app/api/farmerStories/${id}`);
             fetchStories();
         } catch (error) {
             console.error("Error deleting story:", error);
